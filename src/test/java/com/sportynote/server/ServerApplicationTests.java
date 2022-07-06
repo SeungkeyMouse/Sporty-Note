@@ -1,14 +1,10 @@
 package com.sportynote.server;
 
-import com.controller.TestController;
 import com.sportynote.server.mysql.MySQLConnectionTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
