@@ -1,2 +1,4 @@
-package com.sportynote.server.repository.dto;public class GymDto {
+package com.sportynote.server.repository.dto;
+
+public class GymDto {
 }

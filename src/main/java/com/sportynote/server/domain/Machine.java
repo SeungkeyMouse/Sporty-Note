@@ -1,2 +1,4 @@
-package com.sportynote.server.domain;public class Machine {
+package com.sportynote.server.domain;
+
+public class Machine {
 }
