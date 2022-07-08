@@ -12,6 +12,7 @@ import javax.persistence.Id;
 @Setter
 @Entity
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class Gym {
     @Id
     @GeneratedValue
