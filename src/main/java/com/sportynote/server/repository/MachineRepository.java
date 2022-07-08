@@ -14,9 +14,11 @@ import java.util.List;
 public class MachineRepository {
     private final EntityManager em;
 
-    public void save(Machine machine) { em. persist(machine);}
+    public void save(Machine machine) {
+        em.persist(machine);
+    }
 
-    public List<Machine> findAll(){
+    public List<Machine> findAll() {
         return em.createQuery("select m from Machine m", Machine.class)
                 .getResultList();
     }

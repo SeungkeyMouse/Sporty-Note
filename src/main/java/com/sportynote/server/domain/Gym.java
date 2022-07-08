@@ -21,8 +21,10 @@ public class Gym {
 
     @NotNull
     private String name;
+
     @NotNull
     private String latitude;
+
     @NotNull
     private String longitude;
 

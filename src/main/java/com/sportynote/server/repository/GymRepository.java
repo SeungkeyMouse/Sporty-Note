@@ -11,9 +11,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GymRepository {
     private final EntityManager em;
-    public void save(Gym gym) { em. persist(gym);}
 
-    public List<Gym> findAll(){
+    public void save(Gym gym) {
+        em.persist(gym);
+    }
+
+    public List<Gym> findAll() {
         return em.createQuery("select g from Gym g", Gym.class)
                 .getResultList();
     }

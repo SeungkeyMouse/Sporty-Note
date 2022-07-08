@@ -18,7 +18,7 @@ public class GymService {
 
     public void save(GymDto gymDto) {
         Gym gym = new Gym();
-//        gym.setIdx(gymDto.getIdx());
+
         gym.setName(gymDto.getName());
         gym.setLatitude(gymDto.getLatitude());
         gym.setLongitude(gymDto.getLongitude());
