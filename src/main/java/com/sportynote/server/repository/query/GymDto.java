@@ -1,6 +1,5 @@
-package com.sportynote.server.repository.dto;
+package com.sportynote.server.repository.query;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

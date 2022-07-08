@@ -2,8 +2,7 @@ package com.sportynote.server.service;
 
 import com.sportynote.server.domain.Gym;
 import com.sportynote.server.repository.GymRepository;
-import com.sportynote.server.repository.dto.GymDto;
-import lombok.AllArgsConstructor;
+import com.sportynote.server.repository.query.GymDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

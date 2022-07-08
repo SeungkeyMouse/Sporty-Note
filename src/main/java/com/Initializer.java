@@ -1,9 +1,7 @@
 package com;
 
-import com.sportynote.server.domain.Gym;
-import com.sportynote.server.repository.GymRepository;
 import com.sportynote.server.repository.MachineRepository;
-import com.sportynote.server.repository.dto.GymDto;
+import com.sportynote.server.repository.query.GymDto;
 import com.sportynote.server.service.GymService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;

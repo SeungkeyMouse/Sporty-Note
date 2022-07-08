@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class MachineRepository {
+public class MachineRepository{
     private final EntityManager em;
 
     public void save(Machine machine) {
@@ -21,5 +21,9 @@ public class MachineRepository {
     public List<Machine> findAll() {
         return em.createQuery("select m from Machine m", Machine.class)
                 .getResultList();
+    }
+
+    public Machine findById(Integer machineId){
+        return em.find(Machine.class, machineId);
     }
 }
