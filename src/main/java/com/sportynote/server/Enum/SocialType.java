@@ -1,7 +1,8 @@
 package com.sportynote.server.Enum;
 
-public enum     SocialType {
-    GOOGLE("google"), KAKAO("kakao");
+public enum SocialType {
+    NAVER("naver"), KAKAO("kakao");
+
 
     private final String ROLE_PREFIX = "ROLE_";
     private final String name;
@@ -10,6 +11,7 @@ public enum     SocialType {
         this.name = name;
     }
 
+    //아직 안쓰는 기능 권한 및 해당 계정이 맞는가
     public String getRoleType() {
         return ROLE_PREFIX + name.toUpperCase();
     }

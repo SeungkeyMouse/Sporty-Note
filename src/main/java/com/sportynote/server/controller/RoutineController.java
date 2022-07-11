@@ -20,4 +20,5 @@ public class RoutineController {
     public ResponseEntity<?> MyRoutines() throws URISyntaxException {
         return ResponseEntity.ok(routineRepository.findAll());
     }
+
 }

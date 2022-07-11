@@ -2,6 +2,7 @@ package com.sportynote.server.repository;
 
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.Routine;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -16,8 +17,12 @@ public class RoutineRepository {
         em.persist(routine);
     }
 
-    public List<Routine> findAll() {
-        return em.createQuery("select m from Routine m", Routine.class)
+    public void save(Machine machine) {
+        em.persist(machine);
+    }
+
+    public List<Machine> findAll() {
+        return em.createQuery("select m from Machine m", Machine.class)
                 .getResultList();
     }
 }

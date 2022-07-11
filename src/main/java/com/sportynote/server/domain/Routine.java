@@ -21,6 +21,8 @@ public class Routine {
     @NotNull
     private String routineName;
 
+
+
 //    @NotNull
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "gym_idx")
@@ -29,4 +31,8 @@ public class Routine {
     @NotNull
     private String machineId;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "gym_idx")
+    private Gym gym;
 }

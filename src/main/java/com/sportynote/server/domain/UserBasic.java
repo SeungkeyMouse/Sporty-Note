@@ -1,5 +1,6 @@
 package com.sportynote.server.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Getter;
@@ -44,5 +45,4 @@ public class UserBasic {
     @Column(name = "last_login_at")
     private LocalDateTime lastLoginAt;
 
-    private String nickName;
 }
