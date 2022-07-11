@@ -25,7 +25,6 @@ public class UserFavorite {
     private UserBasic userBasic;
 
     @OneToMany(mappedBy = "userFavorite", cascade = CascadeType.ALL)//양방향을 지향해야함
-    @JoinColumn(name = "machine_id")
     private List<Machine> userFavoriteMachines = new ArrayList<>();
 
 

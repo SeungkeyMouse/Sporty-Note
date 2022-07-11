@@ -39,13 +39,10 @@ public class UserBasic {
 
     private String name;
 
-    private SocialType socialtype;
+    private SocialType socialType;
 
-    @Column(name = "lastlogin_at")
-    private LocalDateTime lastloginat;
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt;
 
-    private String nickname;
-
-    private String userid;
-
+    private String nickName;
 }

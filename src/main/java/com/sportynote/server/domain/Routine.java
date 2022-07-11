@@ -19,7 +19,7 @@ public class Routine {
     private Integer idx;
 
     @NotNull
-    private String routinename;
+    private String routineName;
 
 //    @NotNull
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -27,6 +27,6 @@ public class Routine {
 //    private String user_id;
 
     @NotNull
-    private String machine_id;
+    private String machineId;
 
 }
