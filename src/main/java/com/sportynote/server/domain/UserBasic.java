@@ -4,6 +4,8 @@ package com.sportynote.server.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class UserBasic {
     @Id
     @GeneratedValue
@@ -36,10 +39,9 @@ public class UserBasic {
 
     private String email;
 
-    private String id;
-
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
     @Column(name = "last_login_at")

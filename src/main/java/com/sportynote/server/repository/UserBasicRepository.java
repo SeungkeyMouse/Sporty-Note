@@ -3,6 +3,7 @@ package com.sportynote.server.repository;
 import com.sportynote.server.domain.Gym;
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.UserBasic;
+import com.sportynote.server.domain.UserFavorite;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,9 @@ public class UserBasicRepository {
                 .getResultList();
     }
 
-    public UserBasic findById(String userBasic){
-        return em.find(UserBasic.class, userBasic);
+    public UserBasic findById(String userId){
+        return em.createQuery("select u from UserBasic u where u.userId =: userId", UserBasic.class)
+                .setParameter("userId", userId)
+                .getSingleResult();
     }
 }
