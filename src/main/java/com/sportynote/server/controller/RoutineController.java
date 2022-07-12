@@ -17,8 +17,10 @@ public class RoutineController {
     }
 
     @GetMapping("/routines")
-    public ResponseEntity<?> MyRoutines() throws URISyntaxException {
+    public ResponseEntity<?> myRoutines() throws URISyntaxException {
         return ResponseEntity.ok(routineRepository.findAll());
+
     }
+    //Routine 1, 기구 N
 
 }

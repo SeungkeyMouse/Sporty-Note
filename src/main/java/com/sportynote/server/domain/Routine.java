@@ -7,32 +7,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name ="routine_table")
 public class Routine {
     @Id
     @GeneratedValue
-    @Column
     private Integer idx;
 
     @NotNull
     private String routineName;
 
-
-
 //    @NotNull
+//    @JoinColumn(name= "Idx")
 //    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "gym_idx")
-//    private String user_id;
-
+//    private UserBasic userid;
+//
     @NotNull
-    private String machineId;
+    @OneToMany(mappedBy = "routine_table",cascade=CascadeType.ALL)
+    private List<Machine> machine = new ArrayList<>();
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "gym_idx")
-    private Gym gym;
+
 }
