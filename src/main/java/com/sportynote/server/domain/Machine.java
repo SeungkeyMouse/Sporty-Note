@@ -14,7 +14,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Machine {
     @Id
     @GeneratedValue
@@ -36,7 +36,6 @@ public class Machine {
 
     @JsonIgnore
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "userFavorite_idx")
     private UserFavorite userFavorite;
 
     //==생성 메서드==//

@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,5 +26,19 @@ public class UserFavoriteRepository {
 
     public UserFavorite findById(Integer userFavoriteIdx){
         return em.find(UserFavorite.class, userFavoriteIdx);
+    }
+
+    public Optional<UserFavorite> findByUserId(String userId){
+        Optional<UserFavorite> userFavorite = null;
+        try{
+            userFavorite = Optional.ofNullable(em.createQuery("select uf from UserFavorite uf where uf.userBasic.userId =: userId", UserFavorite.class)
+                    .setParameter("userId", userId)
+                    .getSingleResult());
+        }catch (NoResultException e){
+            userFavorite = Optional.empty();
+        }finally {
+            return userFavorite;
+        }
+
     }
 }

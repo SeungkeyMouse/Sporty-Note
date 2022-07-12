@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class UserFavorite {
     @Id
     @GeneratedValue
@@ -21,8 +21,8 @@ public class UserFavorite {
     private Integer idx;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
     private UserBasic userBasic;
+
 
     @OneToMany(mappedBy = "userFavorite", cascade = CascadeType.ALL)//양방향을 지향해야함
     private List<Machine> userFavoriteMachines = new ArrayList<>();
