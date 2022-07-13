@@ -38,6 +38,10 @@ public class Machine {
     @ManyToOne(fetch = LAZY)
     private UserFavorite userFavorite;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Routine routine;
+
     //==생성 메서드==//
     public static Machine createFavoriteMachine(Machine orgMachine) {
         Machine favoriteMachine = new Machine();
