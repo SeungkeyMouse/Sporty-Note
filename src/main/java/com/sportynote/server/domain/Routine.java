@@ -28,9 +28,9 @@ public class Routine {
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private UserBasic userid;
 //
-    @NotNull
-    @OneToMany(mappedBy = "routine_table",cascade=CascadeType.ALL)
-    private List<Machine> machine = new ArrayList<>();
+//    @NotNull
+//    @OneToMany(mappedBy = "routine")    //cascade=CascadeType.ALL
+//    private List<Machine> machines = new ArrayList<>();
 
 
 

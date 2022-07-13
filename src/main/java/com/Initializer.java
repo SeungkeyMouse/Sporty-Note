@@ -39,9 +39,10 @@ public class Initializer implements CommandLineRunner {
         gymService.save(new GymDto("바디스페이스", "37", "128","서울시", "강남구", "선릉로"));
         gymService.save(new GymDto("정원헬스장", "36", "127","서울시", "성북구", "안암로"));
         gymService.save(new GymDto("의정부헬스장", "37.5", "128","의정부시", "무슨구", "땡땡동"));
-
         userBasicSetup();
-        machineSetup();
+
+//        machineSetup();
+
 
         printUserFavorite();
     }
@@ -58,14 +59,19 @@ public class Initializer implements CommandLineRunner {
     }
 
     void machineSetup() {
+        System.out.println("te345678");
         Machine machine = new Machine();
+        System.out.println("te34567");
         machine.setMachineName("벤치프레스");
+        System.out.println("te345");
         machine.setTargetArea("가슴");
+        System.out.println("te34");
         machine.setUrl("https://www.naver.com");
+        System.out.println("te3");
         machine.setGym(gymRepository.findAll().get(0));
-
+        System.out.println("te2");
         machineRepository.save(machine);
-
+        System.out.println("te1");
         Machine machine2 = new Machine();
         machine2.setMachineName("랫풀다운");
         machine2.setTargetArea("등");
@@ -73,11 +79,12 @@ public class Initializer implements CommandLineRunner {
         machine2.setGym(gymRepository.findAll().get(1));
 
         machineRepository.save(machine2);
-
+        System.out.println("te5");
         machineService.addFavorite("123123", 7);
         machineService.addFavorite("123123", 6);
 
         machineService.addFavorite("777777", 7);
+        System.out.println("te6");
     }
 
     void userBasicSetup() {
