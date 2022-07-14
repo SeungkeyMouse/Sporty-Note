@@ -27,7 +27,7 @@ public class Routine {
 //    @JoinColumn(name= "Idx")
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private UserBasic userid;
-//
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private Machine machine;
