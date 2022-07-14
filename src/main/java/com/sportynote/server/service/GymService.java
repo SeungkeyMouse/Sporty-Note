@@ -25,7 +25,8 @@ public class GymService {
         gym.setSi(gymDto.getSi());
         gym.setGu(gymDto.getGu());
         gym.setDong(gymDto.getDong());
-
+        System.out.println("colorkolor");
         gymRepository.save(gym);
+        System.out.println("kolorcolor");
     }
 }

@@ -19,15 +19,11 @@ public class RoutineService {
     /**
      루틴 하나 추가 CREATE
      */
-    public Boolean addRoutine(String userId, Routine routine) {
-        //루틴 저장
-        try {
-            routineRepository.save(routine);
-            return true;
+    public static Boolean addRoutine(String userId, Routine routine) {
+        for(int i=0;i<routine.getMachine().size();i++){
+            System.out.println(routine.getMachine().get(i));
         }
-        catch (Exception e){
-            return false;
-        }
+        return false;
     }
 
 }

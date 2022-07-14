@@ -28,5 +28,6 @@ public class UserBasicRepository {
         return em.createQuery("select u from UserBasic u where u.userId =: userId", UserBasic.class)
                 .setParameter("userId", userId)
                 .getSingleResult();
+
     }
 }

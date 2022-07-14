@@ -28,10 +28,16 @@ public class MachineService {
      */
     @Transactional
     public Integer addFavorite(String userId, Integer machineId) {
+        System.out.println(userId +" " +String.valueOf(machineId));
         Optional<UserFavorite> userFavorites = userFavoriteRepository.findByUserId(userId);
+
         //엔티티 조회
+        System.out.println("gs25");
         UserBasic userBasic = userBasicRepository.findById(userId);
+        System.out.println("userBasicgetidx:"+userBasic.getIdx());
+        System.out.println("TEST1");
         Machine machine = machineRepository.findById(machineId);
+        System.out.println("TEST2");
         //case1 : 처음 즐겨찾기를 추가한다면=> favoriteMachines 리스트가 비어있음.
         if(!userFavorites.isPresent()){
             //즐겨찾기 생성

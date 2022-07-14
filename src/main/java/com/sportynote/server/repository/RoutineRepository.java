@@ -29,5 +29,7 @@ public class RoutineRepository {
                 .setParameter("idx",idx).setParameter("userid",userid).getResultList();
     }
 
+//    public List<Routine> addRoutine(String userId, Routine routine){
+//    }
 
 }
