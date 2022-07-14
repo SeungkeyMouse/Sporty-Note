@@ -1,10 +1,8 @@
 package com.sportynote.server.repository;
 
-import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.Routine;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

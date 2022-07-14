@@ -1,11 +1,8 @@
 package com.sportynote.server.repository;
 
-import com.sportynote.server.domain.Machine;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.crypto.Mac;
 import javax.persistence.EntityManager;
 import java.util.List;
 

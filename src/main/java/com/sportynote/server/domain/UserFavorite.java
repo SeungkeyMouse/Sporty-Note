@@ -17,15 +17,15 @@ import java.util.List;
 public class UserFavorite {
     @Id
     @GeneratedValue
-    @Column(name = "userFavorite_idx")
+    @Column(name = "user_favorite_id")
     private Integer idx;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private UserBasic userBasic;
 
 
-    @OneToMany(mappedBy = "userFavorite", cascade = CascadeType.ALL)//양방향을 지향해야함
-    private List<Machine> userFavoriteMachines = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)//양방향을 지향해야함
+    private Machine machine;
 
 
     //==연관관계 메서드==//
@@ -34,16 +34,12 @@ public class UserFavorite {
         userBasic.getUserFavorites().add(this);
     }
 
-    public void addFavoriteMachine(Machine machine) {
-        userFavoriteMachines.add(machine);
-        machine.setUserFavorite(this);
-    }
 
     //==생성 메서드==//
     public static UserFavorite createFavorite(UserBasic userBasic, Machine orgMachine) {
         UserFavorite userFavorite = new UserFavorite();
         userFavorite.setUserBasic(userBasic);
-        userFavorite.addFavoriteMachine(orgMachine);
+        userFavorite.setMachine(orgMachine);
 
         return userFavorite;
     }

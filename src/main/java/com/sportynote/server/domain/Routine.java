@@ -29,9 +29,7 @@ public class Routine {
 //    private UserBasic userid;
 
     @NotNull
-    @OneToMany(mappedBy = "routine",cascade=CascadeType.ALL)
-    private List<Machine> machine = new ArrayList<>();
-
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Machine machine;
 
 }
