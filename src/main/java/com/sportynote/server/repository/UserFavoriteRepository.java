@@ -18,27 +18,52 @@ public class UserFavoriteRepository {
     public void save(UserFavorite userFavorite) {
         em.persist(userFavorite);
     }
-
+    public int delete(UserFavorite userFavorite) {
+        em.remove(userFavorite);
+        return userFavorite.getIdx();
+    }
     public List<UserFavorite> findAll() {
         return em.createQuery("select uf from UserFavorite uf", UserFavorite.class)
                 .getResultList();
     }
-
-    public UserFavorite findById(Integer userFavoriteIdx){
+    public List<UserFavorite> findAllByUserId(String userId) {
+        return em.createQuery("select uf from UserFavorite uf " +
+                        "where uf.userBasic.userId=: userId", UserFavorite.class)
+                .setParameter("userId",userId)
+                .getResultList();
+    }
+    public UserFavorite findById(Integer userFavoriteIdx) {
         return em.find(UserFavorite.class, userFavoriteIdx);
     }
 
-    public Optional<UserFavorite> findByUserId(String userId){
+    public Optional<UserFavorite> findByUserId(String userId) {
         Optional<UserFavorite> userFavorite = null;
-        try{
+        try {
             userFavorite = Optional.ofNullable(em.createQuery("select uf from UserFavorite uf where uf.userBasic.userId =: userId", UserFavorite.class)
                     .setParameter("userId", userId)
                     .getSingleResult());
-        }catch (NoResultException e){
+        } catch (NoResultException e) {
             userFavorite = Optional.empty();
-        }finally {
+        } finally {
             return userFavorite;
         }
 
+    }
+
+    public Optional<UserFavorite> findByUserIdAndMachineId(String userId, Integer machineId) {
+        Optional<UserFavorite> userFavorite = null;
+        try {
+            userFavorite = Optional.ofNullable(
+                    em.createQuery(
+                                    "select uf from UserFavorite uf where uf.userBasic.userId =: userId " +
+                                            "and uf.machine.idx =: machineId", UserFavorite.class)
+                            .setParameter("userId", userId)
+                            .setParameter("machineId", machineId)
+                            .getSingleResult());
+        } catch (NoResultException e) {
+            userFavorite = Optional.empty();
+        } finally {
+            return userFavorite;
+        }
     }
 }

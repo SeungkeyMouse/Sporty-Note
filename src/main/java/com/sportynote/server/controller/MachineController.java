@@ -5,10 +5,10 @@ import com.sportynote.server.repository.MachineRepository;
 import com.sportynote.server.service.MachineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,10 +30,16 @@ public class MachineController {
 
     //즐겨찾기
     @PostMapping("/machine/favorite")
-    public Integer addFavoriteMachine(@RequestParam("user_id") String userId,
-                                                @RequestParam("machine_idx") Integer machineId){
+    public ResponseEntity<Integer> addFavoriteMachine(@RequestParam("user_id") String userId,
+                                                      @RequestParam("machine_idx") Integer machineId){
 
-        return machineService.addFavorite(userId, machineId);
+        return ResponseEntity.ok(machineService.addFavorite(userId, machineId));
+    }
+
+    @GetMapping("/machine/favorite")
+    public ResponseEntity<List<?>> getFavoriteMachines(@RequestParam("user_id") String userId){
+
+        return ResponseEntity.ok(machineService.getFavorite(userId));
     }
 
 }

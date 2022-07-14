@@ -1,7 +1,6 @@
 package com;
 
 import com.sportynote.server.Enum.SocialType;
-import com.sportynote.server.domain.Gym;
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.UserBasic;
 import com.sportynote.server.domain.UserFavorite;
@@ -13,7 +12,6 @@ import com.sportynote.server.repository.query.GymDto;
 import com.sportynote.server.service.GymService;
 import com.sportynote.server.service.MachineService;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +29,7 @@ public class Initializer implements CommandLineRunner {
     private final GymRepository gymRepository;
     private final GymService gymService;
     private final MachineService machineService;
-    private final UserFavoriteRepository favoriteRepository;
+    private final UserFavoriteRepository userFavoriteRepository;
     @Override
     public void run(String... args) throws Exception {
         //하단 메소드 안의 내용들을 주석처리하면 실행시 데이터가 주입되지 않습니다.
@@ -46,14 +44,13 @@ public class Initializer implements CommandLineRunner {
         printUserFavorite();
     }
 
+    /**
+     * 즐겨찾기 출력
+     */
     void printUserFavorite() {
-        List<UserFavorite> all = favoriteRepository.findAll();
-        for (UserFavorite userFavorite : all) {
-            System.out.println("-------A");
-            List<Machine> userFavoriteMachines = userFavorite.getUserFavoriteMachines();
-            for (Machine userFavoriteMachine : userFavoriteMachines) {
-                System.out.println("userFavoriteMachine = " + userFavoriteMachine.getMachineName());
-            }
+        List<UserFavorite> userFavoriteMachines = userFavoriteRepository.findAll();
+        for (UserFavorite userFavorite : userFavoriteMachines) {
+            System.out.println("유저명: " + userFavorite.getUserBasic().getName() +"기구명 : " + userFavorite.getMachine().getMachineName());
         }
     }
 
@@ -74,8 +71,11 @@ public class Initializer implements CommandLineRunner {
 
         machineRepository.save(machine2);
 
-        machineService.addFavorite("123123", 7);
+        /**
+         * 즐겨찾기 추가
+         */
         machineService.addFavorite("123123", 6);
+        machineService.addFavorite("123123", 7);
 
         machineService.addFavorite("777777", 7);
     }
