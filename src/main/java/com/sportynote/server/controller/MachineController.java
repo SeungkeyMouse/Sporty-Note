@@ -16,7 +16,7 @@ public class MachineController {
 
     private final MachineRepository machineRepository;
     private final MachineService machineService;
-    //모든 기구리스트 리턴
+    //모든 기구리스트 리턴!
     @GetMapping("/machines")
     public ResponseEntity<?> getMachines() throws URISyntaxException {
         return ResponseEntity.ok(machineRepository.findAll());

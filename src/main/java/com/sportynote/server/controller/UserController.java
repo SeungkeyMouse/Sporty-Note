@@ -19,11 +19,6 @@ import java.net.URISyntaxException;
 public class UserController {
 
     private final UserBasicRepository userBasicRepository;
-    @GetMapping("/")
-    @ApiOperation(value = "샘플")
-    public String hello(){
-        return "hello";
-    }
 
     @GetMapping("/users")
     public ResponseEntity<?> getUsers() throws URISyntaxException {

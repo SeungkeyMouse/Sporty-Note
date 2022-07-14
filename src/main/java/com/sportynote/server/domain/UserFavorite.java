@@ -41,8 +41,6 @@ public class UserFavorite {
         userFavorite.setUserBasic(userBasic);
         userFavorite.setMachine(orgMachine);
 
-        //orgMachine.addUserFavorite(userFavorite);//굳이 orgMachine에서도 추가해줘야하나?
-
         return userFavorite;
     }
 }

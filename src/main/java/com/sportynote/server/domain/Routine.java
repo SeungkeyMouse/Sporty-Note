@@ -29,7 +29,7 @@ public class Routine {
 //    private UserBasic userid;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Machine machine;
 
 }
