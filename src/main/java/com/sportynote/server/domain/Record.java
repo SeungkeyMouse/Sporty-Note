@@ -19,7 +19,7 @@ import static javax.persistence.FetchType.LAZY;
 @Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name ="routine_table")
+@Table(name ="record_table")
 public class Record {
     @Id
     @GeneratedValue

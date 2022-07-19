@@ -1,6 +1,8 @@
 package com.sportynote.server.controller;
 
+import com.sportynote.server.domain.Machine;
 import com.sportynote.server.repository.MachineRepository;
+import com.sportynote.server.service.MachineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +32,11 @@ public class MachineController {
     @PostMapping("/machine/favorite")
     public ResponseEntity<Integer> addFavoriteMachine(@RequestParam("user_id") String userId,
                                                       @RequestParam("machine_idx") Integer machineId){
-
         return ResponseEntity.ok(machineService.addFavorite(userId, machineId));
     }
 
     @GetMapping("/machine/favorite")
     public ResponseEntity<List<?>> getFavoriteMachines(@RequestParam("user_id") String userId){
-
         return ResponseEntity.ok(machineService.getFavorite(userId));
     }
 

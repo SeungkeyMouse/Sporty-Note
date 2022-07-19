@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.sportynote.server.Enum.SocialType;
@@ -23,10 +24,10 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
-public class UserBasic {
+public class UserBasic implements Serializable {
     @Id
     @GeneratedValue
-    @Column
+    @Column(name="idx")
     private Integer idx;
 
     @NotNull
