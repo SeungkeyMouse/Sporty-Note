@@ -79,6 +79,7 @@ public class MachineService {
             for (UserFavorite userFavorite : userFavorites) {
                 Machine sampleM = userFavorite.getMachine();
                 MachineDto machineDto = new MachineDto(
+                        sampleM.getIdx(),
                         sampleM.getMachineName(),
                         sampleM.getTargetArea(),
                         sampleM.getUrl()

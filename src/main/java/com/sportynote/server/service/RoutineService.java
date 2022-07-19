@@ -1,7 +1,6 @@
 package com.sportynote.server.service;
 
 import com.sportynote.server.domain.*;
-import com.sportynote.server.dto.Routinedto;
 import com.sportynote.server.repository.MachineRepository;
 import com.sportynote.server.repository.RoutineRepository;
 import com.sportynote.server.repository.UserBasicRepository;

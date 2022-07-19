@@ -43,11 +43,9 @@ public class Initializer implements CommandLineRunner {
         gymService.save(new GymDto("바디스페이스", "37", "128","서울시", "강남구", "선릉로"));
         gymService.save(new GymDto("정원헬스장", "36", "127","서울시", "성북구", "안암로"));
         gymService.save(new GymDto("의정부헬스장", "37.5", "128","의정부시", "무슨구", "땡땡동"));
-        machineService.save(new MachineDto( "bench press", "가슴","https://www.swmaestro.org/sw/main/main.do"));
-        machineService.save(new MachineDto("El hook machine", "등","https://www.swmaestro.org/sw/main/main.do"));
-        machineService.save(new MachineDto("barbell squat", "하체","https://www.swmaestro.org/sw/main/main.do"));
+
         userBasicSetup();
-//        machineSetup();
+        machineSetup();
 
         printUserFavorite();
         System.out.println("실행 완료되었습니다.");
@@ -80,13 +78,18 @@ public class Initializer implements CommandLineRunner {
 
         machineRepository.save(machine2);
 
-        /**
+        /***
          * 즐겨찾기 추가
          */
         machineService.addFavorite("123123", 6);
         machineService.addFavorite("123123", 7);
 
         machineService.addFavorite("777777", 7);
+
+        /***
+         * 노트한 기구 추가
+         */
+
     }
 
     void userBasicSetup() {
