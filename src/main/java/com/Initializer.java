@@ -10,9 +10,11 @@ import com.sportynote.server.repository.UserBasicRepository;
 import com.sportynote.server.repository.UserFavoriteRepository;
 import com.sportynote.server.repository.query.GymDto;
 import com.sportynote.server.repository.query.MachineDto;
+import com.sportynote.server.repository.query.NodeDto;
 import com.sportynote.server.repository.query.RoutineDto;
 import com.sportynote.server.service.GymService;
 import com.sportynote.server.service.MachineService;
+import com.sportynote.server.service.NoteService;
 import com.sportynote.server.service.RoutineService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -36,6 +38,7 @@ public class Initializer implements CommandLineRunner {
     private final MachineService machineService;
     private final RoutineService routineService;
     private final UserFavoriteRepository userFavoriteRepository;
+    private final NoteService noteService;
     @Override
     public void run(String... args) throws Exception {
         //하단 메소드 안의 내용들을 주석처리하면 실행시 데이터가 주입되지 않습니다.
@@ -89,6 +92,10 @@ public class Initializer implements CommandLineRunner {
         /***
          * 노트한 기구 추가
          */
+        noteService.addNoteNode(new NodeDto("123123", 6, 2, "Orange", "123123의 벤치프레스 Orange 내용1입니다", 13.5F,24.88F,"사진주소1"));
+        noteService.addNoteNode(new NodeDto("123123", 6, 2, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 13.5F,24.88F,"사진주소2"));
+        noteService.addNoteNode(new NodeDto("123123", 6, 1, "Red", "123123의 벤치프레스 Red 내용입니다", 13.5F,20F,"사진주소3"));
+        noteService.addNoteNode(new NodeDto("777777", 7, 1, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
 
     }
 

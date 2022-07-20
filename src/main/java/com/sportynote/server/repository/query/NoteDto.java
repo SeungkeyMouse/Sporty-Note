@@ -3,9 +3,18 @@ package com.sportynote.server.repository.query;
 import com.sportynote.server.domain.Machine;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class NoteDto {
-    private Integer idx;
+    //하나의 노트페이지를 불러오는 정보
+    private MachineDto machineDto;
+
+    private Map<Integer, List<NodeDto>> nodeDtos;
 }

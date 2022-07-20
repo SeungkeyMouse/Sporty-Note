@@ -1,5 +1,6 @@
 package com.sportynote.server.domain;
 
+import com.sportynote.server.repository.query.NodeDto;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,17 +32,11 @@ public class Note {
     private List<NoteNode> noteNode = new ArrayList<>();
 
 
-
     //==생성 메서드==//
-    public static Note createNote(UserBasic userBasic, Machine orgMachine,NoteNode noteNode) {
-        UserFavorite userFavorite = new UserFavorite();
-        userFavorite.setUserBasic(userBasic);
-        userFavorite.setMachine(orgMachine);
-
+    public static Note createNote(UserBasic userBasic, Machine orgMachine) {
         Note note = new Note();
         note.setUserBasic(userBasic);
         note.setMachine(orgMachine);
-        note.getNoteNode().add(noteNode);
 
         return note;
     }
