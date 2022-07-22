@@ -1,17 +1,16 @@
 package com.sportynote.server.controller;
 
+import com.sportynote.server.Enum.NodeType;
 import com.sportynote.server.domain.NoteNode;
 import com.sportynote.server.repository.NoteNodeRepository;
 import com.sportynote.server.repository.NoteRepository;
-import com.sportynote.server.repository.query.MachineDto;
-import com.sportynote.server.repository.query.NodeDto;
-import com.sportynote.server.repository.query.NoteDto;
+import com.sportynote.server.repository.query.*;
 import com.sportynote.server.service.NoteService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,6 @@ public class NoteController {
     @GetMapping("/note/list")
     public ResponseEntity<List<MachineDto>> getAllMyNotedMachines(@RequestParam("userId") String userId){
         return ResponseEntity.ok(noteRepository.findNotedMachineByUserId(userId));
-//        return ResponseEntity.ok(noteNodeRepository.findAll());
     }
 
     //2. 해당하는 운동의 나의 '노드' 모두 불러오기(MY탭) ex) 벤치프레스의 [MY] 노트
@@ -46,9 +44,20 @@ public class NoteController {
     //POST
     //1. 나의 <노트>에 '노드' 저장(하나씩 UPDATE)
     @PostMapping("/note/create")
-    public ResponseEntity<Integer> addNoteNode(@RequestBody NodeDto nodeDto){
-        return ResponseEntity.ok(noteService.addNoteNode(nodeDto));
+    public ResponseEntity<Integer> addNoteNode(@RequestBody NodeCreateDto nodeCreateDto){
+        return ResponseEntity.ok(noteService.addNoteNode(nodeCreateDto));
     }
 
-    //2.
+    //2. 노드 수정
+    @PostMapping("/note/update")
+    public ResponseEntity<Integer> updateNoteNode(@RequestBody NodeUpdateDto nodeDto){
+        return ResponseEntity.ok(noteService.updateNoteNode(nodeDto));
+    }
+
+    //3. 노드 삭제
+    /*@PostMapping("/note/update")
+    public ResponseEntity<Integer> deleteNoteNode(@RequestBody NodeDto nodeDto){
+        return ResponseEntity.ok(noteService.updateNoteNode(nodeDto));
+    }*/
+
 }

@@ -1,7 +1,10 @@
 package com.sportynote.server.domain;
 
+import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.repository.query.NodeCreateDto;
 import com.sportynote.server.repository.query.NodeDto;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +25,9 @@ public class NoteNode {
     @NotNull
     private Note note;
 
-    private Integer type;//부위 ex) 1-팔꿈치 / 2-가슴 / 3-다리 / 4-등(허리)
+    @Enumerated(EnumType.STRING)
+    private NodeType type;//부위 ex) 1-팔꿈치 / 2-가슴 / 3-다리 / 4-등(허리)
+
     private String color;
 
 
@@ -33,15 +38,17 @@ public class NoteNode {
     private String pictureUrl;
 
     //==생성 메서드==//
-    public static NoteNode createNode(Note note, NodeDto nodeDto) {
+    public static NoteNode createNode(Note note, NodeCreateDto nodeCreateDto) {
         NoteNode node = new NoteNode();
         node.setNote(note);
-        node.setType(nodeDto.getType());
-        node.setColor(nodeDto.getColor());
-        node.setText(nodeDto.getText());
-        node.setX_location(nodeDto.getX_location());
-        node.setY_location(nodeDto.getY_location());
-        node.setPictureUrl(nodeDto.getPictureUrl());
+
+        node.setType(nodeCreateDto.getType());
+        node.setColor(nodeCreateDto.getColor());
+        node.setText(nodeCreateDto.getText());
+        node.setX_location(nodeCreateDto.getX_location());
+        node.setY_location(nodeCreateDto.getY_location());
+        node.setPictureUrl(nodeCreateDto.getPictureUrl());
+
 
         return node;
     }
