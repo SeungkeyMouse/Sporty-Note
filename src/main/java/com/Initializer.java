@@ -1,17 +1,13 @@
 package com;
 
+import com.sportynote.server.Enum.NodeType;
 import com.sportynote.server.Enum.SocialType;
-import com.sportynote.server.domain.Machine;
-import com.sportynote.server.domain.UserBasic;
-import com.sportynote.server.domain.UserFavorite;
+import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.GymRepository;
 import com.sportynote.server.repository.MachineRepository;
 import com.sportynote.server.repository.UserBasicRepository;
 import com.sportynote.server.repository.UserFavoriteRepository;
-import com.sportynote.server.repository.query.GymDto;
-import com.sportynote.server.repository.query.MachineDto;
-import com.sportynote.server.repository.query.NodeDto;
-import com.sportynote.server.repository.query.RoutineDto;
+import com.sportynote.server.repository.query.*;
 import com.sportynote.server.service.GymService;
 import com.sportynote.server.service.MachineService;
 import com.sportynote.server.service.NoteService;
@@ -19,6 +15,7 @@ import com.sportynote.server.service.RoutineService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Node;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -99,10 +96,10 @@ public class Initializer implements CommandLineRunner {
         /***
          * 노트한 기구 추가
          */
-        noteService.addNoteNode(new NodeDto("123123", 6, 2, "Orange", "123123의 벤치프레스 Orange 내용1입니다", 13.5F,24.88F,"사진주소1"));
-        noteService.addNoteNode(new NodeDto("123123", 6, 2, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 13.5F,24.88F,"사진주소2"));
-        noteService.addNoteNode(new NodeDto("123123", 6, 1, "Red", "123123의 벤치프레스 Red 내용입니다", 13.5F,20F,"사진주소3"));
-        noteService.addNoteNode(new NodeDto("777777", 7, 1, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto("123123", 6, NodeType.CHEST,"Orange", "123123의 벤치프레스 Orange 내용1입니다", 13.5F,24.88F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto("123123", 6,NodeType.CHEST, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 13.5F,24.88F,"사진주소2"));
+        noteService.addNoteNode(new NodeCreateDto("123123", 6, NodeType.BACK, "Red", "123123의 벤치프레스 Red 내용입니다", 13.5F,20F,"사진주소3"));
+        noteService.addNoteNode(new NodeCreateDto("777777", 7,  NodeType.BACK, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
 
     }
 

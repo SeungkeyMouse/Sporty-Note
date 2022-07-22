@@ -1,5 +1,6 @@
 package com.sportynote.server.repository;
 
+import com.sportynote.server.Enum.NodeType;
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.Note;
 import com.sportynote.server.domain.NoteNode;
@@ -86,13 +87,13 @@ public class NoteRepository {
                 machine.getTargetArea(), machine.getUrl());
 
         //2. "노드"들에 대한 기본 정보
-        Map<Integer, List<NodeDto>> nodeMap = new HashMap<>();//key: 노트타입, value: 노드Dto리스트
+        Map<NodeType, List<NodeDto>> nodeMap = new HashMap<>();//key: 노트타입, value: 노드Dto리스트
         for (NoteNode node : resultList) {
-            Integer key = node.getType();
+            NodeType key = node.getType();
 
             //노드-> 노드DTO
             NodeDto nodeDto = new NodeDto(node.getColor(),
-                    machineId, node.getType(), node.getColor(), node.getText(), node.getX_location(), node.getY_location(),
+                    machineId,node.getIdx(), node.getType(), node.getColor(), node.getText(), node.getX_location(), node.getY_location(),
                     node.getPictureUrl());
 
             //각 node의 타입별로 Map에 넣어줌
