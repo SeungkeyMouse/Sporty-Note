@@ -84,7 +84,7 @@ public class RoutineService {
      루틴 하나 수정 UPDATE
      */
     public boolean modifyRoutine(MachineRoutineDto machineRoutineDto) {
-        Routine routine = new Routine();
+        Routine routine = new Routine(); //
         /**{
             "machines": [
             6,7,8
