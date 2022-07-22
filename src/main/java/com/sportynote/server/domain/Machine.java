@@ -45,6 +45,13 @@ public class Machine {
     private List<Routine> routines = new ArrayList<>();
 
     @Builder
+    public Machine(Integer idx, String machineName, String targetArea, String Url){
+        this.idx=idx;
+        this.machineName=machineName;
+        this.targetArea=targetArea;
+        this.Url=Url;
+    }
+
     public static Machine createMachine(String machineName,String targetArea,String Url) {
         return Machine.builder()
                 .machineName(machineName)

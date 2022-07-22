@@ -81,13 +81,20 @@ public class Initializer implements CommandLineRunner {
 
         machineRepository.save(machine2);
 
+        Machine machine3 = new Machine();
+        machine3.setMachineName("스쿼트");
+        machine3.setTargetArea("하체");
+        machine3.setUrl("https://www.swmaestro.org/sw/main/main.do");
+        // machine2.setGym(gymRepository.findAll().get(1));
+
+        machineRepository.save(machine3);
         /***
          * 즐겨찾기 추가
          */
         machineService.addFavorite("123123", 6);
         machineService.addFavorite("123123", 7);
 
-        machineService.addFavorite("777777", 7);
+        machineService.addFavorite("777777", 8);
 
         /***
          * 노트한 기구 추가
