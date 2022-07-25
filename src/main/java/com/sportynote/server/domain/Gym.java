@@ -1,5 +1,6 @@
 package com.sportynote.server.domain;
 
+import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import javax.persistence.Id;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Gym {
+public class Gym extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name= "gym_idx")

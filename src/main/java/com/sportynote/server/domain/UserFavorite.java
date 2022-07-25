@@ -1,5 +1,6 @@
 package com.sportynote.server.domain;
 
+import com.sportynote.server.domain.base.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-public class UserFavorite {
+public class UserFavorite extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "user_favorite_id")
