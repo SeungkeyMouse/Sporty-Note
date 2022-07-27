@@ -3,10 +3,7 @@ package com;
 import com.sportynote.server.Enum.NodeType;
 import com.sportynote.server.Enum.SocialType;
 import com.sportynote.server.domain.*;
-import com.sportynote.server.repository.GymRepository;
-import com.sportynote.server.repository.MachineRepository;
-import com.sportynote.server.repository.UserBasicRepository;
-import com.sportynote.server.repository.UserFavoriteRepository;
+import com.sportynote.server.repository.*;
 import com.sportynote.server.repository.query.*;
 import com.sportynote.server.service.GymService;
 import com.sportynote.server.service.MachineService;
@@ -36,6 +33,7 @@ public class Initializer implements CommandLineRunner {
     private final RoutineService routineService;
     private final UserFavoriteRepository userFavoriteRepository;
     private final NoteService noteService;
+
     @Override
     public void run(String... args) throws Exception {
         //하단 메소드 안의 내용들을 주석처리하면 실행시 데이터가 주입되지 않습니다.
@@ -46,9 +44,31 @@ public class Initializer implements CommandLineRunner {
 
         userBasicSetup();
         machineSetup();
-
+        machineLocationSetup();
+        noteSetup();
         printUserFavorite();
         System.out.println("실행 완료되었습니다.");
+    }
+
+    private void noteSetup() {
+        /***
+         * 노트한 기구 추가
+         */
+        noteService.addNoteNode(new NodeCreateDto("123123", 6, NodeType.CHEST,"Orange", "123123의 벤치프레스 Orange 내용1입니다", 0F,0F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto("123123", 6,NodeType.CHEST, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 0F,0F,"사진주소2"));
+        noteService.addNoteNode(new NodeCreateDto("123123", 6, NodeType.BACK, "Red", "123123의 벤치프레스 Red 내용입니다", 13.5F,20F,"사진주소3"));
+        noteService.addNoteNode(new NodeCreateDto("777777", 7,  NodeType.BACK, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
+
+    }
+
+    private void machineLocationSetup() {
+        machineService.addNodeLocation(new NodeLocationDto(6,NodeType.CHEST, 10F,10F));
+        machineService.addNodeLocation(new NodeLocationDto(6,NodeType.BACK, 20F,20F));
+        machineService.addNodeLocation(new NodeLocationDto(6,NodeType.ELBOW, 30F,30F));
+
+        machineService.addNodeLocation(new NodeLocationDto(7,NodeType.CHEST, 100F,10F));
+        machineService.addNodeLocation(new NodeLocationDto(7,NodeType.BACK, 200F,20F));
+        machineService.addNodeLocation(new NodeLocationDto(7,NodeType.ELBOW, 300F,30F));
     }
 
     /**
@@ -93,13 +113,6 @@ public class Initializer implements CommandLineRunner {
 
         machineService.addFavorite("777777", 8);
 
-        /***
-         * 노트한 기구 추가
-         */
-        noteService.addNoteNode(new NodeCreateDto("123123", 6, NodeType.CHEST,"Orange", "123123의 벤치프레스 Orange 내용1입니다", 13.5F,24.88F,"사진주소1"));
-        noteService.addNoteNode(new NodeCreateDto("123123", 6,NodeType.CHEST, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 13.5F,24.88F,"사진주소2"));
-        noteService.addNoteNode(new NodeCreateDto("123123", 6, NodeType.BACK, "Red", "123123의 벤치프레스 Red 내용입니다", 13.5F,20F,"사진주소3"));
-        noteService.addNoteNode(new NodeCreateDto("777777", 7,  NodeType.BACK, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
 
     }
 
