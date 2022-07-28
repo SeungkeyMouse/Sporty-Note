@@ -12,7 +12,8 @@ public class MachineDto {
 
     //내 기구 정보
     private Integer idx;
-    private String machineName;
+    private String krMachineName;
+    private String engMachineName;
     private String targetArea;
     private String Url;
 

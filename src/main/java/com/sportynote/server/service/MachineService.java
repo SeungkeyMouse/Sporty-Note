@@ -34,7 +34,8 @@ public class MachineService {
     public void save(MachineDto machineDto) {
         Machine machine = new Machine();
 
-        machine.setMachineName(machineDto.getMachineName());
+        machine.setKrMachineName(machineDto.getKrMachineName());
+        machine.setEngMachineName(machineDto.getEngMachineName());
         machine.setTargetArea(machineDto.getTargetArea());
         machine.setUrl(machineDto.getUrl());
         machineRepository.save(machine);
@@ -79,7 +80,8 @@ public class MachineService {
                 Machine sampleM = userFavorite.getMachine();
                 MachineDto machineDto = new MachineDto(
                         sampleM.getIdx(),
-                        sampleM.getMachineName(),
+                        sampleM.getKrMachineName(),
+                        sampleM.getEngMachineName(),
                         sampleM.getTargetArea(),
                         sampleM.getUrl()
                 );
