@@ -61,8 +61,8 @@ public class RoutineController {
 
     /** 루틴 수정 Update */
     @PutMapping("/modify-routines")
-    public ResponseEntity<?> modifyRoutines(@RequestBody MachineRoutineDto machineRoutineDto) throws URISyntaxException {
-        result = (routineService.modifyRoutine(machineRoutineDto)) ? "success" : "failed";
+    public ResponseEntity<?> modifyRoutines(@RequestBody RoutineDto routineDto) throws URISyntaxException {
+        result = (routineService.modifyRoutine(routineDto)) ? "success" : "failed";
         status_code = result == "success" ? 201 : 200;
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + result + "}");
     }

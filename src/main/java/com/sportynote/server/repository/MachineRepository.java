@@ -23,7 +23,7 @@ public class MachineRepository{
                 .getResultList();
     }
 
-    public Machine findById(Integer machineId){
+    public Machine findById(Integer machineId) {
         return em.find(Machine.class, machineId);
     }
 }

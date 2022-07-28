@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
 @Table(name ="routine_table")
@@ -32,16 +31,34 @@ public class Routine {
     private Machine machine;
 
 
-    @Builder
+
     public Routine(String routineName, UserBasic userBasic, Machine machine){
         this.routineName=routineName;
         this.userBasic=userBasic;
         this.machine=machine;
     }
 
+    @Builder //수정 빌더
+    public Routine(String routineName, UserBasic userBasic, Machine machine,Integer idx){
+        this.idx=idx;
+        this.routineName=routineName;
+        this.userBasic=userBasic;
+        this.machine=machine;
+    }
+
     //==Routine 생성 메서드==//
-    public static Routine createRoutine(String routineName,UserBasic userBasic, Machine machine) {
+    public static Routine createRoutine(String routineName, UserBasic userBasic, Machine machine) {
         return Routine.builder()
+                .routineName(routineName)
+                .userBasic(userBasic)
+                .machine(machine)
+                .build();
+    }
+
+    //==Routine 수정 메서드==//
+    public static Routine updateRoutine(Integer idx, String routineName, UserBasic userBasic, Machine machine) {
+        return Routine.builder()
+                .idx(idx)
                 .routineName(routineName)
                 .userBasic(userBasic)
                 .machine(machine)

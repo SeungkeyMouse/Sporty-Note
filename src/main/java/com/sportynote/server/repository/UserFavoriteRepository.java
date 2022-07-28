@@ -18,6 +18,7 @@ public class UserFavoriteRepository {
     public void save(UserFavorite userFavorite) {
         em.persist(userFavorite);
     }
+
     public int delete(UserFavorite userFavorite) {//제거
         em.remove(userFavorite);
         return userFavorite.getIdx();

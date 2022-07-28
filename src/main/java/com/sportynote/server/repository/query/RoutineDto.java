@@ -9,7 +9,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class RoutineDto {
-    private String routine_Idx;
     private String userid;
     private String routineName;
     private List<Integer> Machines = new ArrayList<>();
