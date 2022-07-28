@@ -1,14 +1,13 @@
 package com.sportynote.server.service;
 
-import com.sportynote.server.domain.Gym;
-import com.sportynote.server.domain.Machine;
-import com.sportynote.server.domain.UserBasic;
-import com.sportynote.server.domain.UserFavorite;
+import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.MachineRepository;
+import com.sportynote.server.repository.NodeLocationSetRepository;
 import com.sportynote.server.repository.UserBasicRepository;
 import com.sportynote.server.repository.UserFavoriteRepository;
 import com.sportynote.server.repository.query.GymDto;
 import com.sportynote.server.repository.query.MachineDto;
+import com.sportynote.server.repository.query.NodeLocationDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,7 @@ public class MachineService {
     private final UserBasicRepository userBasicRepository;
     private final UserFavoriteRepository userFavoriteRepository;
 
-
+    private final NodeLocationSetRepository nodeLocationSetRepository;
     /**
      * 머신 저장
      * */
@@ -90,5 +89,19 @@ public class MachineService {
         }
 
         return favoriteMachines;
+    }
+
+    @Transactional
+    public String addNodeLocation(NodeLocationDto nodeLocationDto) {
+        try {
+            Machine machine = machineRepository.findById(nodeLocationDto.getMachineId());
+            NodeLocationSet nodeLocationSet = NodeLocationSet.createNodeLocationSet(machine, nodeLocationDto);
+
+            nodeLocationSetRepository.save(nodeLocationSet);
+        }catch (Exception e){
+            return "Fail";
+        }
+
+        return "Success";
     }
 }

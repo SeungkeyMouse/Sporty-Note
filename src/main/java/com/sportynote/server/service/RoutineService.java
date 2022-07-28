@@ -98,9 +98,9 @@ public class RoutineService {
             existSet.add(existRoutine.get(i).getMachine().getIdx());
         }
 
-        for(int i=0;i<routineDto.getMachines().size();i++){
-            System.out.print(dtoSet.)
-        }
+//        for(int i=0;i<routineDto.getMachines().size();i++){
+//            System.out.print(dtoSet.)
+//        }
         for(int i=0;i<existRoutine.size();i++){
             existSet.add(existRoutine.get(i).getMachine().getIdx());
         }

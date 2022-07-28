@@ -10,8 +10,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.FetchType.LAZY;
-
 @Getter
 @Setter
 @Entity
@@ -19,7 +17,7 @@ import static javax.persistence.FetchType.LAZY;
 public class Machine {
     @Id
     @GeneratedValue
-    @Column(name = "machine_id")
+    @Column(name = "machine_idx")
     private Integer idx;
 
     @NotNull
@@ -44,6 +42,9 @@ public class Machine {
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
     private List<Routine> routines = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
+    private List<NodeLocationSet> nodeLocationSets =  new ArrayList<>();
     @Builder
     public Machine(Integer idx, String machineName, String targetArea, String Url){
         this.idx=idx;

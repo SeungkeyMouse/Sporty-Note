@@ -1,8 +1,9 @@
 package com.sportynote.server.controller;
 
-import com.sportynote.server.domain.Machine;
 import com.sportynote.server.repository.MachineRepository;
+import com.sportynote.server.repository.query.NodeLocationDto;
 import com.sportynote.server.service.MachineService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,9 +36,17 @@ public class MachineController {
         return ResponseEntity.ok(machineService.addFavorite(userId, machineId));
     }
 
+    //즐겨찾기한 기구들 가져오기
     @GetMapping("/machine/favorite")
     public ResponseEntity<List<?>> getFavoriteMachines(@RequestParam("user_id") String userId){
         return ResponseEntity.ok(machineService.getFavorite(userId));
+    }
+
+
+    //기구별 노드 위치 추가하기
+    @PostMapping("/machine/set_node")
+    public ResponseEntity<?> setMachineNodeLocation(@RequestBody NodeLocationDto nodeLocationDto){
+        return ResponseEntity.ok(machineService.addNodeLocation(nodeLocationDto));
     }
 
 }
