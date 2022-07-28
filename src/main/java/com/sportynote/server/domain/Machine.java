@@ -21,7 +21,10 @@ public class Machine {
     private Integer idx;
 
     @NotNull
-    private String machineName;
+    private String krMachineName;
+
+    @NotNull
+    private String engMachineName;
 
     @Nullable
     private String targetArea;
@@ -46,16 +49,18 @@ public class Machine {
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
     private List<NodeLocationSet> nodeLocationSets =  new ArrayList<>();
     @Builder
-    public Machine(Integer idx, String machineName, String targetArea, String Url){
+    public Machine(Integer idx, String krMachineName, String engMachineName, String targetArea, String Url){
         this.idx=idx;
-        this.machineName=machineName;
+        this.krMachineName=krMachineName;
+        this.engMachineName = engMachineName;
         this.targetArea=targetArea;
         this.Url=Url;
     }
 
-    public static Machine createMachine(String machineName,String targetArea,String Url) {
+    public static Machine createMachine(String krMachineName,String engMachineName, String targetArea,String Url) {
         return Machine.builder()
-                .machineName(machineName)
+                .krMachineName(krMachineName)
+                .engMachineName(engMachineName)
                 .targetArea(targetArea)
                 .Url(Url)
                 .build();

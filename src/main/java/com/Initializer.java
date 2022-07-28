@@ -77,13 +77,14 @@ public class Initializer implements CommandLineRunner {
     void printUserFavorite() {
         List<UserFavorite> userFavoriteMachines = userFavoriteRepository.findAll();
         for (UserFavorite userFavorite : userFavoriteMachines) {
-            System.out.println("유저명: " + userFavorite.getUserBasic().getName() +"기구명 : " + userFavorite.getMachine().getMachineName());
+            System.out.println("유저명: " + userFavorite.getUserBasic().getName() +"기구명 : " + userFavorite.getMachine().getKrMachineName());
         }
     }
 
     void machineSetup() {
         Machine machine = new Machine();
-        machine.setMachineName("벤치프레스");
+        machine.setKrMachineName("벤치프레스");
+        machine.setEngMachineName("Bench Press");
         machine.setTargetArea("가슴");
         machine.setUrl("https://www.naver.com");
         //machine.setGym(gymRepository.findAll().get(0));
@@ -91,7 +92,8 @@ public class Initializer implements CommandLineRunner {
         machineRepository.save(machine);
 
         Machine machine2 = new Machine();
-        machine2.setMachineName("랫풀다운");
+        machine2.setKrMachineName("랫풀다운");
+        machine2.setEngMachineName("Lat Pull Down");
         machine2.setTargetArea("등");
         machine2.setUrl("https://www.daum.net");
        // machine2.setGym(gymRepository.findAll().get(1));
@@ -99,7 +101,8 @@ public class Initializer implements CommandLineRunner {
         machineRepository.save(machine2);
 
         Machine machine3 = new Machine();
-        machine3.setMachineName("스쿼트");
+        machine3.setKrMachineName("스쿼트");
+        machine3.setEngMachineName("Squat");
         machine3.setTargetArea("하체");
         machine3.setUrl("https://www.swmaestro.org/sw/main/main.do");
         // machine2.setGym(gymRepository.findAll().get(1));

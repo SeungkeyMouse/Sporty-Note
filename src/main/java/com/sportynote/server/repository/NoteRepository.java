@@ -44,7 +44,7 @@ public class NoteRepository {
         List<MachineDto> machineDtoList = new ArrayList<>();
         for (Note note : noteList) {
             Machine machine = note.getMachine();
-            MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getMachineName(),
+            MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getKrMachineName(),machine.getEngMachineName(),
                     machine.getTargetArea(), machine.getUrl());
             machineDtoList.add(machineDto);
         }
@@ -83,7 +83,7 @@ public class NoteRepository {
 
         //1. 머신에 대한 기본 정보
         Machine machine = resultList.get(0).getNote().getMachine();
-        MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getMachineName(),
+        MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getKrMachineName(),machine.getEngMachineName(),
                 machine.getTargetArea(), machine.getUrl());
 
         //2. "노드"들에 대한 기본 정보
