@@ -5,8 +5,7 @@ import com.sportynote.server.repository.MachineRepository;
 import com.sportynote.server.repository.RoutineRepository;
 import com.sportynote.server.repository.UserBasicRepository;
 import com.sportynote.server.repository.UserFavoriteRepository;
-import com.sportynote.server.repository.query.MachineDto.RoutineMachineDto;
-import com.sportynote.server.repository.query.RoutineDto.MachineRoutineDto;
+import com.sportynote.server.repository.query.RoutineMachineDto;
 import com.sportynote.server.repository.query.*;
 import com.sportynote.server.repository.repositoryImpl.RoutineRepositoryImpl;
 import lombok.RequiredArgsConstructor;
@@ -120,14 +119,15 @@ public class RoutineService {
         for (Integer integer : routineExistSet) {
             Routine routine = routineRepository.findByUserIdAndMachineIdAndRoutineName(userBasic.getUserId(),integer,routineName);
             System.out.println("deleteRoutineList : " + integer);
-            routineRepository.delete(routine.getIdx());
+            routineRepository.deleteMachine(routine.getIdx());
         }
         return true;
     }
-//    /** 루틴 하나 삭제 */
-//    public boolean deleteRoutine(RoutineDto routineDto){
-//        routineRepository.deleteAll(routineDto.getRoutineName(),routineDto.getUserid());
-//    }
+    /** 루틴 하나 삭제 */
+    public boolean deleteRoutine(RoutineDto routineDto){
+        routineRepository.delete(routineDto.getRoutineName(),routineDto.getUserid());
+        return true;
+    }
 
 }
 

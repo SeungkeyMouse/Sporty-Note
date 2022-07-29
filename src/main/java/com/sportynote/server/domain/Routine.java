@@ -3,6 +3,7 @@ package com.sportynote.server.domain;
 import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name ="routine_table")
+@SQLDelete(sql = "UPDATE routine_table SET deleted = true WHERE idx = ?")
 public class Routine extends BaseEntity {
     @Id
     @GeneratedValue
@@ -30,8 +32,6 @@ public class Routine extends BaseEntity {
     @JoinColumn(name="machine_id")
     @ManyToOne
     private Machine machine;
-
-
 
     public Routine(String routineName, UserBasic userBasic, Machine machine){
         this.routineName=routineName;

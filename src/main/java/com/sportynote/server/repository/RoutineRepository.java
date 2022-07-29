@@ -35,10 +35,13 @@ public class RoutineRepository {
 //        }
 //    }
 
-    public void delete(Integer idx){
+    public void deleteMachine(Integer idx){
         em.remove(em.find(Routine.class, idx));
     }
-
+    public void delete(String routineName,String userid){
+        findByIdAndRoutineName(routineName,userid);
+        em.remove(findByIdAndRoutineName(routineName,userid));
+    }
 
     public List<Routine> findAll() {
         return em.createQuery("select m from Routine m", Routine.class)

@@ -3,9 +3,8 @@ package com.sportynote.server.controller;
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.Routine;
 import com.sportynote.server.repository.RoutineRepository;
-import com.sportynote.server.repository.query.MachineDto.RoutineMachineDto;
+import com.sportynote.server.repository.query.RoutineMachineDto;
 import com.sportynote.server.repository.query.MachineDto;
-import com.sportynote.server.repository.query.RoutineDto.MachineRoutineDto;
 import com.sportynote.server.repository.query.RoutineDto;
 
 import com.sportynote.server.service.RoutineService;
@@ -20,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/routine")
 public class RoutineController {
 
     private final RoutineRepository routineRepository;
@@ -63,6 +63,13 @@ public class RoutineController {
     @PutMapping("/modify-routines")
     public ResponseEntity<?> modifyRoutines(@RequestBody RoutineDto routineDto) throws URISyntaxException {
         result = (routineService.modifyRoutine(routineDto)) ? "success" : "failed";
+        status_code = result == "success" ? 201 : 200;
+        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + result + "}");
+    }
+
+    @DeleteMapping("/delete-routines")
+    public ResponseEntity<?> deleteRoutines(@RequestBody RoutineDto routineDto) throws URISyntaxException {
+        result = (routineService.deleteRoutine(routineDto)) ? "success" : "failed";
         status_code = result == "success" ? 201 : 200;
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + result + "}");
     }
