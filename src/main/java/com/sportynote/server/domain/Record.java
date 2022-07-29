@@ -1,6 +1,7 @@
 package com.sportynote.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,7 +21,7 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name ="record_table")
-public class Record {
+public class Record extends BaseEntity {
     @Id
     @GeneratedValue
     private Integer idx;

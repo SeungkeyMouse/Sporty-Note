@@ -1,5 +1,6 @@
 package com.sportynote.server.domain;
 
+import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name ="routine_table")
-public class Routine {
+public class Routine extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name="Routine_Idx")

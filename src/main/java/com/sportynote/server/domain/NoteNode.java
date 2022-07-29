@@ -1,6 +1,7 @@
 package com.sportynote.server.domain;
 
 import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.domain.base.BaseEntity;
 import com.sportynote.server.repository.query.NodeCreateDto;
 import com.sportynote.server.repository.query.NodeDto;
 import com.sun.istack.NotNull;
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor
-public class NoteNode {
+public class NoteNode extends BaseEntity {
     @Id
     @GeneratedValue
     private Integer idx;

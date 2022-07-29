@@ -1,6 +1,7 @@
 package com.sportynote.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name ="routine_node_table")
-public class RecordNode {
+public class RecordNode extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "machine_idx")

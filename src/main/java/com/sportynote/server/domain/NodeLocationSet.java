@@ -2,6 +2,7 @@ package com.sportynote.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.domain.base.BaseEntity;
 import com.sportynote.server.repository.query.NodeCreateDto;
 import com.sportynote.server.repository.query.NodeLocationDto;
 import com.sun.istack.NotNull;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor
-public class NodeLocationSet {
+public class NodeLocationSet extends BaseEntity {
     @Id
     @GeneratedValue
     private Integer idx;

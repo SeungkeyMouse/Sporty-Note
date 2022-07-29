@@ -1,6 +1,7 @@
 package com.sportynote.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.lang.Nullable;
@@ -14,7 +15,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Machine {
+public class Machine extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "machine_idx")

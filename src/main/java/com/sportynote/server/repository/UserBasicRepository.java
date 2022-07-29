@@ -5,6 +5,7 @@ import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.UserBasic;
 import com.sportynote.server.domain.UserFavorite;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

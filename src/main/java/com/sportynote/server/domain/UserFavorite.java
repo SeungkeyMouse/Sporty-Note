@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
+
 public class UserFavorite extends BaseEntity {
     @Id
     @GeneratedValue

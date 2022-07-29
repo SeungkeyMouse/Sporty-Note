@@ -1,5 +1,6 @@
 package com.sportynote.server.domain;
 
+import com.sportynote.server.domain.base.BaseEntity;
 import com.sportynote.server.repository.query.NodeDto;
 import com.sun.istack.NotNull;
 import lombok.Getter;
@@ -14,11 +15,10 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Note {
+public class Note extends BaseEntity {
     @Id
     @GeneratedValue
     private Integer idx;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
