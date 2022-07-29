@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface RoutineRepositoryImpl extends JpaRepository<Routine,Integer> {
+public interface RoutineRepositoryImpl extends JpaRepository<Routine,Long> {
 }

@@ -17,9 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Machine extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "machine_idx")
-    private Integer idx;
+    private Long idx;
 
     @NotNull
     private String krMachineName;
@@ -50,7 +50,7 @@ public class Machine extends BaseEntity {
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
     private List<NodeLocationSet> nodeLocationSets =  new ArrayList<>();
     @Builder
-    public Machine(Integer idx, String krMachineName, String engMachineName, String targetArea, String Url){
+    public Machine(Long idx, String krMachineName, String engMachineName, String targetArea, String Url){
         this.idx=idx;
         this.krMachineName=krMachineName;
         this.engMachineName = engMachineName;

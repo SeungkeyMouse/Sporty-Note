@@ -45,7 +45,7 @@ public class MachineService {
      * 즐겨찾기 추가
      */
     @Transactional
-    public Integer addFavorite(String userId, Integer machineId) {
+    public Long addFavorite(String userId, Long machineId) {
         Optional<UserFavorite> userFavorites = userFavoriteRepository.findByUserIdAndMachineId(userId, machineId);
         //엔티티 조회
         UserBasic userBasic = userBasicRepository.findById(userId);

@@ -11,7 +11,7 @@ import lombok.Setter;
 public class MachineDto {
 
     //내 기구 정보
-    private Integer idx;
+    private Long idx;
     private String krMachineName;
     private String engMachineName;
     private String targetArea;
@@ -21,8 +21,8 @@ public class MachineDto {
     @AllArgsConstructor
     public static class RoutineMachineDto {
         //내 기구 정보 내 루틴 idx
-        private Integer PrimaryKey;
-        private Integer idx;
+        private Long PrimaryKey;
+        private Long idx;
         private String machineName;
         private String targetArea;
         private String Url;

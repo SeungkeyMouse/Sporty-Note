@@ -20,7 +20,7 @@ public class NodeLocationSetRepository {
         em.persist(ns);
     }
 
-    public Optional<NodeLocationSet> findByMachineIdAndNodeType(Integer machineId, NodeType nodeType){
+    public Optional<NodeLocationSet> findByMachineIdAndNodeType(Long machineId, NodeType nodeType){
         Optional<NodeLocationSet> optNLS = null;
         try{
             optNLS = Optional.ofNullable(em.createQuery("select ns from NodeLocationSet ns "+

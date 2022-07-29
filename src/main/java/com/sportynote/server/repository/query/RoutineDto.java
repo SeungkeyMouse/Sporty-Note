@@ -11,5 +11,5 @@ import java.util.List;
 public class RoutineDto {
     private String userid;
     private String routineName;
-    private List<Integer> Machines;
+    private List<Long> Machines;
 }

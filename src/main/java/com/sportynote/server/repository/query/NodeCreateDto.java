@@ -12,7 +12,7 @@ import lombok.Setter;
 @Data
 public class NodeCreateDto {
     private String userId;
-    private Integer machineId;
+    private Long machineId;
 
     //노드에 대한정보
     //종류

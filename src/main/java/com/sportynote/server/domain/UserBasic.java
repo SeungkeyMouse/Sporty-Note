@@ -27,13 +27,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UserBasic extends BaseEntity implements Serializable {
     @Id
-    @GeneratedValue
-    @Column(name="idx")
-    private Integer idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_basic_idx")
+    private Long idx;
 
     @NotNull
     @Column(name = "user_id")
     private String userId;
+
+    @Column(name = "oauth_id")
+    private String oauthId;
 
     @JsonIgnore
     @OneToMany(mappedBy = "userBasic")

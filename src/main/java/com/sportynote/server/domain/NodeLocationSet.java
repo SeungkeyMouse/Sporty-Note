@@ -18,8 +18,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class NodeLocationSet extends BaseEntity {
     @Id
-    @GeneratedValue
-    private Integer idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "node_location_set_idx")
+    private Long idx;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "machine_idx")

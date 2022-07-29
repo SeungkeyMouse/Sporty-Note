@@ -23,8 +23,9 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name ="record_table")
 public class Record extends BaseEntity {
     @Id
-    @GeneratedValue
-    private Integer idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "record_idx")
+    private Long idx;
 
     @NotNull
     private String userId;
@@ -35,7 +36,7 @@ public class Record extends BaseEntity {
     private Machine machines;
 
     @NotNull
-    private Integer noteId;
+    private Long noteId;
 
     @NotNull
     private LocalDateTime recordedDate;

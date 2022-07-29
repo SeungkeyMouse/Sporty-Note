@@ -4,10 +4,7 @@ import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -16,9 +13,9 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Gym extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "gym_idx")
-    private Integer idx;
+    private Long idx;
 
     @NotNull
     private String name;

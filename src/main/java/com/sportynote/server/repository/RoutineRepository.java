@@ -29,13 +29,13 @@ public class RoutineRepository {
 
 //    //일단 냅두겠습니다..
 //    public <Routine> void saveAll(Iterable<com.sportynote.server.domain.Routine> routines){
-//        List<Integer> result = new ArrayList<>();
+//        List<Long> result = new ArrayList<>();
 //        for(com.sportynote.server.domain.Routine entity: routines){
 //            result.add(save(entity));
 //        }
 //    }
 
-    public void deleteMachine(Integer idx){
+    public void deleteMachine(Long idx){
         em.remove(em.find(Routine.class, idx));
     }
     public void delete(String routineName,String userid){
@@ -60,7 +60,7 @@ public class RoutineRepository {
                 .setParameter("userid",userid).setParameter("RoutineName",RoutineName).getResultList();
     }
 
-    public Routine findByUserIdAndMachineIdAndRoutineName(String userId, Integer machineId, String routineName) {
+    public Routine findByUserIdAndMachineIdAndRoutineName(String userId, Long machineId, String routineName) {
             return em.createQuery("select m from Routine m where m.userBasic.userId=:userid and m.machine.idx=:machineId and m.routineName=:routineName", Routine.class)
                     .setParameter("userid", userId).setParameter("machineId",machineId).setParameter("routineName", routineName).getSingleResult();
 

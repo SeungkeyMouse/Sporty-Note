@@ -36,7 +36,7 @@ public class NoteController {
     //2. 해당하는 운동의 나의 '노드' 모두 불러오기(MY탭) ex) 벤치프레스의 [MY] 노트
     @GetMapping("/note")
     public ResponseEntity<NoteDto> getMyNote(@RequestParam("userId") String userId,
-                                                @RequestParam("machineId") Integer machineId){
+                                                @RequestParam("machineId") Long machineId){
         return ResponseEntity.ok(noteService.findMyNoteNodes(userId, machineId));
     }
 
@@ -44,19 +44,19 @@ public class NoteController {
     //POST
     //1. 나의 <노트>에 '노드' 저장(하나씩 UPDATE)
     @PostMapping("/note/create")
-    public ResponseEntity<Integer> addNoteNode(@RequestBody NodeCreateDto nodeCreateDto){
+    public ResponseEntity<Long> addNoteNode(@RequestBody NodeCreateDto nodeCreateDto){
         return ResponseEntity.ok(noteService.addNoteNode(nodeCreateDto));
     }
 
     //2. 노드 수정
     @PostMapping("/note/update")
-    public ResponseEntity<Integer> updateNoteNode(@RequestBody NodeUpdateDto nodeDto){
+    public ResponseEntity<Long> updateNoteNode(@RequestBody NodeUpdateDto nodeDto){
         return ResponseEntity.ok(noteService.updateNoteNode(nodeDto));
     }
 
     //3. 노드 삭제
     /*@PostMapping("/note/update")
-    public ResponseEntity<Integer> deleteNoteNode(@RequestBody NodeDto nodeDto){
+    public ResponseEntity<Long> deleteNoteNode(@RequestBody NodeDto nodeDto){
         return ResponseEntity.ok(noteService.updateNoteNode(nodeDto));
     }*/
 

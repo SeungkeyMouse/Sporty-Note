@@ -19,7 +19,7 @@ public class UserFavoriteRepository {
         em.persist(userFavorite);
     }
 
-    public int delete(UserFavorite userFavorite) {//제거
+    public Long delete(UserFavorite userFavorite) {//제거
         em.remove(userFavorite);
         return userFavorite.getIdx();
     }
@@ -33,7 +33,7 @@ public class UserFavoriteRepository {
                 .setParameter("userId",userId)
                 .getResultList();
     }
-    public UserFavorite findById(Integer userFavoriteIdx) {
+    public UserFavorite findById(Long userFavoriteIdx) {
         return em.find(UserFavorite.class, userFavoriteIdx);
     }
 
@@ -51,7 +51,7 @@ public class UserFavoriteRepository {
 
     }
 
-    public Optional<UserFavorite> findByUserIdAndMachineId(String userId, Integer machineId) {
+    public Optional<UserFavorite> findByUserIdAndMachineId(String userId, Long machineId) {
         Optional<UserFavorite> userFavorite = null;
         try {
             userFavorite = Optional.ofNullable(

@@ -10,7 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Data
 public class NodeLocationDto {
-    private Integer machineId;
+    private Long machineId;
 
     private NodeType nodeType;
 

@@ -16,9 +16,9 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE routine_table SET deleted = true WHERE idx = ?")
 public class Routine extends BaseEntity {
     @Id
-    @GeneratedValue
-    @Column(name="Routine_Idx")
-    private Integer idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="routine_idx")
+    private Long idx;
 
     @NotNull
     private String routineName;
@@ -40,7 +40,7 @@ public class Routine extends BaseEntity {
     }
 
     @Builder //수정 빌더
-    public Routine(String routineName, UserBasic userBasic, Machine machine,Integer idx){
+    public Routine(String routineName, UserBasic userBasic, Machine machine,Long idx){
         this.idx=idx;
         this.routineName=routineName;
         this.userBasic=userBasic;
@@ -57,7 +57,7 @@ public class Routine extends BaseEntity {
     }
 
     //==Routine 수정 메서드==//
-    public static Routine updateRoutine(Integer idx, String routineName, UserBasic userBasic, Machine machine) {
+    public static Routine updateRoutine(Long idx, String routineName, UserBasic userBasic, Machine machine) {
         return Routine.builder()
                 .idx(idx)
                 .routineName(routineName)

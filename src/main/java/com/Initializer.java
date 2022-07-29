@@ -54,21 +54,21 @@ public class Initializer implements CommandLineRunner {
         /***
          * 노트한 기구 추가
          */
-        noteService.addNoteNode(new NodeCreateDto("123123", 6, NodeType.CHEST,"Orange", "123123의 벤치프레스 Orange 내용1입니다", 0F,0F,"사진주소1"));
-        noteService.addNoteNode(new NodeCreateDto("123123", 6,NodeType.CHEST, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 0F,0F,"사진주소2"));
-        noteService.addNoteNode(new NodeCreateDto("123123", 6, NodeType.BACK, "Red", "123123의 벤치프레스 Red 내용입니다", 13.5F,20F,"사진주소3"));
-        noteService.addNoteNode(new NodeCreateDto("777777", 7,  NodeType.BACK, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto("123123", 1L, NodeType.CHEST,"Orange", "123123의 벤치프레스 Orange 내용1입니다", 0F,0F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto("123123", 1L,NodeType.CHEST, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 0F,0F,"사진주소2"));
+        noteService.addNoteNode(new NodeCreateDto("123123", 2L, NodeType.BACK, "Red", "123123의 벤치프레스 Red 내용입니다", 13.5F,20F,"사진주소3"));
+        noteService.addNoteNode(new NodeCreateDto("777777", 2L,  NodeType.BACK, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
 
     }
 
     private void machineLocationSetup() {
-        machineService.addNodeLocation(new NodeLocationDto(6,NodeType.CHEST, 10F,10F));
-        machineService.addNodeLocation(new NodeLocationDto(6,NodeType.BACK, 20F,20F));
-        machineService.addNodeLocation(new NodeLocationDto(6,NodeType.ELBOW, 30F,30F));
+        machineService.addNodeLocation(new NodeLocationDto(1L,NodeType.CHEST, 10F,10F));
+        machineService.addNodeLocation(new NodeLocationDto(1L,NodeType.BACK, 20F,20F));
+        machineService.addNodeLocation(new NodeLocationDto(1L,NodeType.ELBOW, 30F,30F));
 
-        machineService.addNodeLocation(new NodeLocationDto(7,NodeType.CHEST, 100F,10F));
-        machineService.addNodeLocation(new NodeLocationDto(7,NodeType.BACK, 200F,20F));
-        machineService.addNodeLocation(new NodeLocationDto(7,NodeType.ELBOW, 300F,30F));
+        machineService.addNodeLocation(new NodeLocationDto(2L,NodeType.CHEST, 100F,10F));
+        machineService.addNodeLocation(new NodeLocationDto(2L,NodeType.BACK, 200F,20F));
+        machineService.addNodeLocation(new NodeLocationDto(2L,NodeType.ELBOW, 300F,30F));
     }
 
     /**
@@ -121,10 +121,10 @@ public class Initializer implements CommandLineRunner {
         /***
          * 즐겨찾기 추가
          */
-        machineService.addFavorite("123123", 6);
-        machineService.addFavorite("123123", 7);
+        machineService.addFavorite("123123", 1L);
+        machineService.addFavorite("123123", 2L);
 
-        machineService.addFavorite("777777", 8);
+        machineService.addFavorite("777777", 3L);
 
 
     }

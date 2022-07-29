@@ -18,9 +18,9 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name ="routine_node_table")
 public class RecordNode extends BaseEntity {
     @Id
-    @GeneratedValue
-    @Column(name = "machine_idx")
-    private Integer idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "record_node_idx")
+    private Long idx;
 
     @NotNull
     private String userId;
@@ -31,7 +31,7 @@ public class RecordNode extends BaseEntity {
     private Routine machineId;
 
     @NotNull
-    private Integer noteId;
+    private Long noteId;
 
     @NotNull
     private Integer complete;

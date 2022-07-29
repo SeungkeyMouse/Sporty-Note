@@ -18,9 +18,9 @@ import java.util.List;
 
 public class UserFavorite extends BaseEntity {
     @Id
-    @GeneratedValue
-    @Column(name = "user_favorite_id")
-    private Integer idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_favorite_idx")
+    private Long idx;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private UserBasic userBasic;

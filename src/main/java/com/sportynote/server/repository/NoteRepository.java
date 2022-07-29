@@ -52,7 +52,7 @@ public class NoteRepository {
         return machineDtoList;
     }
 
-    public Optional<Note> findByIds(String userId, Integer machineId) {
+    public Optional<Note> findByIds(String userId, Long machineId) {
         Optional<Note> note = null;
         try {
             note = Optional.ofNullable(em.createQuery("select n from Note n " +
@@ -68,7 +68,7 @@ public class NoteRepository {
         }
     }
 
-    public NoteDto findMyNoteNodes(String userId, Integer machineId) {
+    public NoteDto findMyNoteNodes(String userId, Long machineId) {
         List<NoteNode> resultList = em.createQuery("select nd from NoteNode nd"
                                 + " join fetch nd.note n"
                                 + " join fetch n.machine"

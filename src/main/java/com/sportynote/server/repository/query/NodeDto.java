@@ -14,11 +14,11 @@ public class NodeDto {
 
     //노드를 기구 노트에 이어주기 위한 정보
     private String userId;
-    private Integer machineId;
+    private Long machineId;
 
     //노드에 대한정보
     //종류
-    private Integer idx;
+    private Long idx;
 
     private NodeType type;
     private String color;

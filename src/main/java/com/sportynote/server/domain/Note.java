@@ -17,8 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Note extends BaseEntity {
     @Id
-    @GeneratedValue
-    private Integer idx;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "note_idx")
+    private Long idx;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NotNull

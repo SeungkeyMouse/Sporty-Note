@@ -29,7 +29,7 @@ public class NoteService {
 
     private final NodeLocationSetRepository nodeLocationSetRepository;
 
-    public Integer addNoteNode(NodeCreateDto nodeCreateDto) {
+    public Long addNoteNode(NodeCreateDto nodeCreateDto) {
 
         Optional<Note> optNote = noteRepository.findByIds(nodeCreateDto.getUserId(), nodeCreateDto.getMachineId());
         Note note;
@@ -69,11 +69,11 @@ public class NoteService {
         return note.getIdx();
     }
 
-    public NoteDto findMyNoteNodes(String userId, Integer machineId) {
+    public NoteDto findMyNoteNodes(String userId, Long machineId) {
         return noteRepository.findMyNoteNodes(userId, machineId);
     }
 
-    public Integer updateNoteNode(NodeUpdateDto nodeDto) {
+    public Long updateNoteNode(NodeUpdateDto nodeDto) {
         NoteNode node = nodeRepository.findById(nodeDto.getIdx());
         //변경감지 - 수정
         node.setType(NodeType.findNodeType(nodeDto.getType().getEngName()));

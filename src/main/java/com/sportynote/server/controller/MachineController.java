@@ -25,14 +25,14 @@ public class MachineController {
 
     //운동기구 하나 클릭시 기구 정보 전송
     @GetMapping("/machine/{machineId}")
-    public ResponseEntity<?> getMachineById(@PathVariable Integer machineId){
+    public ResponseEntity<?> getMachineById(@PathVariable Long machineId){
         return ResponseEntity.ok(machineRepository.findById(machineId));
     }
 
     //즐겨찾기
     @PostMapping("/machine/favorite")
-    public ResponseEntity<Integer> addFavoriteMachine(@RequestParam("user_id") String userId,
-                                                      @RequestParam("machine_idx") Integer machineId){
+    public ResponseEntity<Long> addFavoriteMachine(@RequestParam("user_id") String userId,
+                                                      @RequestParam("machine_idx") Long machineId){
         return ResponseEntity.ok(machineService.addFavorite(userId, machineId));
     }
 

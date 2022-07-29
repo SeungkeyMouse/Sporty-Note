@@ -40,11 +40,11 @@ public class RoutineService {
 
     /** 루틴 하나(여러 기구)첫 추가 CREATE */
     public boolean addRoutine(RoutineDto routineDto) {
-            List<Integer> machines = routineDto.getMachines();
+            List<Long> machines = routineDto.getMachines();
             List<Routine> routineList = new ArrayList<>();
             UserBasic userBasicInfo = userBasicRepository.findById("123123"); //예시 userid
-            for (Integer integer : machines) {
-                Machine machineInfo = machineRepository.findById(integer);
+            for (Long machine : machines) {
+                Machine machineInfo = machineRepository.findById(machine);
                 Routine routine = Routine.createRoutine(routineDto.getRoutineName(),userBasicInfo ,machineInfo);
                 routineList.add(routine);
             }
@@ -77,9 +77,9 @@ public class RoutineService {
     /** 루틴 하나 수정 UPDATE */
     public boolean modifyRoutine(RoutineDto routineDto){
         List<Routine> routineExist = routineRepository.findByIdAndRoutineName(routineDto.getUserid(), routineDto.getRoutineName());
-        HashSet<Integer> routineDtoSet = new HashSet<>(); /** 루틴 요청 저장할 기구 리스트*/
-        HashSet<Integer> routineExistSet = new HashSet<>(); /** 요청할 기구 리스트 */
-        HashSet<Integer> routineTempSet = new HashSet<>(); /** 차집합을 위한 임시 해시셋 */
+        HashSet<Long> routineDtoSet = new HashSet<>(); /** 루틴 요청 저장할 기구 리스트*/
+        HashSet<Long> routineExistSet = new HashSet<>(); /** 요청할 기구 리스트 */
+        HashSet<Long> routineTempSet = new HashSet<>(); /** 차집합을 위한 임시 해시셋 */
         /** HashSet 설정 */
         for(int i=0;i<routineDto.getMachines().size();i++){
             routineDtoSet.add(routineDto.getMachines().get(i));
@@ -102,11 +102,10 @@ public class RoutineService {
     }
 
     /** 루틴내 기구만 업데이트 */
-    public boolean updateRoutineList(String routineName, UserBasic userBasic,HashSet<Integer> routineDtoSet) {
+    public boolean updateRoutineList(String routineName, UserBasic userBasic,HashSet<Long> routineDtoSet) {
         List<Routine> routineList = new ArrayList<>();
-        for (Integer integer : routineDtoSet) {
-            System.out.println("updateRoutineList : " + integer);
-            Machine machineInfo = machineRepository.findById(integer);
+        for (Long machine : routineDtoSet) {
+            Machine machineInfo = machineRepository.findById(machine);
             Routine routine = Routine.createRoutine(routineName,userBasic ,machineInfo);
             routineList.add(routine);
         }
@@ -115,10 +114,10 @@ public class RoutineService {
     }
 
     /** 루틴내 기구만 삭제 */
-    public boolean deleteRoutineList(String routineName, UserBasic userBasic, HashSet<Integer> routineExistSet) {
-        for (Integer integer : routineExistSet) {
-            Routine routine = routineRepository.findByUserIdAndMachineIdAndRoutineName(userBasic.getUserId(),integer,routineName);
-            System.out.println("deleteRoutineList : " + integer);
+    public boolean deleteRoutineList(String routineName, UserBasic userBasic, HashSet<Long> routineExistSet) {
+        for (Long machine : routineExistSet) {
+            Routine routine = routineRepository.findByUserIdAndMachineIdAndRoutineName(userBasic.getUserId(),machine,routineName);
+            System.out.println("deleteRoutineList : " + machine);
             routineRepository.deleteMachine(routine.getIdx());
         }
         return true;
