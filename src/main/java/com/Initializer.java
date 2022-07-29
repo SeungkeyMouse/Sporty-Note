@@ -108,6 +108,16 @@ public class Initializer implements CommandLineRunner {
         // machine2.setGym(gymRepository.findAll().get(1));
 
         machineRepository.save(machine3);
+
+        Machine machine4 = new Machine();
+        machine4.setKrMachineName("케이블 풀 다운");
+        machine4.setEngMachineName("Cable pull down");
+        machine4.setTargetArea("등");
+        machine4.setUrl("https://www.swmaestro.org/sw/main/main.do");
+        // machine2.setGym(gymRepository.findAll().get(1));
+
+        machineRepository.save(machine4);
+
         /***
          * 즐겨찾기 추가
          */

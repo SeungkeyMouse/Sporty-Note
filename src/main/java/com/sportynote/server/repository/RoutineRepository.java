@@ -39,6 +39,7 @@ public class RoutineRepository {
         em.remove(em.find(Routine.class, idx));
     }
 
+
     public List<Routine> findAll() {
         return em.createQuery("select m from Routine m", Routine.class)
                 .getResultList();

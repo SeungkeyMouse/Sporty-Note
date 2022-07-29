@@ -39,9 +39,7 @@ public class RoutineService {
 //        machineRepository.save(machine);
 //    }
 
-    /**
-     루틴 하나(여러 기구)첫 추가 CREATE
-     */
+    /** 루틴 하나(여러 기구)첫 추가 CREATE */
     public boolean addRoutine(RoutineDto routineDto) {
             List<Integer> machines = routineDto.getMachines();
             List<Routine> routineList = new ArrayList<>();
@@ -55,9 +53,7 @@ public class RoutineService {
             return true;
     }
 
-    /**
-     * 내 루틴 조회 Read
-     */
+    /** 내 루틴 조회 Read */
     public Set<String> myRoutine(String userid) {
         List<Routine> RoutineLists = routineRepository.findByUserId(userid);
         Set<String> RoutineNames = new TreeSet<>();
@@ -67,75 +63,49 @@ public class RoutineService {
         return RoutineNames;
     }
 
-    /**
-     * 내 루틴 내 기구 조회
-     */
+    /** 내 루틴 내 기구 조회 */
     public List<RoutineMachineDto> findByIdAndRoutineName(String RoutineName){
         String userid="123123";
         List<Routine> RoutineLists = routineRepository.findByIdAndRoutineName(userid, RoutineName);
         List<RoutineMachineDto> MachineLists = new ArrayList<>();
         for(Routine routine : RoutineLists){
             System.out.println(routine.getMachine().getIdx()+routine.getMachine().getUrl());
-            MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getMachineName(),routine.getMachine().getTargetArea(),routine.getMachine().getUrl()));
+            MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getKrMachineName(),routine.getMachine().getTargetArea(),routine.getMachine().getUrl()));
         }
         return MachineLists;
     }
 
-    /**
-     루틴 하나 수정 UPDATE
-     */
+    /** 루틴 하나 수정 UPDATE */
     public boolean modifyRoutine(RoutineDto routineDto){
-        List<Routine> existRoutine = routineRepository.findByIdAndRoutineName(routineDto.getUserid(), routineDto.getRoutineName());
-        HashSet<Integer> dtoSet = new HashSet<>(); /** 루틴 요청 저장할 기구 리스트*/
-        HashSet<Integer> existSet = new HashSet<>();
-        List<Integer> updateLists = new ArrayList<>();
-        List<Integer> deleteLists = new ArrayList<>();
+        List<Routine> routineExist = routineRepository.findByIdAndRoutineName(routineDto.getUserid(), routineDto.getRoutineName());
+        HashSet<Integer> routineDtoSet = new HashSet<>(); /** 루틴 요청 저장할 기구 리스트*/
+        HashSet<Integer> routineExistSet = new HashSet<>(); /** 요청할 기구 리스트 */
+        HashSet<Integer> routineTempSet = new HashSet<>(); /** 차집합을 위한 임시 해시셋 */
         /** HashSet 설정 */
         for(int i=0;i<routineDto.getMachines().size();i++){
-            dtoSet.add(routineDto.getMachines().get(i));
+            routineDtoSet.add(routineDto.getMachines().get(i));
         }
-        for(int i=0;i<existRoutine.size();i++){
-            existSet.add(existRoutine.get(i).getMachine().getIdx());
+        for(int i=0;i<routineExist.size();i++){
+            routineExistSet.add(routineExist.get(i).getMachine().getIdx());
         }
+        routineTempSet.addAll(routineExistSet); // A, A, B   기존, 기존복사, 요청
+        routineExistSet.removeAll(routineDtoSet); // A-B, A, B 기존-요청, 기존복사, 요청
+        routineDtoSet.removeAll(routineTempSet); //A-B,A ,B-A 기존-요청, 기존복사, 요청-기존복사
 
-//        for(int i=0;i<routineDto.getMachines().size();i++){
-//            System.out.print(dtoSet.)
-//        }
-        for(int i=0;i<existRoutine.size();i++){
-            existSet.add(existRoutine.get(i).getMachine().getIdx());
-        }
-        /** existRoutine - dtoLists ,  routineDto - existLists */
-        for(int i =0;i<dtoSet.size();i++) {
-            System.out.print(routineDto.getMachines().get(i)+" ");
-            if(!existSet.remove(routineDto.getMachines().get(i))){
-                System.out.print("updateList : "+ i);
-                updateLists.add(routineDto.getMachines().get(i));
-            }
-        }
-        System.out.println("");
-        for(int i =0;i<existSet.size();i++){
-            System.out.print(existRoutine.get(i).getMachine().getIdx()+" ");
-            if(!dtoSet.remove(existRoutine.get(i).getMachine().getIdx())){
-                deleteLists.add(existRoutine.get(i).getMachine().getIdx());
-            }
-        }
-        System.out.println(updateLists.size());
-        System.out.println(deleteLists.size());
-        List<Routine> routineList = new ArrayList<>();
         UserBasic userBasic = userBasicRepository.findById(routineDto.getUserid()); //예시 userid
         /** UPDATE 중 SAVE */
-        updateRoutineList(routineDto.getRoutineName(),userBasic,updateLists);
+        updateRoutineList(routineDto.getRoutineName(),userBasic,routineDtoSet);
 
         /** UPDATE 중 DELETE */
-        deleteRoutineList(routineDto.getRoutineName(),userBasic,deleteLists);
+        deleteRoutineList(routineDto.getRoutineName(),userBasic,routineExistSet);
 
         return true;
     }
 
-    /** 루틴 기구만 업데이트 */
-    public boolean updateRoutineList(String routineName, UserBasic userBasic,List<Integer> machines) {
+    /** 루틴내 기구만 업데이트 */
+    public boolean updateRoutineList(String routineName, UserBasic userBasic,HashSet<Integer> routineDtoSet) {
         List<Routine> routineList = new ArrayList<>();
-        for (Integer integer : machines) {
+        for (Integer integer : routineDtoSet) {
             System.out.println("updateRoutineList : " + integer);
             Machine machineInfo = machineRepository.findById(integer);
             Routine routine = Routine.createRoutine(routineName,userBasic ,machineInfo);
@@ -145,55 +115,19 @@ public class RoutineService {
         return true;
     }
 
-    /** 루틴 기구만 삭제 */
-    public boolean deleteRoutineList(String routineName, UserBasic userBasic, List<Integer> machines) {
-        for (Integer integer : machines) {
+    /** 루틴내 기구만 삭제 */
+    public boolean deleteRoutineList(String routineName, UserBasic userBasic, HashSet<Integer> routineExistSet) {
+        for (Integer integer : routineExistSet) {
             Routine routine = routineRepository.findByUserIdAndMachineIdAndRoutineName(userBasic.getUserId(),integer,routineName);
             System.out.println("deleteRoutineList : " + integer);
             routineRepository.delete(routine.getIdx());
         }
         return true;
     }
-    /**
-    public boolean modifyRoutine(MachineRoutineDto machineRoutineDto) {
-        Routine routine = new Routine(); //
-        /**{
-            "machines": [
-            6,7,8
-            ],
-            "routineName": "routine",
-                "userid": "123123"
-        }
-        List<Integer> machines = machineRoutineDto.getMachines(); // 6,7,8
-        List<Integer> machineList = new ArrayList<>();
-        UserBasic userBasicInfo = userBasicRepository.findById("123123"); //예시 userid
-
-        /** 원래 가지고 있던 루틴 리스트의 머신들을 가져옴
-        List<Routine> routineList = routineRepository.findByIdAndRoutineName("123123", machineRoutineDto.getRoutineName());
-        for(int i =0;i<routineList.size();i++){
-            machineList.add(routineList.get(i).getMachine().getIdx()); /**Integer machine_id 만 가져옴
-        }
-
-        for (Integer integer : machines) {
-            Machine machineInfo = machineRepository.findById(integer);
-
-            Optional<Routine> optRoutine = routineRepository.findByUserIdAndMachineIdAndRoutineName
-                    (machineRoutineDto.getRoutineName(), machineInfo.getIdx(), userBasicInfo.getUserId());
-
-            if (!optRoutine.isPresent()) { /**내가 값을 보냈고 만약 루틴이 존재할 경우  /** 그대로 덮어씀
-                routine = optRoutine.get();
-            } else { /**내가 값을 보냈고 만약 루틴이 존재하지 않을 경우 /** 새로 추가함  /** 루틴 추가 함수화 예정
-                routine = Routine.createRoutine(machineRoutineDto.getRoutineName(), userBasicInfo, machineInfo);
-            }
-            routineRepository.save(routine);
-        }
-        for (int i=0;i<machineList.size();i++){
-            /**DELETE 구문은 다음주에 스크럼 및 코드 리팩토링 후 구현...
-             * routineRepository.findByIdAndRoutineName(machineList.get(i))
-        }
-
-        return true;
-    }*/
+//    /** 루틴 하나 삭제 */
+//    public boolean deleteRoutine(RoutineDto routineDto){
+//        routineRepository.deleteAll(routineDto.getRoutineName(),routineDto.getUserid());
+//    }
 
 }
 

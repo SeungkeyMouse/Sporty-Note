@@ -27,7 +27,7 @@ public class Routine {
 
     @NotNull
     @JoinColumn(name="machine_id")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Machine machine;
 
 
