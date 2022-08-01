@@ -24,27 +24,27 @@ public class MachineController {
     }
 
     //운동기구 하나 클릭시 기구 정보 전송
-    @GetMapping("/machine/{machineId}")
+    @GetMapping("/machines/{machineId}")
     public ResponseEntity<?> getMachineById(@PathVariable Long machineId){
         return ResponseEntity.ok(machineRepository.findById(machineId));
     }
 
-    //즐겨찾기
-    @PostMapping("/machine/favorite")
+    //즐겨찾기 추가 및 삭제
+    @PostMapping("/machines/favorites")
     public ResponseEntity<Long> addFavoriteMachine(@RequestParam("user_id") String userId,
                                                       @RequestParam("machine_idx") Long machineId){
         return ResponseEntity.ok(machineService.addFavorite(userId, machineId));
     }
 
     //즐겨찾기한 기구들 가져오기
-    @GetMapping("/machine/favorite")
+    @GetMapping("/machines/favorites")
     public ResponseEntity<List<?>> getFavoriteMachines(@RequestParam("user_id") String userId){
         return ResponseEntity.ok(machineService.getFavorite(userId));
     }
 
 
     //기구별 노드 위치 추가하기
-    @PostMapping("/machine/set_node")
+    @PostMapping("/machines/set-node")
     public ResponseEntity<?> setMachineNodeLocation(@RequestBody NodeLocationDto nodeLocationDto){
         return ResponseEntity.ok(machineService.addNodeLocation(nodeLocationDto));
     }
