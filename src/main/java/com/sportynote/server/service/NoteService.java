@@ -74,7 +74,7 @@ public class NoteService {
     }
 
     public Long updateNoteNode(NodeUpdateDto nodeDto) {
-        NoteNode node = nodeRepository.findById(nodeDto.getIdx());
+        NoteNode node = nodeRepository.findById(nodeDto.getNodeIdx());
         //변경감지 - 수정
         node.setType(NodeType.findNodeType(nodeDto.getType().getEngName()));
         node.setColor(nodeDto.getColor());

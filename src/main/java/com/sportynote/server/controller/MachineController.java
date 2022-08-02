@@ -29,11 +29,16 @@ public class MachineController {
         return ResponseEntity.ok(machineRepository.findById(machineId));
     }
 
-    //즐겨찾기 추가 및 삭제
+    //즐겨찾기 추가
     @PostMapping("/machines/favorites")
     public ResponseEntity<Long> addFavoriteMachine(@RequestParam("user_id") String userId,
                                                       @RequestParam("machine_idx") Long machineId){
         return ResponseEntity.ok(machineService.addFavorite(userId, machineId));
+    }
+    //즐겨찾기 삭제
+    @DeleteMapping("/machines/favorites")
+    public ResponseEntity<Long> addFavoriteMachine(@RequestParam("user_favorite_idx") Long userFavoriteIdx){
+        return ResponseEntity.ok(machineService.deleteFavorite(userFavoriteIdx));
     }
 
     //즐겨찾기한 기구들 가져오기

@@ -1,5 +1,6 @@
 package com.sportynote.server.service;
 
+import com.sportynote.server.Enum.NodeType;
 import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.MachineRepository;
 import com.sportynote.server.repository.NodeLocationSetRepository;
@@ -51,7 +52,7 @@ public class MachineService {
         UserBasic userBasic = userBasicRepository.findById(userId);
         Machine machine = machineRepository.findById(machineId);
         //case1 : 해당 기구가 즐겨찾기 목록에 없다면 => UserFavorite 생성해서 기구 매핑
-        if(!userFavorites.isPresent()) {
+        if(userFavorites.isEmpty()) {
             //즐겨찾기 생성
             UserFavorite userFavorite = UserFavorite.createFavorite(userBasic, machine);
 
@@ -60,8 +61,15 @@ public class MachineService {
 
             return userFavorite.getIdx();
         }
-        //case2 : 이미 등록되어 있으면 즐겨찾기에서 기구 제거
-        return userFavoriteRepository.delete(userFavorites.get());
+        //case2 : 이미 등록되어 있으면
+        UserFavorite uf = userFavorites.get();
+        uf.setDeleted(false);
+        return uf.getIdx();
+    }
+    @Transactional
+    public Long deleteFavorite(Long userFavoriteIdx){
+        UserFavorite uf = userFavoriteRepository.findById(userFavoriteIdx);
+        return userFavoriteRepository.delete(uf);
     }
 
     /**
@@ -77,13 +85,14 @@ public class MachineService {
         if(!userFavorites.isEmpty()){
             //즐겨찾기한 데이터가 있으면 모두 반환.
             for (UserFavorite userFavorite : userFavorites) {
-                Machine sampleM = userFavorite.getMachine();
+                Machine favoritedMachine = userFavorite.getMachine();
                 MachineDto machineDto = new MachineDto(
-                        sampleM.getIdx(),
-                        sampleM.getKrMachineName(),
-                        sampleM.getEngMachineName(),
-                        sampleM.getTargetArea(),
-                        sampleM.getUrl()
+                        favoritedMachine.getIdx(),
+                        favoritedMachine.getKrMachineName(),
+                        favoritedMachine.getEngMachineName(),
+                        favoritedMachine.getTargetArea(),
+                        favoritedMachine.getUrl(),
+                        userFavorite.getIdx()
                 );
                 favoriteMachines.add(machineDto);
             }
@@ -96,10 +105,21 @@ public class MachineService {
     @Transactional
     public String addNodeLocation(NodeLocationDto nodeLocationDto) {
         try {
-            Machine machine = machineRepository.findById(nodeLocationDto.getMachineId());
-            NodeLocationSet nodeLocationSet = NodeLocationSet.createNodeLocationSet(machine, nodeLocationDto);
-
-            nodeLocationSetRepository.save(nodeLocationSet);
+            Optional<NodeLocationSet> optNLS= nodeLocationSetRepository.findByMachineIdAndNodeType(
+                    nodeLocationDto.getMachineId(),
+                    NodeType.findNodeType(nodeLocationDto.getNodeType().getEngName())
+            );
+            //세팅되어있는 부위의 위치가 있다면 해당 값을 집어넣음
+            if(!optNLS.isEmpty()){
+                NodeLocationSet nls = optNLS.get();
+                nls.setX_location(nodeLocationDto.getX_location());
+                nls.setY_location(nodeLocationDto.getY_location());
+            }
+            else {
+                Machine machine = machineRepository.findById(nodeLocationDto.getMachineId());
+                NodeLocationSet nodeLocationSet = NodeLocationSet.createNodeLocationSet(machine, nodeLocationDto);
+                nodeLocationSetRepository.save(nodeLocationSet);
+            }
         }catch (Exception e){
             return "Fail";
         }

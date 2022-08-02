@@ -29,7 +29,7 @@ public class UserFavoriteRepository {
     }
     public List<UserFavorite> findAllByUserId(String userId) {
         return em.createQuery("select uf from UserFavorite uf " +
-                        "where uf.userBasic.userId=: userId", UserFavorite.class)
+                        "where uf.userBasic.userId=: userId and uf.deleted = false", UserFavorite.class)
                 .setParameter("userId",userId)
                 .getResultList();
     }

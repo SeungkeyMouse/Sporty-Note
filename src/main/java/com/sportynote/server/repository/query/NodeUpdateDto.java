@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class NodeUpdateDto {
-    private Long idx;
+    private Long nodeIdx;
 
     private NodeType type;
     private String color;
