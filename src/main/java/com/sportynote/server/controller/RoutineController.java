@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/routine")
+@RequestMapping("/routines")
 public class RoutineController {
 
     private final RoutineRepository routineRepository;
@@ -35,7 +35,7 @@ public class RoutineController {
     private int status_code;
 
     /** 루틴 Create */
-    @PostMapping("/add-routines")
+    @PostMapping("/")
     public ResponseEntity<?> addRoutines(@RequestBody RoutineDto routineDto) throws URISyntaxException {
         result = (routineService.addRoutine(routineDto)) ? "success" : "failed";
         status_code = result == "success" ? 201 : 200;
@@ -43,19 +43,16 @@ public class RoutineController {
     }
 
     /** 모든 루틴 Read */
-    @GetMapping("/routines")
+    @GetMapping("/")
     public ResponseEntity<?> myRoutines(@RequestParam("id") String userid) throws URISyntaxException {
         Set<String> results = routineService.myRoutine(userid);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body("{\"result\":" + results + "}");
     }
 
-    /** 루틴 수정 목록 Read */
-    @GetMapping("/my-routine-machine")
-    public ResponseEntity<List<RoutineMachineDto>> myRoutineMachines(@RequestParam(value = "routineName") String RoutineName) throws URISyntaxException {
-        List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(RoutineName);
-        for(RoutineMachineDto dto : results){
-            System.out.println(dto.getMachineName());
-        }
+    /** 루틴 1개 조회 Read */
+    @GetMapping("/{routineName}")
+    public ResponseEntity<List<RoutineMachineDto>> myRoutineMachines(@PathVariable(value = "routineName") String routineName) throws URISyntaxException {
+        List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(routineName);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
 
@@ -67,10 +64,10 @@ public class RoutineController {
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + result + "}");
     }
 
-    @DeleteMapping("/delete-routines")
-    public ResponseEntity<?> deleteRoutines(@RequestBody RoutineDto routineDto) throws URISyntaxException {
-        result = (routineService.deleteRoutine(routineDto)) ? "success" : "failed";
-        status_code = result == "success" ? 201 : 200;
+    @DeleteMapping("/{routineName}")
+    public ResponseEntity<?> deleteRoutines(@PathVariable(value = "routineName") String routineName) throws URISyntaxException {
+        result = (routineService.deleteRoutine(routineName)) ? "success" : "failed";
+        status_code = result == "success" ? 200 : 200;
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + result + "}");
     }
 

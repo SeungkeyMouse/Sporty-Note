@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 import static javax.persistence.FetchType.LAZY;
+
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name ="routine_node_table")
+@Table(name ="record_node_table")
 public class RecordNode extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class RecordNode extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="machine_id")
     @NotNull
-    private Routine machineId;
+    private Machine machine;
 
     @NotNull
     private Long noteId;
@@ -37,12 +37,12 @@ public class RecordNode extends BaseEntity {
     private Integer complete;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "gym_idx")
-    private Gym gym;
-
-    @JsonIgnore
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "userFavorite_idx")
-    private UserFavorite userFavorite;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "gym_idx")
+//    private Gym gym;
+//
+//    @JsonIgnore
+//    @ManyToOne(fetch = LAZY)
+//    @JoinColumn(name = "userFavorite_idx")
+//    private UserFavorite userFavorite;
 }

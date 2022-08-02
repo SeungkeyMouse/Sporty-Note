@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/sample")
+@RequestMapping(value = "/api/samples")
 public class UserController {
 
     private final UserBasicRepository userBasicRepository;

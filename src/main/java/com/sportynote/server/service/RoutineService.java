@@ -68,7 +68,6 @@ public class RoutineService {
         List<Routine> RoutineLists = routineRepository.findByIdAndRoutineName(userid, RoutineName);
         List<RoutineMachineDto> MachineLists = new ArrayList<>();
         for(Routine routine : RoutineLists){
-            System.out.println(routine.getMachine().getIdx()+routine.getMachine().getUrl());
             MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getKrMachineName(),routine.getMachine().getTargetArea(),routine.getMachine().getUrl()));
         }
         return MachineLists;
@@ -117,14 +116,17 @@ public class RoutineService {
     public boolean deleteRoutineList(String routineName, UserBasic userBasic, HashSet<Long> routineExistSet) {
         for (Long machine : routineExistSet) {
             Routine routine = routineRepository.findByUserIdAndMachineIdAndRoutineName(userBasic.getUserId(),machine,routineName);
-            System.out.println("deleteRoutineList : " + machine);
             routineRepository.deleteMachine(routine.getIdx());
         }
         return true;
     }
+
     /** 루틴 하나 삭제 */
-    public boolean deleteRoutine(RoutineDto routineDto){
-        routineRepository.delete(routineDto.getRoutineName(),routineDto.getUserid());
+    public boolean deleteRoutine(String routineName){
+        List<Routine> routineLists = routineRepository.findByIdAndRoutineName("123123",routineName);
+        for(Routine routine : routineLists) {
+            routineRepository.deleteMachine(routine.getIdx());
+        }
         return true;
     }
 

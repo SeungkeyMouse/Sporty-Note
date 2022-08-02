@@ -22,12 +22,12 @@ import java.util.Date;
 
 public abstract class BaseEntity extends BaseTimeEntity{
 
-//    @CreatedBy
-//    @Column(updatable = false)
-//    private String createdBy;
-//
-//    @LastModifiedBy
-//    private String modifiedBy;
+    @CreatedBy
+    @Column(updatable = false)
+    private String createdBy;
+
+    @LastModifiedBy
+    private String modifiedBy;
 
 }
 

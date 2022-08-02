@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name ="routine_table")
-@SQLDelete(sql = "UPDATE routine_table SET deleted = true WHERE idx = ?")
+@SQLDelete(sql = "UPDATE routine_table SET deleted = true WHERE routine_idx = ?")
 public class Routine extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ public class Routine extends BaseEntity {
     }
 
     @Builder //수정 빌더
-    public Routine(String routineName, UserBasic userBasic, Machine machine,Long idx){
+    public Routine(Long idx, String routineName, UserBasic userBasic, Machine machine){
         this.idx=idx;
         this.routineName=routineName;
         this.userBasic=userBasic;
@@ -56,14 +56,5 @@ public class Routine extends BaseEntity {
                 .build();
     }
 
-    //==Routine 수정 메서드==//
-    public static Routine updateRoutine(Long idx, String routineName, UserBasic userBasic, Machine machine) {
-        return Routine.builder()
-                .idx(idx)
-                .routineName(routineName)
-                .userBasic(userBasic)
-                .machine(machine)
-                .build();
-    }
 
 }

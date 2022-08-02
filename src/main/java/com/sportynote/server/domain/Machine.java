@@ -49,21 +49,26 @@ public class Machine extends BaseEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
     private List<NodeLocationSet> nodeLocationSets =  new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
+    private List<Record> recordLists =  new ArrayList<>();
+
     @Builder
-    public Machine(Long idx, String krMachineName, String engMachineName, String targetArea, String Url){
+    public Machine(Long idx, String krMachineName, String engMachineName, String targetArea, String url){
         this.idx=idx;
         this.krMachineName=krMachineName;
         this.engMachineName = engMachineName;
         this.targetArea=targetArea;
-        this.Url=Url;
+        this.Url=url;
     }
 
-    public static Machine createMachine(String krMachineName,String engMachineName, String targetArea,String Url) {
+    public static Machine createMachine(String krMachineName,String engMachineName, String targetArea,String url) {
         return Machine.builder()
                 .krMachineName(krMachineName)
                 .engMachineName(engMachineName)
                 .targetArea(targetArea)
-                .Url(Url)
+                .url(url)
                 .build();
     }
 }
