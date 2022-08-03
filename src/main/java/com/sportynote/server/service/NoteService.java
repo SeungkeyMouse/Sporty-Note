@@ -1,15 +1,9 @@
 package com.sportynote.server.service;
 
 import com.sportynote.server.Enum.NodeType;
-import com.sportynote.server.domain.Machine;
-import com.sportynote.server.domain.NodeLocationSet;
-import com.sportynote.server.domain.Note;
-import com.sportynote.server.domain.NoteNode;
+import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.*;
-import com.sportynote.server.repository.query.NodeCreateDto;
-import com.sportynote.server.repository.query.NodeDto;
-import com.sportynote.server.repository.query.NodeUpdateDto;
-import com.sportynote.server.repository.query.NoteDto;
+import com.sportynote.server.repository.query.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +22,8 @@ public class NoteService {
     private final MachineRepository machineRepository;
 
     private final NodeLocationSetRepository nodeLocationSetRepository;
+
+    private final UserFavoriteRepository userFavoriteRepository;
 
     public Long addNoteNode(NodeCreateDto nodeCreateDto) {
 
@@ -84,4 +80,15 @@ public class NoteService {
         return node.getIdx();
     }
 
+    public List<MachineDto> getAllMyNotedMachines(String userId) {
+        List<MachineDto> notedMachines = noteRepository.findNotedMachineByUserId(userId);
+        for (MachineDto notedMachine : notedMachines) {
+            Optional<UserFavorite> optUf = userFavoriteRepository.findByUserIdAndMachineId(userId, notedMachine.getMachineIdx());
+            if(optUf.isEmpty()) continue;
+            if(optUf.get().isDeleted()) continue;
+            UserFavorite uf = optUf.get();
+            notedMachine.setUserFavoriteIdx(uf.getIdx());
+        }
+        return notedMachines;
+    }
 }

@@ -44,8 +44,12 @@ public class NoteRepository {
         List<MachineDto> machineDtoList = new ArrayList<>();
         for (Note note : noteList) {
             Machine machine = note.getMachine();
-            MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getKrMachineName(),machine.getEngMachineName(),
-                    machine.getTargetArea(), machine.getUrl());
+            MachineDto machineDto = new MachineDto(
+                    machine.getIdx(),
+                    machine.getKrMachineName(),
+                    machine.getEngMachineName(),
+                    machine.getTargetArea(),
+                    machine.getUrl());
             machineDtoList.add(machineDto);
         }
 
@@ -90,11 +94,18 @@ public class NoteRepository {
         Map<NodeType, List<NodeDto>> nodeMap = new HashMap<>();//key: 노트타입, value: 노드Dto리스트
         for (NoteNode node : resultList) {
             NodeType key = node.getType();
-
             //노드-> 노드DTO
-            NodeDto nodeDto = new NodeDto(node.getColor(),
-                    machineId,node.getIdx(), node.getType(), node.getColor(), node.getText(), node.getX_location(), node.getY_location(),
-                    node.getPictureUrl());
+            NodeDto nodeDto = new NodeDto(
+                    userId,
+                    machineId,
+                    node.getIdx(),
+                    node.getType(),
+                    node.getColor(),
+                    node.getText(),
+                    node.getX_location(),
+                    node.getY_location(),
+                    node.getPictureUrl()
+            );
 
             //각 node의 타입별로 Map에 넣어줌
             if (!nodeMap.containsKey(key)) {//Map에 아직 노드가 할당되지 않은 경우 리스트 선언
