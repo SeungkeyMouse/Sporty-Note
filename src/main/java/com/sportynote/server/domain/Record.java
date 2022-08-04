@@ -5,6 +5,7 @@ import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 
@@ -15,7 +16,6 @@ import java.util.List;
 import static javax.persistence.FetchType.LAZY;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
 @Table(name ="record_table")
@@ -26,12 +26,12 @@ public class Record extends BaseEntity {
     private Long idx;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name= "user_id",referencedColumnName = "user_id")
     @NotNull
     private UserBasic userBasic;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="machine_Idx")
+    @ManyToOne  // (fetch = FetchType.LAZY) 지우기 안지우면 에러(com.fasterxml.jackson.databind.exc.InvalidDefinitionException serializer)
+    @JoinColumn(name="machine_idx")
     @NotNull
     private Machine machine;
 
@@ -45,6 +45,10 @@ public class Record extends BaseEntity {
     private Integer count;
 
     private boolean complete;
+
+    @CreatedDate
+    @NotNull
+    private LocalDate createdDay;
 
     @Builder
     public Record(UserBasic userBasic, Machine machine, Integer sett, Integer kg, Integer count, boolean complete) {

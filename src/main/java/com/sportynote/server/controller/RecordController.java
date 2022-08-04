@@ -1,5 +1,6 @@
 package com.sportynote.server.controller;
 
+import com.sportynote.server.domain.Record;
 import com.sportynote.server.repository.RecordRepository;
 import com.sportynote.server.repository.RoutineRepository;
 import com.sportynote.server.repository.query.RecordDto;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -33,40 +36,51 @@ public class RecordController {
     private String result;
     private int status_code;
 
+    /** 나의 기록 보기 날짜별로 */
+    @GetMapping("/")
+    public ResponseEntity<?> calendar() throws URISyntaxException {
+        String userid="123123"; //로그인 jwt토큰 임시 대체
+        List<LocalDate> results = recordService.findByCalendar(userid);
+        return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
+    }
 
+    //기록 하나 보기
+    @GetMapping("/day/{recordDay}")
+    public ResponseEntity<?> recordDay(@PathVariable String recordDay) {
+        String userid="123123";
+        List<RecordDto> results= recordService.findByRecordDay(recordDay,userid);
+        return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
+    }
 
-    /** Read 기록 (그래프) */
+    /** Read 해당 루틴 불러오기 */
     @GetMapping("/{routineName}")
     public ResponseEntity<?> records(@PathVariable(value="routineName") String routineName) throws URISyntaxException {
         List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(routineName);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
 
-    /** Create 기록 (그래프) 완료마다 */
-    @PostMapping("/{machineName}/{sett}")
-    public ResponseEntity<?> addRecords(@PathVariable(value="machineName") String machineName, @PathVariable(value="sett") String sett,@RequestBody RecordDto recordDto) throws URISyntaxException {
+//    /** Read 기록리스트 (나만의 노트 + 기록) */
+//    @GetMapping("/{routine}/")
+//    public ResponseEntity<?> records(@PathVariable(value="routineName") String routineName) throws URISyntaxException {
+//        List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(routineName);
+//        return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
+//    }
+
+    /** Create 기록 (그래프) 완료체크시 */
+    @PostMapping("/complete")
+    public ResponseEntity<?> addRecords(@RequestBody RecordDto recordDto) throws URISyntaxException {
         result = (recordService.addRecord(recordDto)) ? "success" : "failed";
         status_code = result == "success" ? 201 : 200;
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
     }
 
-//    @GetMapping("/")
-//    public ResponseEntity<?> myRoutines(@RequestParam("id") String userid) throws URISyntaxException {
-//        List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(routineName);
-//        for(RoutineMachineDto dto : results){
-//            System.out.println(dto.getMachineName());
-//        }
-//        return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
-//
-//        Set<String> results = routineService.myRoutine(userid);
-//        return ResponseEntity.status(HttpStatus.valueOf(200)).body("{\"result\":" + results + "}");
-//    }
+    /** Create 기록 (그래프) 완료체크시 */
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteRecords(@RequestBody RecordDto recordDto) throws URISyntaxException {
+        result = (recordService.deleteRecord(recordDto)) ? "success" : "failed";
+        status_code = result == "success" ? 201 : 200;
+        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
+    }
 
-//    /** 루틴 클릭시   Read */
-//    @GetMapping("/records")
-//    public ResponseEntity<?> myRoutines(@RequestParam("id") String userid) throws URISyntaxException {
-//        Set<String> results = routineService.myRoutine(userid);
-//        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + results + "}");
-//    }
 
 }

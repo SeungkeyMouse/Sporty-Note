@@ -29,7 +29,7 @@ public class Routine extends BaseEntity {
     private UserBasic userBasic;
 
     @NotNull
-    @JoinColumn(name="machine_id")
+    @JoinColumn(name="machine_idx")
     @ManyToOne
     private Machine machine;
 

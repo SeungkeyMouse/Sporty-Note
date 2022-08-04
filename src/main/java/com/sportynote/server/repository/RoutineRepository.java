@@ -27,14 +27,6 @@ public class RoutineRepository {
         return routine;
     }
 
-//    //일단 냅두겠습니다..
-//    public <Routine> void saveAll(Iterable<com.sportynote.server.domain.Routine> routines){
-//        List<Long> result = new ArrayList<>();
-//        for(com.sportynote.server.domain.Routine entity: routines){
-//            result.add(save(entity));
-//        }
-//    }
-
     public void deleteMachine(Long idx){
         em.remove(em.find(Routine.class, idx));
     }

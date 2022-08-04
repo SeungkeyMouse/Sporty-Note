@@ -5,19 +5,15 @@ import com.sportynote.server.Enum.SocialType;
 import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.*;
 import com.sportynote.server.repository.query.*;
-import com.sportynote.server.service.GymService;
-import com.sportynote.server.service.MachineService;
-import com.sportynote.server.service.NoteService;
-import com.sportynote.server.service.RoutineService;
+import com.sportynote.server.service.*;
 import lombok.AllArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Node;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Component
 @AllArgsConstructor
@@ -33,6 +29,7 @@ public class Initializer implements CommandLineRunner {
     private final RoutineService routineService;
     private final UserFavoriteRepository userFavoriteRepository;
     private final NoteService noteService;
+    private final RecordService recordService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -47,6 +44,8 @@ public class Initializer implements CommandLineRunner {
         machineLocationSetup();
         noteSetup();
         printUserFavorite();
+        routineSetup();
+        recordSetup();
         System.out.println("실행 완료되었습니다.");
     }
 
@@ -144,5 +143,23 @@ public class Initializer implements CommandLineRunner {
         userBasic2.setSocialType(SocialType.NAVER);
         userBasicRepository.save(userBasic2);
     }
+    void routineSetup() {
+        List<Long> machines=new ArrayList<>();
+        for(long i =1;i<5;i++){
+            machines.add(i);
+        }
+        RoutineDto routineDto = new RoutineDto("123123","lower",machines);
+        routineService.addRoutine(routineDto);
+    }
+    void recordSetup() {
+        UserBasic userbasic = new UserBasic();
+        userbasic.setUserId("123123");
+        recordService.addRecord(new RecordDto(userbasic.getUserId(),1L,1,10,10,true));
+        recordService.addRecord(new RecordDto("123123",2L,2,15,10,true));
+        recordService.addRecord(new RecordDto("123123",3L,3,20,10,true));
+        recordService.addRecord(new RecordDto("123123",4L,4,25,10,true));
+
+    }
+
 
 }
