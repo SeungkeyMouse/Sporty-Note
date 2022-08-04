@@ -11,8 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Data
 public class NodeCreateDto {
-    private String userId;
-    private Long machineId;
+    private Long noteIdx;
+    private String userIdx;
+    private Long machineIdx;
 
     //노드에 대한정보
     //종류

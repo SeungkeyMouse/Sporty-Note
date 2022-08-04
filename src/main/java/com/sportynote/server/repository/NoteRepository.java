@@ -22,7 +22,9 @@ public class NoteRepository {
     public void save(Note note) {
         em.persist(note);
     }
-
+    public Optional<Note> findById(Long noteIdx){
+        return Optional.ofNullable(em.find(Note.class, noteIdx));
+    }
     /**
      * 내가 만든 노트가 있는 기구들만 호출
      */
@@ -44,8 +46,12 @@ public class NoteRepository {
         List<MachineDto> machineDtoList = new ArrayList<>();
         for (Note note : noteList) {
             Machine machine = note.getMachine();
-            MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getKrMachineName(),machine.getEngMachineName(),
-                    machine.getTargetArea(), machine.getUrl());
+            MachineDto machineDto = new MachineDto(
+                    machine.getIdx(),
+                    machine.getKrMachineName(),
+                    machine.getEngMachineName(),
+                    machine.getTargetArea(),
+                    machine.getUrl());
             machineDtoList.add(machineDto);
         }
 
@@ -57,7 +63,8 @@ public class NoteRepository {
         try {
             note = Optional.ofNullable(em.createQuery("select n from Note n " +
                             "where n.userBasic.userId=:userId " +
-                            "and n.machine.idx =: machineId ", Note.class)
+                            "and n.machine.idx =: machineId " +
+                            "and n.deleted = false ", Note.class)
                     .setParameter("userId", userId)
                     .setParameter("machineId", machineId)
                     .getSingleResult());
@@ -72,7 +79,8 @@ public class NoteRepository {
         List<NoteNode> resultList = em.createQuery("select nd from NoteNode nd"
                                 + " join fetch nd.note n"
                                 + " join fetch n.machine"
-                                + " where n.userBasic.userId=: userId and n.machine.idx=: machineId "
+                                + " where n.userBasic.userId=: userId and n.machine.idx=: machineId " +
+                                " and nd.deleted=false "
                         , NoteNode.class)
                 .setParameter("userId", userId)
                 .setParameter("machineId", machineId)
@@ -90,11 +98,18 @@ public class NoteRepository {
         Map<NodeType, List<NodeDto>> nodeMap = new HashMap<>();//key: 노트타입, value: 노드Dto리스트
         for (NoteNode node : resultList) {
             NodeType key = node.getType();
-
             //노드-> 노드DTO
-            NodeDto nodeDto = new NodeDto(node.getColor(),
-                    machineId,node.getIdx(), node.getType(), node.getColor(), node.getText(), node.getX_location(), node.getY_location(),
-                    node.getPictureUrl());
+            NodeDto nodeDto = new NodeDto(
+                    userId,
+                    machineId,
+                    node.getIdx(),
+                    node.getType(),
+                    node.getColor(),
+                    node.getText(),
+                    node.getX_location(),
+                    node.getY_location(),
+                    node.getPictureUrl()
+            );
 
             //각 node의 타입별로 Map에 넣어줌
             if (!nodeMap.containsKey(key)) {//Map에 아직 노드가 할당되지 않은 경우 리스트 선언
@@ -102,7 +117,7 @@ public class NoteRepository {
             }
             nodeMap.get(key).add(nodeDto);
         }
-
+        noteDto.setNoteIdx(resultList.get(0).getNote().getIdx());
         noteDto.setMachineDto(machineDto);
         noteDto.setNodeDtos(nodeMap);
 
