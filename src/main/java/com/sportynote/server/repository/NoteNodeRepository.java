@@ -17,6 +17,11 @@ public class NoteNodeRepository{
     public void save(NoteNode node) {
         em.persist(node);
     }
+
+    public Long delete(NoteNode node) {
+        em.remove(node);
+        return node.getIdx();
+    }
     public NoteNode findById(Long nodeId){
         return em.createQuery("select n from NoteNode n where n.idx =: nodeId", NoteNode.class)
                 .setParameter("nodeId", nodeId)

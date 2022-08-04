@@ -27,13 +27,13 @@ public class NoteService {
 
     public Long addNoteNode(NodeCreateDto nodeCreateDto) {
 
-        Optional<Note> optNote = noteRepository.findByIds(nodeCreateDto.getUserId(), nodeCreateDto.getMachineId());
+        Optional<Note> optNote = noteRepository.findById(nodeCreateDto.getNoteIdx());
         Note note;
         //해당 기구에 대한 노트가 생성되지 않은 경우 -> 노트 먼저 생성
         if(!optNote.isPresent()){
             note = Note.createNote(
-                    userBasicRepository.findById(nodeCreateDto.getUserId()),
-                    machineRepository.findById(nodeCreateDto.getMachineId())
+                    userBasicRepository.findById(nodeCreateDto.getUserIdx()),
+                    machineRepository.findById(nodeCreateDto.getMachineIdx())
             );
             noteRepository.save(note);
         }else{//해당 기구에 대한 노트가 이미 있는 경우 가져옴.
@@ -45,7 +45,7 @@ public class NoteService {
         //노드의 위치를 x,y=0F로 설정한 경우에는 세팅되어있는 부위의 위치를 집어넣게 함.
         if(nodeCreateDto.getX_location().compareTo(0F)==0 && nodeCreateDto.getY_location().compareTo(0F)==0) {
             Optional<NodeLocationSet> optNLS= nodeLocationSetRepository.findByMachineIdAndNodeType(
-                    nodeCreateDto.getMachineId(),
+                    nodeCreateDto.getMachineIdx(),
                     NodeType.findNodeType(nodeCreateDto.getType().getEngName())
             );
             //세팅되어있는 부위의 위치가 있다면 해당 값을 집어넣음
@@ -80,6 +80,7 @@ public class NoteService {
         return node.getIdx();
     }
 
+
     public List<MachineDto> getAllMyNotedMachines(String userId) {
         List<MachineDto> notedMachines = noteRepository.findNotedMachineByUserId(userId);
         for (MachineDto notedMachine : notedMachines) {
@@ -90,5 +91,10 @@ public class NoteService {
             notedMachine.setUserFavoriteIdx(uf.getIdx());
         }
         return notedMachines;
+    }
+
+    public Long deleteNoteNode(Long nodeIdx) {
+        NoteNode node = nodeRepository.findById(nodeIdx);
+        return nodeRepository.delete(node);
     }
 }

@@ -54,10 +54,10 @@ public class Initializer implements CommandLineRunner {
         /***
          * 노트한 기구 추가
          */
-        noteService.addNoteNode(new NodeCreateDto("123123", 1L, NodeType.CHEST,"Orange", "123123의 벤치프레스 Orange 내용1입니다", 0F,0F,"사진주소1"));
-        noteService.addNoteNode(new NodeCreateDto("123123", 1L,NodeType.CHEST, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 0F,0F,"사진주소2"));
-        noteService.addNoteNode(new NodeCreateDto("123123", 2L, NodeType.BACK, "Red", "123123의 벤치프레스 Red 내용입니다", 13.5F,20F,"사진주소3"));
-        noteService.addNoteNode(new NodeCreateDto("777777", 2L,  NodeType.BACK, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto(1L,"123123", 1L, NodeType.CHEST,"Orange", "123123의 벤치프레스 Orange 내용1입니다", 0F,0F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto(1L, "123123", 1L,NodeType.CHEST, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 0F,0F,"사진주소2"));
+        noteService.addNoteNode(new NodeCreateDto(2L,"123123", 2L, NodeType.BACK, "Red", "123123의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소3"));
+        noteService.addNoteNode(new NodeCreateDto(3L,"777777", 2L,  NodeType.BACK, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
 
     }
 

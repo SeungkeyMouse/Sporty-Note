@@ -22,7 +22,9 @@ public class NoteRepository {
     public void save(Note note) {
         em.persist(note);
     }
-
+    public Optional<Note> findById(Long noteIdx){
+        return Optional.ofNullable(em.find(Note.class, noteIdx));
+    }
     /**
      * 내가 만든 노트가 있는 기구들만 호출
      */
@@ -61,7 +63,8 @@ public class NoteRepository {
         try {
             note = Optional.ofNullable(em.createQuery("select n from Note n " +
                             "where n.userBasic.userId=:userId " +
-                            "and n.machine.idx =: machineId ", Note.class)
+                            "and n.machine.idx =: machineId " +
+                            "and n.deleted = false ", Note.class)
                     .setParameter("userId", userId)
                     .setParameter("machineId", machineId)
                     .getSingleResult());
@@ -76,7 +79,8 @@ public class NoteRepository {
         List<NoteNode> resultList = em.createQuery("select nd from NoteNode nd"
                                 + " join fetch nd.note n"
                                 + " join fetch n.machine"
-                                + " where n.userBasic.userId=: userId and n.machine.idx=: machineId "
+                                + " where n.userBasic.userId=: userId and n.machine.idx=: machineId " +
+                                " and nd.deleted=false "
                         , NoteNode.class)
                 .setParameter("userId", userId)
                 .setParameter("machineId", machineId)
@@ -113,7 +117,7 @@ public class NoteRepository {
             }
             nodeMap.get(key).add(nodeDto);
         }
-
+        noteDto.setNoteIdx(resultList.get(0).getNote().getIdx());
         noteDto.setMachineDto(machineDto);
         noteDto.setNodeDtos(nodeMap);
 

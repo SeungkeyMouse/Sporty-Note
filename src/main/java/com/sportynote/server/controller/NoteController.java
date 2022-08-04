@@ -39,25 +39,4 @@ public class NoteController {
                                                 @RequestParam("machineId") Long machineId){
         return ResponseEntity.ok(noteService.findMyNoteNodes(userId, machineId));
     }
-
-
-    //POST
-    //1. 나의 <노트>에 '노드' 저장(하나씩 UPDATE)
-    @PostMapping("/note/create")
-    public ResponseEntity<Long> addNoteNode(@RequestBody NodeCreateDto nodeCreateDto){
-        return ResponseEntity.ok(noteService.addNoteNode(nodeCreateDto));
-    }
-
-    //2. 노드 수정
-    @PostMapping("/note/update")
-    public ResponseEntity<Long> updateNoteNode(@RequestBody NodeUpdateDto nodeDto){
-        return ResponseEntity.ok(noteService.updateNoteNode(nodeDto));
-    }
-
-    //3. 노드 삭제
-    /*@PostMapping("/note/update")
-    public ResponseEntity<Long> deleteNoteNode(@RequestBody NodeDto nodeDto){
-        return ResponseEntity.ok(noteService.updateNoteNode(nodeDto));
-    }*/
-
 }
