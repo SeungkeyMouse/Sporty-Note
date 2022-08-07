@@ -155,9 +155,9 @@ public class Initializer implements CommandLineRunner {
         UserBasic userbasic = new UserBasic();
         userbasic.setUserId("123123");
         recordService.addRecord(new RecordDto(userbasic.getUserId(),1L,1,10,10,true));
-        recordService.addRecord(new RecordDto("123123",2L,2,15,10,true));
-        recordService.addRecord(new RecordDto("123123",3L,3,20,10,true));
-        recordService.addRecord(new RecordDto("123123",4L,4,25,10,true));
+        recordService.addRecord(new RecordDto("123123",1L,2,15,10,true));
+        recordService.addRecord(new RecordDto("123123",1L,3,20,10,true));
+        recordService.addRecord(new RecordDto("777777",1L,4,25,10,true));
 
     }
 

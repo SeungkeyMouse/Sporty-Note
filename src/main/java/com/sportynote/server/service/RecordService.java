@@ -70,6 +70,14 @@ public class RecordService {
         }
         return RecordLists;
     }
+    public List<List<RecordDto>> previousRecord(Long machineIdx){
+        String userid="123123";
+        List<List<RecordDto>> recordDtoLists = new ArrayList<>();
+        recordDtoLists.add(recordRepository.findByPreviousRecordMAX(userid, machineIdx));
+        recordDtoLists.add(recordRepository.findByPreviousRecordCNT(userid, machineIdx));
+        return recordDtoLists;
+    }
+
 
     /** String을 시간객체로 */
     public LocalDate stringToLocalDate(String day){

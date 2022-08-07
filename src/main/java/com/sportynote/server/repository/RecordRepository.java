@@ -44,4 +44,27 @@ public class RecordRepository {
     public List<Record> findByRecordDay(LocalDate localDate,String userId){
         return jpaQueryFactory.select(m).from(m).where(m.createdDay.eq(localDate).and(m.userBasic.userId.eq(userId))).fetch();
     }
+
+    //        select user_id,record_idx,sett,kg,count,complete from record_table where kg=any(select max(kg)
+    //                from record_table a group by user_id
+    //        ) and user_id="123123" and machine_idx=1
+    //        UNION ALL
+    //        SELECT user_id,record_idx,sett,kg,count,complete from record_table
+    //        where kg = (SELECT max(kg) from record_table where user_id="123123");
+    public List<RecordDto> findByPreviousRecordCNT(String userid,Long machineIdx){
+
+        return em.createQuery("select new com.sportynote.server.repository.query.RecordDto(m.userBasic.userId,m.machine.idx,m.sett,m.kg,m.count,m.complete) " +
+                        "from Record m where m.kg=any(select max(a.kg) from Record a group by a.userBasic.userId) " +
+                        "and m.userBasic.userId=:userId " +
+                        "and m.machine.idx=:machineIdx",RecordDto.class)
+                .setParameter("userId",userid).setParameter("machineIdx",machineIdx).getResultList();
+    }
+
+    public List<RecordDto> findByPreviousRecordMAX(String userid,Long machineIdx){
+        return em.createQuery("select new com.sportynote.server.repository.query.RecordDto(m.userBasic.userId,m.machine.idx,m.sett,m.kg,m.count,m.complete) " +
+                "from Record m where m.kg =(select max(a.kg) from Record a where a.userBasic.userId=:userId and a.machine.idx=:machineIdx)",RecordDto.class)
+                .setParameter("userId",userid).setParameter("machineIdx",machineIdx).getResultList();
+
+    }
 }
+

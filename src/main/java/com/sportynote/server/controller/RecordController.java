@@ -82,5 +82,16 @@ public class RecordController {
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
     }
 
+    /** Read 이전 기록, 차트로 보기 */
+    @GetMapping("/previous/{machineIdx}")
+    public ResponseEntity<?> previousRecord(@PathVariable Long machineIdx) throws URISyntaxException {
+        List<List<RecordDto>> results = recordService.previousRecord(machineIdx);
+        for(List<RecordDto> record : results){
+            for(RecordDto records : record){
+                System.out.println(records);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
+    }
 
 }

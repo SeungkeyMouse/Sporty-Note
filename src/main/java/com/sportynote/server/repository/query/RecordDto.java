@@ -5,12 +5,14 @@ import com.sportynote.server.domain.UserBasic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 public class RecordDto {
+
     private String userId;
 
     private Long machineIdx;
