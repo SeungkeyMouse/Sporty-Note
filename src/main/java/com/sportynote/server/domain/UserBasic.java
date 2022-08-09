@@ -4,10 +4,7 @@ package com.sportynote.server.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -52,4 +49,23 @@ public class UserBasic extends BaseEntity implements Serializable {
     @Column(name = "last_login_at")
     private LocalDateTime lastLoginAt;
 
+    @Builder
+    public UserBasic(String userId, String oauthId, String email, String name, SocialType socialType) {
+        this.userId = userId;
+        this.oauthId = oauthId;
+        this.email = email;
+        this.name = name;
+        this.socialType = socialType;
+    }
+
+    //==UserBasic 생성 메서드==//
+    public static UserBasic createdUserBasic(String email, String oauthId, String name, String userId, SocialType socialType) {
+        return UserBasic.builder()
+                .email(email)
+                .oauthId(oauthId)
+                .name(name)
+                .userId(userId)
+                .socialType(socialType)
+                .build();
+    }
 }

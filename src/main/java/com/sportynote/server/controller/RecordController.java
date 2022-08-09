@@ -86,11 +86,6 @@ public class RecordController {
     @GetMapping("/previous/{machineIdx}")
     public ResponseEntity<?> previousRecord(@PathVariable Long machineIdx) throws URISyntaxException {
         List<List<RecordDto>> results = recordService.previousRecord(machineIdx);
-        for(List<RecordDto> record : results){
-            for(RecordDto records : record){
-                System.out.println(records);
-            }
-        }
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
 

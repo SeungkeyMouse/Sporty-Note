@@ -37,7 +37,6 @@ public class UserFavorite extends BaseEntity {
         userBasic.getUserFavorites().add(this);
     }
 
-
     //==생성 메서드==//
     public static UserFavorite createFavorite(UserBasic userBasic, Machine orgMachine) {
         UserFavorite userFavorite = new UserFavorite();

@@ -1,7 +1,7 @@
 package com.sportynote.server.Enum;
 
 public enum SocialType {
-    NAVER("naver"), KAKAO("kakao");
+    GOOGLE("google"), KAKAO("kakao");
 
 
     private final String ROLE_PREFIX = "ROLE_";

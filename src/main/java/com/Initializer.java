@@ -140,7 +140,7 @@ public class Initializer implements CommandLineRunner {
         userBasic2.setUserId("777777");
         userBasic2.setEmail("7777@naver.com");
         userBasic2.setName("황모씨");
-        userBasic2.setSocialType(SocialType.NAVER);
+        userBasic2.setSocialType(SocialType.GOOGLE);
         userBasicRepository.save(userBasic2);
     }
     void routineSetup() {
