@@ -42,7 +42,7 @@ public class RoutineService {
     public boolean addRoutine(RoutineDto routineDto) {
             List<Long> machines = routineDto.getMachines();
             List<Routine> routineList = new ArrayList<>();
-            UserBasic userBasicInfo = userBasicRepository.findById("123123"); //예시 userid
+            UserBasic userBasicInfo = userBasicRepository.findById("12312312"); //예시 userid
             for (Long machine : machines) {
                 Machine machineInfo = machineRepository.findById(machine);
                 Routine routine = Routine.createRoutine(routineDto.getRoutineName(),userBasicInfo ,machineInfo);

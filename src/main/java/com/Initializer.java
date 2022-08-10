@@ -53,10 +53,10 @@ public class Initializer implements CommandLineRunner {
         /***
          * 노트한 기구 추가
          */
-        noteService.addNoteNode(new NodeCreateDto(1L,"123123", 1L, NodeType.CHEST,"Orange", "123123의 벤치프레스 Orange 내용1입니다", 0F,0F,"사진주소1"));
-        noteService.addNoteNode(new NodeCreateDto(1L, "123123", 1L,NodeType.CHEST, "Orange", "123123의 벤치프레스 Orange 내용2입니다", 0F,0F,"사진주소2"));
-        noteService.addNoteNode(new NodeCreateDto(2L,"123123", 2L, NodeType.BACK, "Red", "123123의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소3"));
-        noteService.addNoteNode(new NodeCreateDto(3L,"777777", 2L,  NodeType.BACK, "Red", "777777의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto(1L,"12312312", 1L, NodeType.CHEST,"Orange", "12312312의 벤치프레스 Orange 내용1입니다", 0F,0F,"사진주소1"));
+        noteService.addNoteNode(new NodeCreateDto(1L, "12312312", 1L,NodeType.CHEST, "Orange", "12312312의 벤치프레스 Orange 내용2입니다", 0F,0F,"사진주소2"));
+        noteService.addNoteNode(new NodeCreateDto(2L,"12312312", 2L, NodeType.BACK, "Red", "12312312의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소3"));
+        noteService.addNoteNode(new NodeCreateDto(3L,"78978978", 2L,  NodeType.BACK, "Red", "78978978의 랫풀다운 Red 내용입니다", 13.5F,20F,"사진주소1"));
 
     }
 
@@ -120,44 +120,37 @@ public class Initializer implements CommandLineRunner {
         /***
          * 즐겨찾기 추가
          */
-        machineService.addFavorite("123123", 1L);
-        machineService.addFavorite("123123", 2L);
+        machineService.addFavorite("12312312", 1L);
+        machineService.addFavorite("12312312", 2L);
 
-        machineService.addFavorite("777777", 3L);
+        machineService.addFavorite("78978978", 3L);
 
 
     }
 
     void userBasicSetup() {
-        UserBasic userBasic = new UserBasic();
-        userBasic.setUserId("123123");
-        userBasic.setEmail("abcd@naver.com");
-        userBasic.setName("김모씨");
-        userBasic.setSocialType(SocialType.KAKAO);
+        //String email, String oauthId, String name, String userId, SocialType socialType
+        UserBasic userBasic;
+        userBasic = UserBasic.createdUserBasic("abcd@naver.com","10952728","김모씨","12312312",SocialType.GOOGLE);
         userBasicRepository.save(userBasic);
-
-        UserBasic userBasic2 = new UserBasic();
-        userBasic2.setUserId("777777");
-        userBasic2.setEmail("7777@naver.com");
-        userBasic2.setName("황모씨");
-        userBasic2.setSocialType(SocialType.GOOGLE);
-        userBasicRepository.save(userBasic2);
+        userBasic = UserBasic.createdUserBasic("efgh@naver.com","24093052","황모씨","45645645",SocialType.KAKAO);
+        userBasicRepository.save(userBasic);
+        userBasic = UserBasic.createdUserBasic("ijkl@naver.com","35098016","이모씨","78978978",SocialType.GOOGLE);
+        userBasicRepository.save(userBasic);
     }
     void routineSetup() {
         List<Long> machines=new ArrayList<>();
         for(long i =1;i<5;i++){
             machines.add(i);
         }
-        RoutineDto routineDto = new RoutineDto("123123","lower",machines);
+        RoutineDto routineDto = new RoutineDto("12312312","lower",machines);
         routineService.addRoutine(routineDto);
     }
     void recordSetup() {
-        UserBasic userbasic = new UserBasic();
-        userbasic.setUserId("123123");
-        recordService.addRecord(new RecordDto(userbasic.getUserId(),1L,1,10,10,true));
-        recordService.addRecord(new RecordDto("123123",1L,2,15,10,true));
-        recordService.addRecord(new RecordDto("123123",1L,3,20,10,true));
-        recordService.addRecord(new RecordDto("777777",1L,4,25,10,true));
+        recordService.addRecord(new RecordDto("12312312",1L,1,10,10,true));
+        recordService.addRecord(new RecordDto("45645645",1L,2,15,10,true));
+        recordService.addRecord(new RecordDto("78978978",1L,3,20,10,true));
+        recordService.addRecord(new RecordDto("12312312",1L,4,25,10,true));
 
     }
 

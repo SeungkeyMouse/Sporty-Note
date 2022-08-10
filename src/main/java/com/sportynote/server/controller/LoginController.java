@@ -45,6 +45,11 @@ public class LoginController {
         return ResponseEntity.ok(200);
     }
 
+    @GetMapping("/")
+    public String Test() {
+        return "1";
+    }
+
 
 
 }

@@ -5,7 +5,6 @@ import java.util.Date;
 
 import com.sportynote.server.domain.UserBasic;
 import com.sportynote.server.repository.UserBasicRepository;
-import com.sportynote.server.repository.repositoryImpl.UserBasicRepositoryImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -53,17 +52,14 @@ public class JwtTokenProvider {
 
     /**
      * 유저정보를 불러와 인증 객체 반환해주는 함수
-     *
-     * @param token
      * @return Spring Security 인증 객체
      */
-//    @Getter
-//    public UsernamePasswordAuthenticationToken getAuthentication(String token) {
-//        String userId = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().get("userId",String.class);
-//        UserBasic userBasic = userBasicRepository.findById(userId);
-//        UserInfoPrincipal userInfoPrincipal = new UserInfoPrincipal(userBasic);
-//        return new UsernamePasswordAuthenticationToken(userInfoPrincipal, token, userBasic.getAuthorities());
-//    }
+    public UsernamePasswordAuthenticationToken getAuthentication(String token) {
+        String userId = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().get("userId",String.class);
+        UserBasic userBasic = userBasicRepository.findById(userId);
+        UserBasicPrincipal userBasicPrincipal = new UserBasicPrincipal(userBasic);
+        return new UsernamePasswordAuthenticationToken(userBasicPrincipal,token, userBasicPrincipal.getAuthorities());
+    }
 
     /**
      * 클라이언트의 Token이 유효한지 검증하는 함수
@@ -78,10 +74,10 @@ public class JwtTokenProvider {
             return true;
         } catch (SecurityException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException
                 | IllegalArgumentException e) {
-            System.out.println("jwt validate fail");
             return false;
         }
     }
+
 
 
 }

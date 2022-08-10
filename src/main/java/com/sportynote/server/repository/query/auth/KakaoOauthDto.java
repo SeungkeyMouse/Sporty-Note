@@ -32,7 +32,7 @@ public class KakaoOauthDto {
     @Getter
     public static class kakao_account {
         private String email;
-        private String name;
+        private String nickname;
         //private profile profile;
     }
 
