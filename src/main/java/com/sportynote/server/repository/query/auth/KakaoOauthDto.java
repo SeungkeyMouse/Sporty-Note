@@ -32,18 +32,18 @@ public class KakaoOauthDto {
     @Getter
     public static class kakao_account {
         private String email;
-        private String nickname;
-        //private profile profile;
+        private String name;
+        private profile profile;
     }
 
     /**
      * GetKakaoUserInformationResponseDto에서 사용되는 class
      */
-//    @Getter
-//    @Setter
-//    public static class profile {
-//        private String nickname;
-//    }
+    @Getter
+    @Setter
+    public static class profile {
+        private String nickname;
+    }
 
     /**
      * Kakao Oauth Response DTO

@@ -81,7 +81,7 @@ public class AuthService {
             return jwtAuthProvider.createAccessToken(userBasic.getUserId());
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8);
-            UserBasic userBasic = UserBasic.createdUserBasic(kakaoUserInformation.getKakao_account().getEmail(),kakaoUserId,kakaoUserInformation.getKakao_account().getNickname(),userId,SocialType.KAKAO);
+            UserBasic userBasic = UserBasic.createdUserBasic(kakaoUserInformation.getKakao_account().getEmail(),kakaoUserId,kakaoUserInformation.getKakao_account().getProfile().getNickname(),userId,SocialType.KAKAO);
             userBasicRepository.save(userBasic);
             return jwtAuthProvider.createAccessToken(userBasic.getUserId());
         }

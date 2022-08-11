@@ -77,7 +77,20 @@ public class JwtTokenProvider {
             return false;
         }
     }
-
-
+//
+//    /**
+//     * 토큰 만료기한 가져오기
+//     */
+//    public Date getExpirationDate(String token) {
+//        Claims claims = getAllClaims(token);
+//        return claims.getExpiration();
+//    }
+//
+//    /**
+//     * 토큰이 만료되었는지
+//     */
+//    private boolean isTokenExpired(String token) {
+//        return getExpirationDate(token).before(new Date());
+//    }
 
 }
