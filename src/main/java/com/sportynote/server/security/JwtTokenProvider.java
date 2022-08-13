@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.sportynote.server.domain.UserBasic;
 import com.sportynote.server.repository.UserBasicRepository;
+import com.sportynote.server.util.RedisUtil;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -19,12 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 public class JwtTokenProvider {
     private final Key secretKey;
     private final UserBasicRepository userBasicRepository;
+    private final RedisUtil redisUtil;
     Long accessTokenValidTime = 36000L * 60 * 60;
 
-    public JwtTokenProvider(@Value("${jwtSecretKey}") String secretKey,UserBasicRepository userBasicRepository) {
+    public JwtTokenProvider(@Value("${jwtSecretKey}") String secretKey,UserBasicRepository userBasicRepository,RedisUtil redisUtil) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
         this.userBasicRepository= userBasicRepository;
+        this.redisUtil=redisUtil;
     }
     /**
      * 유저 고유 ID(UUID)를 받아 AccessToken 발행
@@ -32,7 +35,7 @@ public class JwtTokenProvider {
      */
     public String createAccessToken(String uuid) {
         Claims claims = Jwts.claims().setSubject("access_token");
-        claims.put("uid", uuid);
+        claims.put("userId", uuid);
         Date currentTime = new Date();
         return Jwts.builder()
                 .setClaims(claims)
@@ -56,8 +59,14 @@ public class JwtTokenProvider {
      */
     public UsernamePasswordAuthenticationToken getAuthentication(String token) {
         String userId = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().get("userId",String.class);
+        System.out.println("userId : "+userId);
         UserBasic userBasic = userBasicRepository.findById(userId);
+
         UserBasicPrincipal userBasicPrincipal = new UserBasicPrincipal(userBasic);
+        //유저 권한
+        System.out.println(userBasicPrincipal.getAuthorities().iterator().next().getAuthority());
+        //유저 네임
+        System.out.println(userBasicPrincipal.getUsername());
         return new UsernamePasswordAuthenticationToken(userBasicPrincipal,token, userBasicPrincipal.getAuthorities());
     }
 
@@ -68,6 +77,9 @@ public class JwtTokenProvider {
     public boolean validateToken(String token) {
         try {
             if (token == null) {
+                return false;
+            }
+            if(redisUtil.hasKeyBlackList(token)){
                 return false;
             }
             Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();

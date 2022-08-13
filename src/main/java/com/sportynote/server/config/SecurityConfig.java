@@ -28,7 +28,7 @@ public class SecurityConfig {
             "/login",
             "/auth/kakao/callback",
             "/auth/google/callback",
-            "/"
+            "/auth/logout"
     };
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {

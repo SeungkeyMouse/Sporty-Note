@@ -7,6 +7,7 @@ import com.sportynote.server.repository.query.auth.GoogleOauthDto.*;
 import com.sportynote.server.repository.query.auth.KakaoOauthDto.*;
 import com.sportynote.server.repository.repositoryImpl.UserBasicRepositoryImpl;
 import com.sportynote.server.security.JwtTokenProvider;
+import com.sportynote.server.util.RedisUtil;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -28,11 +29,13 @@ public class AuthService {
     private final UserBasicRepository userBasicRepository;
     private final UserBasicRepositoryImpl userBasicRepositoryImpl;
     private final JwtTokenProvider jwtAuthProvider;
-    public AuthService(RestTemplate restTemplate, UserBasicRepository userBasicRepository, JwtTokenProvider jwtAuthProvider, UserBasicRepositoryImpl userBasicRepositoryImpl) {
+    private final RedisUtil redisUtil;
+    public AuthService(RestTemplate restTemplate, UserBasicRepository userBasicRepository, JwtTokenProvider jwtAuthProvider, UserBasicRepositoryImpl userBasicRepositoryImpl, RedisUtil redisUtil) {
         this.restTemplate = restTemplate;
         this.userBasicRepository=userBasicRepository;
         this.jwtAuthProvider=jwtAuthProvider;
         this.userBasicRepositoryImpl=userBasicRepositoryImpl;
+        this.redisUtil=redisUtil;
     }
 
     MultiValueMap<String, String> data;
@@ -169,7 +172,10 @@ public class AuthService {
             return jwtAuthProvider.createAccessToken(userBasic.getUserId());
         }
     }
-
+    public Boolean oauthLogout(String Token){
+        redisUtil.setBlackList(Token,"accessToken",1800);
+        return true;
+    }
     @Value("${KAKAO_OAUTH_API_KEY}")
     private String KAKAO_OAUTH_API_KEY;
 
