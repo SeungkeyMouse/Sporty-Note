@@ -64,7 +64,7 @@ public class RoutineService {
 
     /** 내 루틴 내 기구 조회 */
     public List<RoutineMachineDto> findByIdAndRoutineName(String RoutineName){
-        String userid="123123";
+        String userid="12312312";
         List<Routine> RoutineLists = routineRepository.findByIdAndRoutineName(userid, RoutineName);
         List<RoutineMachineDto> MachineLists = new ArrayList<>();
         for(Routine routine : RoutineLists){
@@ -123,7 +123,7 @@ public class RoutineService {
 
     /** 루틴 하나 삭제 */
     public boolean deleteRoutine(String routineName){
-        List<Routine> routineLists = routineRepository.findByIdAndRoutineName("123123",routineName);
+        List<Routine> routineLists = routineRepository.findByIdAndRoutineName("12312312",routineName);
         for(Routine routine : routineLists) {
             routineRepository.deleteMachine(routine.getIdx());
         }
