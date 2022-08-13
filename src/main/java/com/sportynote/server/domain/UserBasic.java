@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import com.sportynote.server.Enum.SocialType;
+<<<<<<< HEAD
 import org.hibernate.annotations.SQLDelete;
+=======
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +26,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+<<<<<<< HEAD
 @SQLDelete(sql = "UPDATE user_Basic SET deleted = true WHERE user_basic_idx = ?")
+=======
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
 public class UserBasic extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

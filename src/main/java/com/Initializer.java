@@ -43,7 +43,11 @@ public class Initializer implements CommandLineRunner {
         machineSetup();
         machineLocationSetup();
         noteSetup();
+<<<<<<< HEAD
 //        printUserFavorite();
+=======
+        printUserFavorite();
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
         routineSetup();
         recordSetup();
         System.out.println("실행 완료되었습니다.");

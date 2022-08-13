@@ -7,7 +7,10 @@ import com.sportynote.server.repository.query.auth.GoogleOauthDto.*;
 import com.sportynote.server.repository.query.auth.KakaoOauthDto.*;
 import com.sportynote.server.repository.repositoryImpl.UserBasicRepositoryImpl;
 import com.sportynote.server.security.JwtTokenProvider;
+<<<<<<< HEAD
 import com.sportynote.server.util.RedisUtil;
+=======
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -29,13 +32,20 @@ public class AuthService {
     private final UserBasicRepository userBasicRepository;
     private final UserBasicRepositoryImpl userBasicRepositoryImpl;
     private final JwtTokenProvider jwtAuthProvider;
+<<<<<<< HEAD
     private final RedisUtil redisUtil;
     public AuthService(RestTemplate restTemplate, UserBasicRepository userBasicRepository, JwtTokenProvider jwtAuthProvider, UserBasicRepositoryImpl userBasicRepositoryImpl, RedisUtil redisUtil) {
+=======
+    public AuthService(RestTemplate restTemplate, UserBasicRepository userBasicRepository, JwtTokenProvider jwtAuthProvider, UserBasicRepositoryImpl userBasicRepositoryImpl) {
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
         this.restTemplate = restTemplate;
         this.userBasicRepository=userBasicRepository;
         this.jwtAuthProvider=jwtAuthProvider;
         this.userBasicRepositoryImpl=userBasicRepositoryImpl;
+<<<<<<< HEAD
         this.redisUtil=redisUtil;
+=======
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
     }
 
     MultiValueMap<String, String> data;
@@ -160,20 +170,32 @@ public class AuthService {
     public String GoogleLogin(String token) {
         GetGoogleUserInformationResponseDto GoogleUserInformation = getGoogleUserInformation(token);
         String GoogleUserId = GoogleUserInformation.getId();
+<<<<<<< HEAD
+=======
+        System.out.println(GoogleUserId);
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
         if (isAlreadyUser(GoogleUserId,SocialType.GOOGLE)) { // 이미 DB에 저장되어있는 구글 유저라면
             UserBasic userBasic = userBasicRepository.findByOauthId(GoogleUserId);
             return jwtAuthProvider.createAccessToken(userBasic.getUserId());
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8);
+<<<<<<< HEAD
+=======
+            System.out.println(SocialType.GOOGLE);
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
             UserBasic userBasic = UserBasic.createdUserBasic(GoogleUserInformation.getEmail(),GoogleUserInformation.getId(),GoogleUserInformation.getName(),userId,SocialType.GOOGLE);
             userBasicRepository.save(userBasic);
             return jwtAuthProvider.createAccessToken(userBasic.getUserId());
         }
     }
+<<<<<<< HEAD
     public Boolean oauthLogout(String Token){
         redisUtil.setBlackList(Token,"accessToken",1800);
         return true;
     }
+=======
+
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
     @Value("${KAKAO_OAUTH_API_KEY}")
     private String KAKAO_OAUTH_API_KEY;
 

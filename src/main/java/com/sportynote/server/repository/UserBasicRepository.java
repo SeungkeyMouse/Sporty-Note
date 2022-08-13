@@ -1,7 +1,14 @@
 package com.sportynote.server.repository;
 
 import com.sportynote.server.Enum.SocialType;
+<<<<<<< HEAD
 import com.sportynote.server.domain.*;
+=======
+import com.sportynote.server.domain.Gym;
+import com.sportynote.server.domain.Machine;
+import com.sportynote.server.domain.UserBasic;
+import com.sportynote.server.domain.UserFavorite;
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.springframework.stereotype.Repository;
@@ -25,9 +32,12 @@ public class UserBasicRepository {
         return em.createQuery("select u from UserBasic u", UserBasic.class)
                 .getResultList();
     }
+<<<<<<< HEAD
     public void delete(Long idx){
         em.remove(em.find(UserBasic.class, idx));
     }
+=======
+>>>>>>> e356767f084accefdb147c73c6a441ef3fdb504d
 
     public UserBasic findById(String userId){
         return em.createQuery("select u from UserBasic u where u.userId =: userId", UserBasic.class)
