@@ -39,6 +39,7 @@ public class Initializer implements CommandLineRunner {
         gymService.save(new GymDto("정원헬스장", "36", "127","서울시", "성북구", "안암로"));
         gymService.save(new GymDto("의정부헬스장", "37.5", "128","의정부시", "무슨구", "땡땡동"));
         gymService.save(new GymDto("선릉헬스장","37.5","126","서울시","강남구","선릉동"));
+
         userBasicSetup();
         machineSetup();
         machineLocationSetup();
