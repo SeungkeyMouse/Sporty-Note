@@ -73,7 +73,7 @@ public class RecordService {
 
 
     public List<List<RecordDto>> previousRecord(Long machineIdx){
-        String userid="12312312";
+        String userid="123123";
         List<List<RecordDto>> recordDtoLists = new ArrayList<>();
         recordDtoLists.add(recordRepository.findByPreviousRecordMAX(userid, machineIdx));
         recordDtoLists.add(recordRepository.findByPreviousRecordCNT(userid, machineIdx));

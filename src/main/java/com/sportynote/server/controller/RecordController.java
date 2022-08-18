@@ -39,7 +39,7 @@ public class RecordController {
     /** 나의 기록 보기 날짜별로 */
     @GetMapping("/")
     public ResponseEntity<?> calendar() throws URISyntaxException {
-        String userid="12312312"; //로그인 jwt토큰 임시 대체
+        String userid="123123"; //로그인 jwt토큰 임시 대체
         List<LocalDate> results = recordService.findByCalendar(userid);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
@@ -47,7 +47,7 @@ public class RecordController {
     //기록 하나 보기
     @GetMapping("/day/{recordDay}")
     public ResponseEntity<?> recordDay(@PathVariable String recordDay) {
-        String userid="12312312";
+        String userid="123123";
         List<RecordDto> results= recordService.findByRecordDay(recordDay,userid);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
@@ -58,6 +58,13 @@ public class RecordController {
         List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(routineName);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
+
+//    /** Read 기록리스트 (나만의 노트 + 기록) */
+//    @GetMapping("/{routine}/")
+//    public ResponseEntity<?> records(@PathVariable(value="routineName") String routineName) throws URISyntaxException {
+//        List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(routineName);
+//        return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
+//    }
 
     /** Create 기록 (그래프) 완료체크시 */
     @PostMapping("/complete")

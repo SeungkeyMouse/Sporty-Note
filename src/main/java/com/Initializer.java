@@ -104,7 +104,7 @@ public class Initializer implements CommandLineRunner {
         machine3.setKrMachineName("스쿼트");
         machine3.setEngMachineName("Squat");
         machine3.setTargetArea("하체");
-        machine3.setUrl("https://health.chosun.com/site/data/img_dir/2022/06/24/2022062402201_0.jpg");
+        machine3.setUrl("https://www.swmaestro.org/sw/main/main.do");
         // machine2.setGym(gymRepository.findAll().get(1));
 
         machineRepository.save(machine3);
@@ -113,7 +113,7 @@ public class Initializer implements CommandLineRunner {
         machine4.setKrMachineName("케이블 풀 다운");
         machine4.setEngMachineName("Cable pull down");
         machine4.setTargetArea("등");
-        machine4.setUrl("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcUadBL%2FbtrrqmQ3p7C%2FmGpckhKtDWOPQARVerEHPK%2Fimg.png");
+        machine4.setUrl("https://www.swmaestro.org/sw/main/main.do");
         // machine2.setGym(gymRepository.findAll().get(1));
 
         machineRepository.save(machine4);

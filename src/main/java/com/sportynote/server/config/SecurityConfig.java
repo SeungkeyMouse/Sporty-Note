@@ -29,9 +29,7 @@ public class SecurityConfig {
             "/auth/kakao/callback",
             "/auth/google/callback",
             "/auth/logout",
-            "/swagger-ui.html",
     };
-
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
@@ -46,11 +44,11 @@ public class SecurityConfig {
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class) // Jwt 인증 로직 필터 추가
-//                .authorizeRequests()
-//                .antMatchers(PUBLIC_URI).permitAll()
-//                .anyRequest().hasRole("USER")
+                .authorizeRequests()
+                .antMatchers(PUBLIC_URI).permitAll()
+                .anyRequest().hasRole("USER")
                 //.anyRequest().authenticated()
-//                .and()
+                .and()
                 .formLogin().disable();
         return http.build();
     }

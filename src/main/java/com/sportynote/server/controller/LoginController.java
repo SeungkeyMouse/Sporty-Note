@@ -25,6 +25,7 @@ public class LoginController {
      */
     @GetMapping("/kakao/callback")
     public KakaoLoginResponse kakaoOauth(@RequestParam("code") String code) {
+        System.out.println(code+"CODECODE");
         String accessToken = authService.getKakaoOauthToken(code);
         return new KakaoLoginResponse(true, accessToken);
     }
@@ -45,7 +46,15 @@ public class LoginController {
     @GetMapping("/logout")
     public ResponseEntity<?> jwtLogout(@RequestParam("access_token") String Token) {
         authService.oauthLogout(Token);
+        String accessToken = authService.GoogleLogin(Token);
         return ResponseEntity.ok(200);
     }
+
+    @GetMapping("/")
+    public String Test() {
+        return "1";
+    }
+
+
 
 }

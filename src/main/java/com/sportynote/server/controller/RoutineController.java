@@ -39,14 +39,14 @@ public class RoutineController {
     public ResponseEntity<?> addRoutines(@RequestBody RoutineDto routineDto) throws URISyntaxException {
         result = (routineService.addRoutine(routineDto)) ? "success" : "failed";
         status_code = result == "success" ? 201 : 200;
-        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
+        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + result + "}");
     }
 
     /** 모든 루틴 Read */
     @GetMapping("/")
     public ResponseEntity<?> myRoutines(@RequestParam("id") String userid) throws URISyntaxException {
         Set<String> results = routineService.myRoutine(userid);
-        return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
+        return ResponseEntity.status(HttpStatus.valueOf(200)).body("{\"result\":" + results + "}");
     }
 
     /** 루틴 1개 조회 Read */
@@ -61,14 +61,14 @@ public class RoutineController {
     public ResponseEntity<?> modifyRoutines(@RequestBody RoutineDto routineDto) throws URISyntaxException {
         result = (routineService.modifyRoutine(routineDto)) ? "success" : "failed";
         status_code = result == "success" ? 201 : 200;
-        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
+        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + result + "}");
     }
 
     @DeleteMapping("/{routineName}")
     public ResponseEntity<?> deleteRoutines(@PathVariable(value = "routineName") String routineName) throws URISyntaxException {
         result = (routineService.deleteRoutine(routineName)) ? "success" : "failed";
         status_code = result == "success" ? 200 : 200;
-        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
+        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body("{\"result\":" + result + "}");
     }
 
 
