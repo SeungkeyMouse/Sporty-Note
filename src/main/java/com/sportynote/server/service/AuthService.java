@@ -140,6 +140,7 @@ public class AuthService {
         HttpHeaders headers = new HttpHeaders();
 //        headers.set("Authorization", "Bearer " + token);
         HttpEntity<String> request = new HttpEntity<>(headers);
+        System.out.println(GOOGLE_OAUTH_INFORMATION_API_URI+"?access_token="+token);
         ResponseEntity<GetGoogleUserInformationResponseDto> response = restTemplate.exchange(
                 GOOGLE_OAUTH_INFORMATION_API_URI+"?access_token="+token,
                 HttpMethod.GET,
@@ -158,7 +159,7 @@ public class AuthService {
     /**
      * Google 로그인 처리 후 넘겨받은 accessToken으로 JWT accessToken 발행하는 함수
      */
-    public String getGoogleLogin(String token) {
+    public String GoogleLogin(String token) {
         GetGoogleUserInformationResponseDto GoogleUserInformation = getGoogleUserInformation(token);
         String GoogleUserId = GoogleUserInformation.getId();
         if (isAlreadyUser(GoogleUserId,SocialType.GOOGLE)) { // 이미 DB에 저장되어있는 구글 유저라면

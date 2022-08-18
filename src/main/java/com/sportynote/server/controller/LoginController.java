@@ -30,24 +30,14 @@ public class LoginController {
     }
 
     /**
-     * 사용자로부터 인가코드를 받아 구글 서버로부터 유저 정보 를 받고 AccessToken 발행
+     * 사용자로부터 인가코드를 받아 구글 서버로부터 유저 정보를 받고 AccessToken 발행
      * @return 로그인 성공 유무 및 accessToken(JWT)
      */
     @GetMapping("/google/callback")
     public GoogleLoginResponse googleOauth(@RequestParam("access_token") String Token) {
-        String accessToken = authService.getGoogleLogin(Token);
+        String accessToken = authService.GoogleLogin(Token);
         return new GoogleLoginResponse(true, accessToken);
     }
-
-//    /**
-//     * 사용자로부터 인가코드를 받아 구글 서버로부터 유저 정보 를 받고 AccessToken 발행
-//     * @return 로그인 성공 유무 및 accessToken(JWT)
-//     */
-//    @GetMapping("/apple/callback")
-//    public AppleResponse appleOauth(@RequestParam("access_token") String Token) {
-//        String accessToken = authService.GoogleLogin(Token);
-//        return new GoogleLoginResponse(true, accessToken);
-//    }
 
     /**
      * 사용자로부터 access token을 받아 이를 만료시키는 코드

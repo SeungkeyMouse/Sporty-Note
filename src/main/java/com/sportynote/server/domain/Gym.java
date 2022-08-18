@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class Gym extends BaseEntity {
     @Id

@@ -67,7 +67,7 @@ querydsl {
 }
 // build 시 사용할 sourceSet 추가
 sourceSets {
-	main.java.srcDir querydslDir srcDir("src/main/resources") srcDir("src/main/resources-${profile}")
+	main.java.srcDir querydslDir
 }
 // querydsl 컴파일시 사용할 옵션 설정
 compileQuerydsl{
