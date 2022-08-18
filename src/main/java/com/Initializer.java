@@ -43,7 +43,6 @@ public class Initializer implements CommandLineRunner {
         machineSetup();
         machineLocationSetup();
         noteSetup();
-//        printUserFavorite();
         printUserFavorite();
         routineSetup();
         recordSetup();
@@ -61,7 +60,7 @@ public class Initializer implements CommandLineRunner {
 
     }
 
-    private void machineLocationSetup() {
+    private void  machineLocationSetup() {
         machineService.addNodeLocation(new NodeLocationDto(1L,NodeType.CHEST, 10F,10F));
         machineService.addNodeLocation(new NodeLocationDto(1L,NodeType.BACK, 20F,20F));
         machineService.addNodeLocation(new NodeLocationDto(1L,NodeType.ELBOW, 30F,30F));

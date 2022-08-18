@@ -71,8 +71,7 @@ public class RecordController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRecords(@RequestBody RecordDto recordDto) throws URISyntaxException {
         result = (recordService.deleteRecord(recordDto)) ? "success" : "failed";
-        status_code = result == "success" ? 201 : 200;
-        return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
+        return ResponseEntity.status(HttpStatus.valueOf(200)).body(result);
     }
 
     /** Read 이전 기록, 차트로 보기 */
