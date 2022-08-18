@@ -66,7 +66,6 @@ public class JwtTokenProvider {
     }
 
     /**
-<<<<<<< HEAD
      * JwtToken에서 유저 ID를 가져오는 함수
      * @return String userId
      * * */
