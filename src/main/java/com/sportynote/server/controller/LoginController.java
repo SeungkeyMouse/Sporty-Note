@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class LoginController {
-    AuthService authService;
+    private final AuthService authService;
 
     public LoginController(AuthService authService){
         this.authService = authService;
@@ -25,18 +25,18 @@ public class LoginController {
      */
     @GetMapping("/kakao/callback")
     public KakaoLoginResponse kakaoOauth(@RequestParam("code") String code) {
-        System.out.println(code+"CODECODE");
         String accessToken = authService.getKakaoOauthToken(code);
         return new KakaoLoginResponse(true, accessToken);
     }
+
 
     /**
      * 사용자로부터 인가코드를 받아 구글 서버로부터 유저 정보를 받고 AccessToken 발행
      * @return 로그인 성공 유무 및 accessToken(JWT)
      */
     @GetMapping("/google/callback")
-    public GoogleLoginResponse googleOauth(@RequestParam("access_token") String Token) {
-        String accessToken = authService.GoogleLogin(Token);
+    public GoogleLoginResponse googleOauth(@RequestParam("code") String code) {
+        String accessToken = authService.getGoogleOauthToken(code);
         return new GoogleLoginResponse(true, accessToken);
     }
 
@@ -46,7 +46,6 @@ public class LoginController {
     @GetMapping("/logout")
     public ResponseEntity<?> jwtLogout(@RequestParam("access_token") String Token) {
         authService.oauthLogout(Token);
-        String accessToken = authService.GoogleLogin(Token);
         return ResponseEntity.ok(200);
     }
 

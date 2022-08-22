@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @AllArgsConstructor
 @Data
@@ -29,7 +31,7 @@ public class NodeDto {
     private Float x_location;
     private Float y_location;
 
-
+    private LocalDateTime updated_at;
     private String pictureUrl;
 
 }

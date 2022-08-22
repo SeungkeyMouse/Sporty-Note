@@ -25,19 +25,6 @@ public class RoutineService {
     private final UserBasicRepository userBasicRepository;
     private final RoutineRepositoryImpl routineRepositoryImpl;
 
-//    private final RoutineService routineService;
-    /**
-     * 루틴 하나 저장
-     */
-//    public void save(RoutineDto routineDto) {
-//        Routine routine = new Routine();
-//
-//        routine.setRoutineName(routineDto.getMachineName());
-//        machine.setTargetArea(machineDto.getTargetArea());
-//        machine.setUrl(machineDto.getUrl());
-//        machineRepository.save(machine);
-//    }
-
     /** 루틴 하나(여러 기구)첫 추가 CREATE */
     public boolean addRoutine(RoutineDto routineDto) {
             List<Long> machines = routineDto.getMachines();

@@ -1,5 +1,8 @@
 package com.sportynote.server.config;
 
+import com.sportynote.server.properties.RedisProperties;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -20,10 +23,15 @@ import java.time.Duration;
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
+    private final RedisProperties redisProperties;
+    public RedisConfig(RedisProperties redisProperties){
+        this.redisProperties=redisProperties;
+    };
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory("localhost", 6379);
+        return new LettuceConnectionFactory(redisProperties.getUri(), redisProperties.getPort());
     }
+
 
     @Bean
     public CacheManager cacheManager() {

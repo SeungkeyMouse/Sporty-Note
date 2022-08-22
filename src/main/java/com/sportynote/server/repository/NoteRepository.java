@@ -108,6 +108,7 @@ public class NoteRepository {
                     node.getText(),
                     node.getX_location(),
                     node.getY_location(),
+                    node.getUpdatedAt(),
                     node.getPictureUrl()
             );
 

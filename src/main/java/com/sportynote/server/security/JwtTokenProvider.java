@@ -21,13 +21,22 @@ public class JwtTokenProvider {
     private final Key secretKey;
     private final UserBasicRepository userBasicRepository;
     private final RedisUtil redisUtil;
-    Long accessTokenValidTime = 36000L * 60 * 60;
+    Long accessTokenValidTime = 36000L * 60 * 60 * 10; //1.5일 * 10
 
     public JwtTokenProvider(@Value("${jwtSecretKey}") String secretKey,UserBasicRepository userBasicRepository,RedisUtil redisUtil) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
         this.userBasicRepository = userBasicRepository;
         this.redisUtil = redisUtil;
+    }
+
+    /**
+     * AccessToken Redis에 저장 후 AccessToken을 리턴
+     */
+    public String createUserToken(String uuid){
+        String accessToken = createAccessToken(uuid);
+        redisUtil.set(accessToken, "accessToken", accessTokenValidTime/60); //minutes
+        return accessToken;
     }
     /**
      * 유저 고유 ID(UUID)를 받아 AccessToken 발행
@@ -36,7 +45,7 @@ public class JwtTokenProvider {
     public String createAccessToken(String uuid) {
         Claims claims = Jwts.claims().setSubject("access_token");
         claims.put("userId", uuid);
-        claims.put("uid", uuid);
+
         Date currentTime = new Date();
         return Jwts.builder()
                 .setClaims(claims)
@@ -82,7 +91,7 @@ public class JwtTokenProvider {
             if (token == null) {
                 return false;
             }
-            if(redisUtil.hasKeyBlackList(token)){
+            if(!redisUtil.hasKey(token)){
                 return false;
             }
             Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();
