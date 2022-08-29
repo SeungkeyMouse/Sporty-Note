@@ -35,7 +35,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisStandaloneConfiguration.setPort(redisProperties.getPort());
         redisStandaloneConfiguration.setPassword(redisProperties.getPassword());
 
-        return new LettuceConnectionFactory(redisProperties.getUri(), redisProperties.getPort());
+        return new LettuceConnectionFactory(redisStandaloneConfiguration);
     }
 
 
