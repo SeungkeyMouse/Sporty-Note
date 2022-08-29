@@ -49,11 +49,9 @@ public class LoginController {
         return ResponseEntity.ok(200);
     }
 
-    @GetMapping("/")
-    public String Test() {
-        return "1";
+    @GetMapping("/code")
+    public String StringCode (@RequestParam("code") String code) {
+        return code;
     }
-
-
 
 }

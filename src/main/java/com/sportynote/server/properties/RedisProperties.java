@@ -16,4 +16,5 @@ import org.springframework.stereotype.Component;
 public class RedisProperties {
     private String uri;
     private int port;
+    private String password;
 }
