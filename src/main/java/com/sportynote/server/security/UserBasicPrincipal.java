@@ -21,6 +21,10 @@ public class UserBasicPrincipal implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
         return authorities;
     }
 

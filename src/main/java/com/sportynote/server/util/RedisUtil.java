@@ -14,9 +14,9 @@ public class RedisUtil {
         this.redisTemplate = redisTemplate;
         this.redisBlackListTemplate = redisBlackListTemplate;
     }
-    public void set(String key, Object o, int minutes) {
+    public void set(String key, Object o, long minutes) {
         this.redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer(o.getClass()));
-        this.redisTemplate.opsForValue().set(key, o, (long)minutes, TimeUnit.MINUTES);
+        this.redisTemplate.opsForValue().set(key, o, minutes, TimeUnit.MINUTES);
     }
 
     public Object get(String key) {
@@ -43,8 +43,7 @@ public class RedisUtil {
     public boolean deleteBlackList(String key) {
         return this.redisBlackListTemplate.delete(key);
     }
-
-    public boolean hasKeyBlackList(String key) {
-        return this.redisBlackListTemplate.hasKey(key);
+    public boolean hasKeyWhiteList(String key) {
+        return this.redisTemplate.hasKey(key);
     }
 }

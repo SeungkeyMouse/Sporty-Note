@@ -24,12 +24,9 @@ public class SecurityConfig {
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     private static final String[] PUBLIC_URI = {
-            "/index.html",
-            "/login",
-            "/auth/kakao/callback",
-            "/auth/google/callback",
-            "/auth/logout"
+            "/role.html"
     };
+
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
@@ -45,9 +42,8 @@ public class SecurityConfig {
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class) // Jwt 인증 로직 필터 추가
                 .authorizeRequests()
-                .antMatchers(PUBLIC_URI).permitAll()
-                .anyRequest().hasRole("USER")
-                //.anyRequest().authenticated()
+                .antMatchers(PUBLIC_URI).hasRole("USER")
+                .anyRequest().permitAll()
                 .and()
                 .formLogin().disable();
         return http.build();

@@ -1,7 +1,9 @@
 package com.sportynote.server.service;
 
 import com.sportynote.server.Enum.SocialType;
+import com.sportynote.server.config.RedisConfig;
 import com.sportynote.server.domain.UserBasic;
+import com.sportynote.server.properties.RedisProperties;
 import com.sportynote.server.repository.UserBasicRepository;
 import com.sportynote.server.repository.query.auth.GoogleOauthDto.*;
 import com.sportynote.server.repository.query.auth.KakaoOauthDto.*;
@@ -30,21 +32,22 @@ public class AuthService {
     private final UserBasicRepositoryImpl userBasicRepositoryImpl;
     private final JwtTokenProvider jwtAuthProvider;
     private final RedisUtil redisUtil;
-    public AuthService(RestTemplate restTemplate, UserBasicRepository userBasicRepository, JwtTokenProvider jwtAuthProvider, UserBasicRepositoryImpl userBasicRepositoryImpl, RedisUtil redisUtil) {
+    private final RedisProperties redisProperties;
+
+    public AuthService(RestTemplate restTemplate, UserBasicRepository userBasicRepository, JwtTokenProvider jwtAuthProvider, UserBasicRepositoryImpl userBasicRepositoryImpl, RedisUtil redisUtil, RedisProperties redisProperties) {
         this.restTemplate = restTemplate;
         this.userBasicRepository=userBasicRepository;
         this.jwtAuthProvider=jwtAuthProvider;
         this.userBasicRepositoryImpl=userBasicRepositoryImpl;
         this.redisUtil=redisUtil;
+        this.redisProperties=redisProperties;
     }
-
-    MultiValueMap<String, String> data;
 
     /**
      * 사용자로부터 인가 CODE를 받아서 TOKEN을 요청하는 함수
      */
     public String getKakaoOauthToken(String code) {
-        data = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
 
         data.add("grant_type", "authorization_code");
         data.add("client_id", KAKAO_OAUTH_API_KEY);
@@ -56,10 +59,8 @@ public class AuthService {
                 .encode()
                 .build()
                 .toUri();
-
         ResponseEntity<GetKakaoOauthTokenResponseDto> result = restTemplate.postForEntity(uri, data,
                 GetKakaoOauthTokenResponseDto.class);
-
         if (result.getStatusCode() == HttpStatus.OK) {
             String token = result.getBody().getAccess_token();
             if (token == null) {
@@ -73,6 +74,44 @@ public class AuthService {
         }
     }
 
+
+
+    /**
+     * 사용자로부터 인가 CODE를 받아서 TOKEN을 요청하는 함수
+     */
+    public String getGoogleOauthToken(String code) {
+        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+        data.add("grant_type", "authorization_code");
+        data.add("client_id", GOOGLE_OAUTH_CLIENT_ID);
+        data.add("client_secret", GOOGLE_OAUTH_CLIENT_SECRET);
+        data.add("redirect_uri", GOOGLE_OAUTH_REDIRECT_URI);
+        data.add("code", code);
+
+        URI uri = UriComponentsBuilder
+                .fromUriString(GOOGLE_OAUTH_TOKEN_API_URI)
+                .encode()
+                .build()
+                .toUri();
+
+        ResponseEntity<GetGoogleOauthTokenResponseDto> result = restTemplate.postForEntity(uri, data,
+                GetGoogleOauthTokenResponseDto.class);
+
+        if (result.getStatusCode() == HttpStatus.OK) {
+            String token = result.getBody().getAccess_token();
+            if (token == null) {
+                return null;
+            } else {
+                return googleLogin(token);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+
+
+
     /**
      * Kakao 로그인 처리 후 accessToken 발행하는 함수
      */
@@ -81,12 +120,13 @@ public class AuthService {
         String kakaoUserId = Long.toString(kakaoUserInformation.getId());
         if (isAlreadyUser(kakaoUserId,SocialType.KAKAO)) { // 이미 DB에 저장되어있는 카카오 유저라면
             UserBasic userBasic = userBasicRepository.findByOauthId(kakaoUserId);
-            return jwtAuthProvider.createAccessToken(userBasic.getUserId());
+            return jwtAuthProvider.createUserToken(userBasic.getUserId());
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8);
-            UserBasic userBasic = UserBasic.createdUserBasic(kakaoUserInformation.getKakao_account().getEmail(),kakaoUserId,kakaoUserInformation.getKakao_account().getProfile().getNickname(),userId,SocialType.KAKAO);
+            UserBasic userBasic = UserBasic.createdUserBasic(kakaoUserInformation.getKakao_account().getEmail(),kakaoUserId,
+                    kakaoUserInformation.getKakao_account().getProfile().getNickname(),userId,SocialType.KAKAO);
             userBasicRepository.save(userBasic);
-            return jwtAuthProvider.createAccessToken(userBasic.getUserId());
+            return jwtAuthProvider.createUserToken(userBasic.getUserId());
         }
     }
 
@@ -110,6 +150,7 @@ public class AuthService {
             return null;
         }
     }
+
 
 
 
@@ -138,7 +179,6 @@ public class AuthService {
         HttpHeaders headers = new HttpHeaders();
 //        headers.set("Authorization", "Bearer " + token);
         HttpEntity<String> request = new HttpEntity<>(headers);
-        System.out.println(GOOGLE_OAUTH_INFORMATION_API_URI+"?access_token="+token);
         ResponseEntity<GetGoogleUserInformationResponseDto> response = restTemplate.exchange(
                 GOOGLE_OAUTH_INFORMATION_API_URI+"?access_token="+token,
                 HttpMethod.GET,
@@ -156,26 +196,26 @@ public class AuthService {
 
     /**
      * Google 로그인 처리 후 넘겨받은 accessToken으로 JWT accessToken 발행하는 함수
+     * //https://www.googleapis.com/drive/v2/files?
      */
-    public String GoogleLogin(String token) {
+    public String googleLogin(String token) {
         GetGoogleUserInformationResponseDto GoogleUserInformation = getGoogleUserInformation(token);
         String GoogleUserId = GoogleUserInformation.getId();
-        System.out.println(GoogleUserId);
         if (isAlreadyUser(GoogleUserId,SocialType.GOOGLE)) { // 이미 DB에 저장되어있는 구글 유저라면
             UserBasic userBasic = userBasicRepository.findByOauthId(GoogleUserId);
             return jwtAuthProvider.createAccessToken(userBasic.getUserId());
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8);
-            System.out.println(SocialType.GOOGLE);
             UserBasic userBasic = UserBasic.createdUserBasic(GoogleUserInformation.getEmail(),GoogleUserInformation.getId(),GoogleUserInformation.getName(),userId,SocialType.GOOGLE);
             userBasicRepository.save(userBasic);
             return jwtAuthProvider.createAccessToken(userBasic.getUserId());
         }
     }
+
     public Boolean oauthLogout(String Token){
-        redisUtil.setBlackList(Token,"accessToken",1800);
-        return true;
+        return redisUtil.delete(Token);
     }
+
     @Value("${KAKAO_OAUTH_API_KEY}")
     private String KAKAO_OAUTH_API_KEY;
 
@@ -187,6 +227,18 @@ public class AuthService {
 
     @Value("${KAKAO_OAUTH_INFORMATION_API_URI}")
     private String KAKAO_OAUTH_INFORMATION_API_URI;
+
+    @Value("${GOOGLE_OAUTH_CLIENT_ID}")
+    private String GOOGLE_OAUTH_CLIENT_ID;
+
+    @Value("${GOOGLE_OAUTH_CLIENT_SECRET}")
+    private String GOOGLE_OAUTH_CLIENT_SECRET;
+
+    @Value("${GOOGLE_OAUTH_REDIRECT_URI}")
+    private String GOOGLE_OAUTH_REDIRECT_URI;
+
+    @Value("${GOOGLE_OAUTH_TOKEN_API_URI}")
+    private String GOOGLE_OAUTH_TOKEN_API_URI;
 
     @Value("${GOOGLE_OAUTH_INFORMATION_API_URI}")
     private String GOOGLE_OAUTH_INFORMATION_API_URI;

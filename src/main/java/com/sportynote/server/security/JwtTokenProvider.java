@@ -21,14 +21,23 @@ public class JwtTokenProvider {
     private final Key secretKey;
     private final UserBasicRepository userBasicRepository;
     private final RedisUtil redisUtil;
-    Long accessTokenValidTime = 36000L * 60 * 60;
-
+    Long accessTokenValidTime = 36000L * 60 * 60 * 10; //1.5일 * 10
     public JwtTokenProvider(@Value("${jwtSecretKey}") String secretKey,UserBasicRepository userBasicRepository,RedisUtil redisUtil) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
-        this.userBasicRepository= userBasicRepository;
-        this.redisUtil=redisUtil;
+        this.userBasicRepository = userBasicRepository;
+        this.redisUtil = redisUtil;
     }
+
+    /**
+     * AccessToken Redis에 저장 후 AccessToken을 리턴
+     */
+    public String createUserToken(String uuid){
+        String accessToken = createAccessToken(uuid);
+        redisUtil.set(accessToken, "accessToken", accessTokenValidTime/60); //minutes
+        return accessToken;
+    }
+
     /**
      * 유저 고유 ID(UUID)를 받아 AccessToken 발행
      * @return accessToken
@@ -45,6 +54,8 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+
+
     /**
      * Http Header에서 토큰을 추출
      * @return accessToken
@@ -58,16 +69,22 @@ public class JwtTokenProvider {
      * @return Spring Security 인증 객체
      */
     public UsernamePasswordAuthenticationToken getAuthentication(String token) {
-        String userId = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().get("userId",String.class);
-        System.out.println("userId : "+userId);
+        String userId = getTokenToUserId(token);
         UserBasic userBasic = userBasicRepository.findById(userId);
-
         UserBasicPrincipal userBasicPrincipal = new UserBasicPrincipal(userBasic);
         //유저 권한
         System.out.println(userBasicPrincipal.getAuthorities().iterator().next().getAuthority());
         //유저 네임
         System.out.println(userBasicPrincipal.getUsername());
         return new UsernamePasswordAuthenticationToken(userBasicPrincipal,token, userBasicPrincipal.getAuthorities());
+    }
+
+    /**
+     * JwtToken에서 유저 ID를 가져오는 함수
+     * @return String userId
+     * * */
+    public String getTokenToUserId(String token){
+        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().get("userId",String.class);
     }
 
     /**
@@ -79,7 +96,7 @@ public class JwtTokenProvider {
             if (token == null) {
                 return false;
             }
-            if(redisUtil.hasKeyBlackList(token)){
+            if(!redisUtil.hasKey(token)){
                 return false;
             }
             Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();

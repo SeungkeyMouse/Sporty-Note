@@ -54,7 +54,6 @@ public class RecordService {
         return true;
     }
 
-
     /** 내 운동기록 불러오기 (날짜만) */
     public List<LocalDate> findByCalendar(String userid){
         return recordRepository.findByCalendar(userid);
@@ -66,10 +65,13 @@ public class RecordService {
         List<Record> recordList = recordRepository.findByRecordDay(localDate,userId);
         List<RecordDto> RecordLists = new ArrayList<>();
         for(Record record : recordList) {
-            RecordLists.add(new RecordDto(record.getUserBasic().getUserId(),record.getMachine().getIdx(),record.getSett(),record.getKg(),record.getCount(),record.isComplete()));
+            RecordLists.add(new RecordDto(record.getUserBasic().getUserId(),record.getMachine().getIdx(),record.getSett(),
+                    record.getKg(),record.getCount(),record.isComplete()));
         }
         return RecordLists;
     }
+
+
     public List<List<RecordDto>> previousRecord(Long machineIdx){
         String userid="123123";
         List<List<RecordDto>> recordDtoLists = new ArrayList<>();

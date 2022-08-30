@@ -4,6 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+=======
 .ssh
 
 ### STS ###
@@ -19,7 +20,7 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-application.properties
+/resoucres
 .DS_Store
 
 .idea

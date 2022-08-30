@@ -25,19 +25,6 @@ public class RoutineService {
     private final UserBasicRepository userBasicRepository;
     private final RoutineRepositoryImpl routineRepositoryImpl;
 
-//    private final RoutineService routineService;
-    /**
-     * 루틴 하나 저장
-     */
-//    public void save(RoutineDto routineDto) {
-//        Routine routine = new Routine();
-//
-//        routine.setRoutineName(routineDto.getMachineName());
-//        machine.setTargetArea(machineDto.getTargetArea());
-//        machine.setUrl(machineDto.getUrl());
-//        machineRepository.save(machine);
-//    }
-
     /** 루틴 하나(여러 기구)첫 추가 CREATE */
     public boolean addRoutine(RoutineDto routineDto) {
             List<Long> machines = routineDto.getMachines();
@@ -68,7 +55,8 @@ public class RoutineService {
         List<Routine> RoutineLists = routineRepository.findByIdAndRoutineName(userid, RoutineName);
         List<RoutineMachineDto> MachineLists = new ArrayList<>();
         for(Routine routine : RoutineLists){
-            MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getKrMachineName(),routine.getMachine().getTargetArea(),routine.getMachine().getUrl()));
+            MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getKrMachineName(),
+                    routine.getMachine().getTargetArea(),routine.getMachine().getUrl()));
         }
         return MachineLists;
     }

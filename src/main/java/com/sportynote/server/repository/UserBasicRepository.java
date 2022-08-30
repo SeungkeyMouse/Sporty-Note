@@ -1,6 +1,7 @@
 package com.sportynote.server.repository;
 
 import com.sportynote.server.Enum.SocialType;
+import com.sportynote.server.domain.*;
 import com.sportynote.server.domain.Gym;
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.UserBasic;
@@ -27,6 +28,9 @@ public class UserBasicRepository {
     public List<UserBasic> findAll() {
         return em.createQuery("select u from UserBasic u", UserBasic.class)
                 .getResultList();
+    }
+    public void delete(Long idx){
+        em.remove(em.find(UserBasic.class, idx));
     }
 
     public UserBasic findById(String userId){
