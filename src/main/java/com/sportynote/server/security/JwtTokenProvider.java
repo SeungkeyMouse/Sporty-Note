@@ -38,6 +38,7 @@ public class JwtTokenProvider {
         redisUtil.set(accessToken, "accessToken", accessTokenValidTime/60); //minutes
         return accessToken;
     }
+
     /**
      * 유저 고유 ID(UUID)를 받아 AccessToken 발행
      * @return accessToken
@@ -54,6 +55,8 @@ public class JwtTokenProvider {
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
+
+
 
     /**
      * Http Header에서 토큰을 추출
