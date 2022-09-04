@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.sportynote.server.domain.UserBasic;
 import com.sportynote.server.repository.UserBasicRepository;
+import com.sportynote.server.security.user.UserAccount;
 import com.sportynote.server.util.RedisUtil;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -76,7 +77,7 @@ public class JwtTokenProvider {
         System.out.println(userBasicPrincipal.getAuthorities().iterator().next().getAuthority());
         //유저 네임
         System.out.println(userBasicPrincipal.getUsername());
-        return new UsernamePasswordAuthenticationToken(userBasicPrincipal,token, userBasicPrincipal.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(new UserAccount(userBasicPrincipal),token, userBasicPrincipal.getAuthorities());
     }
 
     /**

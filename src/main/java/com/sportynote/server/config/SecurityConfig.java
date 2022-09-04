@@ -23,8 +23,8 @@ public class SecurityConfig {
 
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    private static final String[] PUBLIC_URI = {
-            "/role.html"
+    private static final String[] PRIVATE_URI = {
+            "/role.html",
     };
 
     @Bean
@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class) // Jwt 인증 로직 필터 추가
                 .authorizeRequests()
-                .antMatchers(PUBLIC_URI).hasRole("USER")
+                .antMatchers(PRIVATE_URI).hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().disable();

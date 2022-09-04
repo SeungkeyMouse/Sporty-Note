@@ -2,11 +2,14 @@ package com.sportynote.server.controller;
 
 import com.sportynote.server.repository.MachineRepository;
 import com.sportynote.server.repository.query.NodeLocationDto;
+import com.sportynote.server.security.UserBasicPrincipal;
+import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.MachineService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.net.URISyntaxException;
 import java.util.List;

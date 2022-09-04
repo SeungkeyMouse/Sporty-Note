@@ -5,10 +5,12 @@ import java.util.Collection;
 import java.util.List;
 
 import com.sportynote.server.domain.UserBasic;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@Getter
 public class UserBasicPrincipal implements UserDetails {
 
     private UserBasic userBasic;
@@ -21,10 +23,6 @@ public class UserBasicPrincipal implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
         return authorities;
     }
 
@@ -36,6 +34,9 @@ public class UserBasicPrincipal implements UserDetails {
     @Override
     public String getUsername() {
         return userBasic.getName();
+    }
+    public String getUserId() {
+        return userBasic.getUserId();
     }
 
     @Override
