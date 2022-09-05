@@ -36,7 +36,7 @@ public class ExceptionController {
 //    public String noItemErrorHandler(NumberFormatException e){
 //        return "Invalid Path Variable!";
 //    }
-    @GetMapping("/12345")
+    @GetMapping("/123456")
     public String Test(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal) {
         return "123";
     }
