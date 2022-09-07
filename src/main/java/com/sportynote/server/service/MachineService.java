@@ -38,7 +38,7 @@ public class MachineService {
         machine.setKrMachineName(machineDto.getKrMachineName());
         machine.setEngMachineName(machineDto.getEngMachineName());
         machine.setTargetArea(machineDto.getTargetArea());
-        machine.setUrl(machineDto.getUrl());
+        machine.setImageUrl1(machineDto.getUrl());
         machineRepository.save(machine);
     }
 
@@ -91,7 +91,7 @@ public class MachineService {
                         favoritedMachine.getKrMachineName(),
                         favoritedMachine.getEngMachineName(),
                         favoritedMachine.getTargetArea(),
-                        favoritedMachine.getUrl(),
+                        favoritedMachine.getImageUrl1(),
                         userFavorite.getIdx()
                 );
                 favoriteMachines.add(machineDto);
