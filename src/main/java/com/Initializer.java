@@ -106,7 +106,7 @@ public class Initializer implements CommandLineRunner {
         machine3.setEngMachineName("Squat");
         machine3.setTargetArea("하체");
         machine3.setUrl("https://www.swmaestro.org/sw/main/main.do");
-        // machine2.setGym(gymRepository.findAll().get(1));
+        // machine2.setGym(gymRepository.f indAll().get(1));
 
         machineRepository.save(machine3);
 
