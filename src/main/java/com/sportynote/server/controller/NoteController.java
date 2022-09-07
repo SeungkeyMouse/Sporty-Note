@@ -5,11 +5,14 @@ import com.sportynote.server.domain.NoteNode;
 import com.sportynote.server.repository.NoteNodeRepository;
 import com.sportynote.server.repository.NoteRepository;
 import com.sportynote.server.repository.query.*;
+import com.sportynote.server.security.UserBasicPrincipal;
+import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.NoteService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 import java.util.Map;
@@ -29,15 +32,16 @@ public class NoteController {
 
     //1. 나의 <노트한 [기구]> 모두 불러오기(운동 종류 상관없이) ex) 내가 생성한 노트가 있는 기구(제목, id등)
     @GetMapping("/notes/machines")
-    public ResponseEntity<List<MachineDto>> getAllMyNotedMachines(@RequestParam("userId") String userId){
-        return ResponseEntity.ok(noteService.getAllMyNotedMachines(userId));
+    public ResponseEntity<List<MachineDto>> getAllMyNotedMachines(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal){
+        System.out.println(userBasicPrincipal.getUserId());
+        return ResponseEntity.ok(noteService.getAllMyNotedMachines(userBasicPrincipal.getUserId()));
     }
 
 
     //2. 해당하는 운동의 나의 '노드' 모두 불러오기(MY탭) ex) 벤치프레스의 [MY] 노트
     @GetMapping("/notes")
-    public ResponseEntity<NoteDto> getMyNote(@RequestParam("userId") String userId,
+    public ResponseEntity<NoteDto> getMyNote(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,
                                                 @RequestParam("machineId") Long machineId){
-        return ResponseEntity.ok(noteService.findMyNoteNodes(userId, machineId));
+        return ResponseEntity.ok(noteService.findMyNoteNodes(userBasicPrincipal.getUserId(), machineId));
     }
 }

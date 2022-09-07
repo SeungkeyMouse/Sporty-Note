@@ -32,6 +32,7 @@ public class MachineController {
         return ResponseEntity.ok(machineRepository.findById(machineId));
     }
 
+    //
     //즐겨찾기 추가
     @PostMapping("/machines/favorites")
     public ResponseEntity<Long> addFavoriteMachine(@RequestParam("user_id") String userId,

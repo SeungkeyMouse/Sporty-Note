@@ -47,6 +47,9 @@ public class LoginController {
         return ResponseEntity.ok(200);
     }
 
+    /**
+     * Oauth 서버에서 응답받은 인가코드를 받는 코드
+     * */
     @GetMapping("/code")
     public String StringCode (@RequestParam("code") String code) {
         return code;

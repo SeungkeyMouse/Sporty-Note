@@ -5,7 +5,9 @@ import com.sportynote.server.Enum.SocialType;
 import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.*;
 import com.sportynote.server.repository.query.*;
+import com.sportynote.server.security.JwtTokenProvider;
 import com.sportynote.server.service.*;
+import io.jsonwebtoken.Jwt;
 import lombok.AllArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +33,7 @@ public class Initializer implements CommandLineRunner {
     private final UserFavoriteRepository userFavoriteRepository;
     private final NoteService noteService;
     private final RecordService recordService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     public void run(String... args) throws Exception {
@@ -48,6 +51,7 @@ public class Initializer implements CommandLineRunner {
         printUserFavorite();
         routineSetup();
         recordSetup();
+        System.out.println(jwtTokenProvider.createAccessToken("12312312"));
         System.out.println("실행 완료되었습니다.");
     }
 
