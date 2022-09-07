@@ -4,6 +4,7 @@ import com.sportynote.server.Enum.NodeType;
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.Note;
 import com.sportynote.server.domain.NoteNode;
+import com.sportynote.server.domain.NoteNodeSet;
 import com.sportynote.server.repository.query.MachineDto;
 import com.sportynote.server.repository.query.NodeDto;
 import com.sportynote.server.repository.query.NoteDto;
@@ -51,7 +52,7 @@ public class NoteRepository {
                     machine.getKrMachineName(),
                     machine.getEngMachineName(),
                     machine.getTargetArea(),
-                    machine.getUrl());
+                    machine.getImageUrl1());
             machineDtoList.add(machineDto);
         }
 
@@ -92,7 +93,7 @@ public class NoteRepository {
         //1. 머신에 대한 기본 정보
         Machine machine = resultList.get(0).getNote().getMachine();
         MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getKrMachineName(),machine.getEngMachineName(),
-                machine.getTargetArea(), machine.getUrl());
+                machine.getTargetArea(), machine.getImageUrl1());
 
         //2. "노드"들에 대한 기본 정보
         Map<NodeType, List<NodeDto>> nodeMap = new HashMap<>();//key: 노트타입, value: 노드Dto리스트

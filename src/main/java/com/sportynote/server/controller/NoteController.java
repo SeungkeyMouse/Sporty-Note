@@ -22,8 +22,8 @@ public class NoteController {
     private final NoteService noteService;
 
     //GET
-    //3. 해당하는 운동의 다른사람 '노드' 모두 불러오기(전체탭) ex) 벤치프레스의 [전체] 노트
-    //4. 해당하는 운동의 추천 '노드' 모두 불러오기(추천탭) ex) 벤치프레스의 [추천] 노트
+    //4. 해당하는 운동의 다른사람 '노드' 모두 불러오기(전체탭) ex) 벤치프레스의 [전체] 노트
+    //5. 해당하는 운동의 추천 '노드' 모두 불러오기(추천탭) ex) 벤치프레스의 [추천] 노트
 
 
 
@@ -39,5 +39,11 @@ public class NoteController {
     public ResponseEntity<NoteDto> getMyNote(@RequestParam("userId") String userId,
                                                 @RequestParam("machineId") Long machineId){
         return ResponseEntity.ok(noteService.findMyNoteNodes(userId, machineId));
+    }
+
+    //3. [일반] 탭 노트 내용 불러오기
+    @GetMapping("/notes/general")
+    public ResponseEntity<NoteDto> getNormalNote(@RequestParam("machineId") Long machineId){
+        return ResponseEntity.ok(noteService.findGeneralNoteNodes(machineId));
     }
 }

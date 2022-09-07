@@ -20,6 +20,12 @@ public class MachineController {
 
     private final MachineRepository machineRepository;
     private final MachineService machineService;
+
+    /**
+     * 기구 검색 관련기능
+     * @return
+     * @throws URISyntaxException
+     */
     //모든 기구리스트 리턴!
     @GetMapping("/machines")
     public ResponseEntity<?> getMachines() throws URISyntaxException {
@@ -38,6 +44,12 @@ public class MachineController {
                                                       @RequestParam("machine_idx") Long machineId){
         return ResponseEntity.ok(machineService.addFavorite(userId, machineId));
     }
+
+    /**
+     * 즐겨찾기 관련 기능
+     * @param userFavoriteIdx
+     * @return
+     */
     //즐겨찾기 삭제
     @DeleteMapping("/machines/favorites")
     public ResponseEntity<Long> addFavoriteMachine(@RequestParam("user_favorite_idx") Long userFavoriteIdx){
@@ -51,6 +63,11 @@ public class MachineController {
     }
 
 
+    /**
+     * 기구별 노드 세팅
+     * @param nodeLocationDto
+     * @return
+     */
     //기구별 노드 위치 추가하기
     @PostMapping("/machines/set-node")
     public ResponseEntity<?> setMachineNodeLocation(@RequestBody NodeLocationDto nodeLocationDto){

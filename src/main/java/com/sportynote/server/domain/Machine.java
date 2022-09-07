@@ -31,7 +31,13 @@ public class Machine extends BaseEntity {
     private String targetArea;
 
     @Nullable
-    private String Url;
+    private String imageUrl1;
+
+    @Nullable
+    private String imageUrl2;
+
+    @Nullable
+    private String videoUrl1;
 
 //    @JsonIgnore
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -54,21 +60,30 @@ public class Machine extends BaseEntity {
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
     private List<Record> recordLists =  new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
+    private List<NoteNodeSet> nodeSets =  new ArrayList<>();
+
     @Builder
-    public Machine(Long idx, String krMachineName, String engMachineName, String targetArea, String url){
+    public Machine(Long idx, String krMachineName, String engMachineName, String targetArea, String imageUrl1, String imageUrl2, String videoUrl1){
         this.idx=idx;
         this.krMachineName=krMachineName;
         this.engMachineName = engMachineName;
         this.targetArea=targetArea;
-        this.Url=url;
+        this.imageUrl1=imageUrl1;
+        this.imageUrl2=imageUrl2;
+        this.videoUrl1=videoUrl1;
+
     }
 
-    public static Machine createMachine(String krMachineName,String engMachineName, String targetArea,String url) {
+    public static Machine createMachine(String krMachineName,String engMachineName, String targetArea,String imageUrl1, String imageUrl2, String videoUrl1) {
         return Machine.builder()
                 .krMachineName(krMachineName)
                 .engMachineName(engMachineName)
                 .targetArea(targetArea)
-                .url(url)
+                .imageUrl1(imageUrl1)
+                .imageUrl2(imageUrl2)
+                .videoUrl1(videoUrl1)
                 .build();
     }
 }

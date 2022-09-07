@@ -56,7 +56,7 @@ public class RoutineService {
         List<RoutineMachineDto> MachineLists = new ArrayList<>();
         for(Routine routine : RoutineLists){
             MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getKrMachineName(),
-                    routine.getMachine().getTargetArea(),routine.getMachine().getUrl()));
+                    routine.getMachine().getTargetArea(),routine.getMachine().getImageUrl1()));
         }
         return MachineLists;
     }
