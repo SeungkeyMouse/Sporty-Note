@@ -13,15 +13,20 @@ public class MachineDto {
     private String krMachineName;
     private String engMachineName;
     private String targetArea;
-    private String url;
+    private String imageUrl1;
+    private String imageUrl2;
+    private String videoUrl1;
 
     private Long userFavoriteIdx;
 
-    public MachineDto(Long machineIdx, String krMachineName, String engMachineName, String targetArea, String url){
+    public MachineDto(Long machineIdx, String krMachineName, String engMachineName, String targetArea, String imageUrl1
+    , String imageUrl2, String videoUrl1){
         this.machineIdx = machineIdx;
         this.krMachineName = krMachineName;
         this.engMachineName = engMachineName;
         this.targetArea = targetArea;
-        this.url = url;
+        this.imageUrl1 = imageUrl1;
+        this.imageUrl2 = imageUrl2;
+        this.videoUrl1 = videoUrl1;
     }
 }

@@ -30,13 +30,13 @@ public class MachineController {
     //모든 기구리스트 리턴!
     @GetMapping("/")
     public ResponseEntity<?> getMachines() throws URISyntaxException {
-        return ResponseEntity.ok(machineRepository.findAll());
+        return ResponseEntity.ok(machineService.getMachines());
     }
 
     //운동기구 하나 클릭시 기구 정보 전송
     @GetMapping("/{machineId}")
     public ResponseEntity<?> getMachineById(@PathVariable Long machineId){
-        return ResponseEntity.ok(machineRepository.findById(machineId));
+        return ResponseEntity.ok(machineService.getMachineById(machineId));
     }
 
     //

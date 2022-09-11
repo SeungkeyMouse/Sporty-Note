@@ -98,7 +98,7 @@ public class Initializer implements CommandLineRunner {
     }
 
     void machineSetup() {
-        Machine machine = Machine.createMachine("벤치프레스", "Bench Press", "가슴", "이미지1주소", "이미지2주소", "이미지3주소");
+        Machine machine = Machine.createMachine("벤치프레스", "Bench Press", "가슴", "이미지1주소", "이미지2주소", "비디오1주소");
         machineRepository.save(machine);
 
         Machine machine2 = Machine.createMachine("랫풀다운","Lat Pull Down","등","https://www.daum.net", "이미지2주소", "비디오주소");

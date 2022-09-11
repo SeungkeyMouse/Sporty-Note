@@ -108,7 +108,7 @@ public class NoteService {
         NoteDto generalNote = nodeSetRepository.findGeneralNoteNodes(machineId);
         Machine m = machineRepository.findById(machineId);
         MachineDto machineDto = new MachineDto(m.getIdx(), m.getKrMachineName(), m.getEngMachineName(),
-                m.getTargetArea(), m.getImageUrl1());
+                m.getTargetArea(), m.getImageUrl1(), m.getImageUrl2(), m.getVideoUrl1());
         generalNote.setMachineDto(machineDto);
 
         generalNote.setNoteIdx(0L);

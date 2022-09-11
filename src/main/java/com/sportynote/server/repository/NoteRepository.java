@@ -52,7 +52,9 @@ public class NoteRepository {
                     machine.getKrMachineName(),
                     machine.getEngMachineName(),
                     machine.getTargetArea(),
-                    machine.getImageUrl1());
+                    machine.getImageUrl1(),
+                    machine.getImageUrl2(),
+                    machine.getVideoUrl1());
             machineDtoList.add(machineDto);
         }
 
@@ -93,7 +95,7 @@ public class NoteRepository {
         //1. 머신에 대한 기본 정보
         Machine machine = resultList.get(0).getNote().getMachine();
         MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getKrMachineName(),machine.getEngMachineName(),
-                machine.getTargetArea(), machine.getImageUrl1());
+                machine.getTargetArea(), machine.getImageUrl1(), machine.getImageUrl2(), machine.getVideoUrl1());
 
         //2. "노드"들에 대한 기본 정보
         Map<NodeType, List<NodeDto>> nodeMap = new HashMap<>();//key: 노트타입, value: 노드Dto리스트
