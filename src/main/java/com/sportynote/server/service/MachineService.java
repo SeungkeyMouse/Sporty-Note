@@ -38,7 +38,9 @@ public class MachineService {
         machine.setKrMachineName(machineDto.getKrMachineName());
         machine.setEngMachineName(machineDto.getEngMachineName());
         machine.setTargetArea(machineDto.getTargetArea());
-        machine.setImageUrl1(machineDto.getUrl());
+        machine.setImageUrl1(machineDto.getImageUrl1());
+        machine.setImageUrl2(machineDto.getImageUrl2());
+        machine.setVideoUrl1(machineDto.getVideoUrl1());
         machineRepository.save(machine);
     }
 
@@ -92,6 +94,8 @@ public class MachineService {
                         favoritedMachine.getEngMachineName(),
                         favoritedMachine.getTargetArea(),
                         favoritedMachine.getImageUrl1(),
+                        favoritedMachine.getImageUrl2(),
+                        favoritedMachine.getVideoUrl1(),
                         userFavorite.getIdx()
                 );
                 favoriteMachines.add(machineDto);
@@ -125,5 +129,24 @@ public class MachineService {
         }
 
         return "Success";
+    }
+
+    public List<MachineDto> getMachines() {
+        List<Machine> machineList = machineRepository.findAll();
+        List<MachineDto> machineDtos = new LinkedList<>();
+        for (Machine m : machineList) {
+            MachineDto machineDto = new MachineDto(m.getIdx(), m.getKrMachineName(), m.getEngMachineName(),
+                    m.getTargetArea(), m.getImageUrl1(), m.getImageUrl2(), m.getVideoUrl1());
+            machineDtos.add(machineDto);
+        }
+        return machineDtos;
+    }
+
+    public MachineDto getMachineById(Long machineId) {
+        Machine m = machineRepository.findById(machineId);
+        MachineDto machineDto = new MachineDto(m.getIdx(), m.getKrMachineName(), m.getEngMachineName(),
+                m.getTargetArea(), m.getImageUrl1(), m.getImageUrl2(), m.getVideoUrl1());
+
+        return machineDto;
     }
 }
