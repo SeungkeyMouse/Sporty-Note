@@ -94,7 +94,6 @@ public class NoteService {
     }
 
     public Long deleteNoteNode(Long nodeIdx) {
-        userBasicPrincipal.getUserId();
         NoteNode node = nodeRepository.findById(nodeIdx);
         return nodeRepository.delete(node);
     }
