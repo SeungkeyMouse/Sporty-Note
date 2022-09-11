@@ -5,12 +5,15 @@ import com.sportynote.server.repository.RecordRepository;
 import com.sportynote.server.repository.RoutineRepository;
 import com.sportynote.server.repository.query.RecordDto;
 import com.sportynote.server.repository.query.RoutineMachineDto;
+import com.sportynote.server.security.UserBasicPrincipal;
+import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.RecordService;
 import com.sportynote.server.service.RoutineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.net.URISyntaxException;
 import java.time.LocalDate;
@@ -38,9 +41,8 @@ public class RecordController {
 
     /** 나의 기록 보기 날짜별로 */
     @GetMapping("/")
-    public ResponseEntity<?> calendar() throws URISyntaxException {
-        String userid="123123"; //로그인 jwt토큰 임시 대체
-        List<LocalDate> results = recordService.findByCalendar(userid);
+    public ResponseEntity<?> calendar(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal) throws URISyntaxException {
+        List<LocalDate> results = recordService.findByCalendar(userBasicPrincipal.getUserId());
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
 

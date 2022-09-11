@@ -33,7 +33,7 @@ public class NoteNodeController {
 
     //3. 노드 삭제
     @DeleteMapping
-    public ResponseEntity<Long> deleteNoteNode(@RequestParam("note_node_idx") Long noteNodeIdx){
+    public ResponseEntity<Long> deleteNoteNode(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,@RequestParam("note_node_idx") Long noteNodeIdx){
         return ResponseEntity.ok(noteService.deleteNoteNode(noteNodeIdx));
     }
 
