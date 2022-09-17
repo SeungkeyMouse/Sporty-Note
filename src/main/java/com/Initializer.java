@@ -40,20 +40,6 @@ public class Initializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //하단 메소드 안의 내용들을 주석처리하면 실행시 데이터가 주입되지 않습니다.
         System.out.println("Initializer.java : CommandLineRunner 실행");
-<<<<<<< HEAD
-//        gymService.save(new GymDto("바디스페이스", "37", "128","서울시", "강남구", "선릉로"));
-//        gymService.save(new GymDto("정원헬스장", "36", "127","서울시", "성북구", "안암로"));
-//        gymService.save(new GymDto("의정부헬스장", "37.5", "128","의정부시", "무슨구", "땡땡동"));
-//        gymService.save(new GymDto("선릉헬스장","37.5","126","서울시","강남구","선릉동"));
-//        userBasicSetup();
-//        machineSetup();
-//        machineLocationSetup();
-//        noteSetup();
-////        printUserFavorite();
-//        printUserFavorite();
-//        routineSetup();
-//        recordSetup();
-=======
         gymService.save(new GymDto("바디스페이스", "37", "128", "서울시", "강남구", "선릉로"));
         gymService.save(new GymDto("정원헬스장", "36", "127", "서울시", "성북구", "안암로"));
         gymService.save(new GymDto("의정부헬스장", "37.5", "128", "의정부시", "무슨구", "땡땡동"));
@@ -69,7 +55,6 @@ public class Initializer implements CommandLineRunner {
         System.out.println(jwtTokenProvider.createAccessToken("12312312"));
         nodeSetDto();
 
->>>>>>> develop
         System.out.println("실행 완료되었습니다.");
     }
 
@@ -119,17 +104,7 @@ public class Initializer implements CommandLineRunner {
         Machine machine2 = Machine.createMachine("랫풀다운","Lat Pull Down","등","https://www.daum.net", "이미지2주소", "비디오주소");
         machineRepository.save(machine2);
 
-<<<<<<< HEAD
-        Machine machine3 = new Machine();
-        machine3.setKrMachineName("스쿼트");
-        machine3.setEngMachineName("Squat");
-        machine3.setTargetArea("하체");
-        machine3.setUrl("https://www.swmaestro.org/sw/main/main.do");
-        // machine2.setGym(gymRepository.f indAll().get(1));
-
-=======
         Machine machine3 = Machine.createMachine("스쿼트","Squat","하체","https://www.daum.net", "이미지2주소", "비디오주소1");
->>>>>>> develop
         machineRepository.save(machine3);
 
         Machine machine4 = Machine.createMachine("케이블 풀 다운","Cable pull down","등","머신4-이미지1", "이미지2주소", "비디오주소1");
@@ -140,7 +115,6 @@ public class Initializer implements CommandLineRunner {
          */
         machineService.addFavorite("12312312", 1L);
         machineService.addFavorite("12312312", 2L);
-
         machineService.addFavorite("78978978", 3L);
 
 
