@@ -92,3 +92,10 @@ configurations {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+test {
+	useJUnitPlatform()
+	systemProperty "jasypt.encryptor.password", System.getProperties().get("jasypt.encryptor.password")
+}
+bootRun {
+	systemProperty "jasypt.encryptor.password", findProperty("jasypt.encryptor.password")
+}
