@@ -49,6 +49,10 @@ dependencies {
 //	h2 연결
 	runtimeOnly 'com.h2database:h2'
 
+	// 암호화
+	implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.4'
+
+
 // Swagger연결 : https://mvnrepository.com/artifact/com.spring4all/swagger-spring-boot-starter
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'

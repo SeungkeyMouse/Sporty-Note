@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 =======
 .ssh
+application-dev.properties
 
 ### STS ###
 .apt_generated
@@ -20,7 +21,6 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-/resoucres
 .DS_Store
 
 .idea
