@@ -22,8 +22,6 @@ public class JasyptConfig {
     public StringEncryptor stringEncryptor() {
         Environment env = context.getEnvironment();
         String password=env.getProperty("jasypt.encryptor.password");
-        System.out.println(password);
-
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
         config.setPassword(password); // 암호화 키 값
