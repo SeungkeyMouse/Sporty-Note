@@ -1,14 +1,14 @@
 package com.sportynote.server.controller;
 
+import com.sportynote.server.service.GymService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/gym")
 public class GymController {
-    //1. 사용자 - Gym 연결 및 수정
+    private final GymService gymService;
 
-    //2. Gym의 기구 추가
-
-    //3. Gym의 기구들 조회
 }
