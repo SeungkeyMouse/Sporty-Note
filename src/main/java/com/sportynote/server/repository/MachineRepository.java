@@ -26,4 +26,5 @@ public class MachineRepository{
     public Machine findById(Long machineId) {
         return em.find(Machine.class, machineId);
     }
+
 }
