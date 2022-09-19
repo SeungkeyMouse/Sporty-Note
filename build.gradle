@@ -89,10 +89,11 @@ configurations {
 	querydsl.extendsFrom compileClasspath
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}
 test {
+	useJUnitPlatform()
 	systemProperty 'jasypt.encryptor.password', findProperty("jasypt.encryptor.password")
 }
 bootRun {
