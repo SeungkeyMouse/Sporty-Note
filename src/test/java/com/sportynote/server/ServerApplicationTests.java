@@ -1,6 +1,5 @@
 package com.sportynote.server;
 
-import com.sportynote.server.config.JasyptConfig;
 import com.sportynote.server.mysql.MySQLConnectionTest;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
