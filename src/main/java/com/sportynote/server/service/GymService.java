@@ -5,12 +5,11 @@ import com.sportynote.server.repository.GymRepository;
 import com.sportynote.server.repository.query.GymDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
-@Transactional
 public class GymService {
 
     private final GymRepository gymRepository;
