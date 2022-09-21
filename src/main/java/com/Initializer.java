@@ -208,7 +208,6 @@ public class Initializer implements CommandLineRunner {
         machineList.add(Machine.createMachine("원암 로우 머신(원판)" , "Lever One Arm Low Row (plate loaded)" , "등" , "42151101/42151101_medium1.png" , "42151101/42151101_medium2.png" , "video/42151201_video1.mp4"));
         machineList.add(Machine.createMachine("바벨 풀 오버" , "Barbell Pullover" , "등" , "43391101/43391101_medium1.png" , "43391101/43391101_medium2.png" , "video/43391201_video1.mp4"));
         machineList.add(Machine.createMachine("리버스 그립 하이로우 머신(원판)" , "Lever Reverse Grip High Row (plate loaded)" , "등" , "43781101/43781101_medium1.png" , "43781101/43781101_medium2.png" , "video/43781201_video1.mp4"));
-        machineList.add(Machine.createMachine("덤벨 풀오버" , "Dumbbell Pullover (VERSION 2)" , "등" , "53301101/53301101_medium1.png" , "53301101/53301101_medium2.png" , "video/53301201_video1.mp4"));
 
         for (Machine machine : machineList) {
             machineRepository.save(machine);
