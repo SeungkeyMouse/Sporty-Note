@@ -73,10 +73,10 @@ public class JwtTokenProvider {
         String userId = getTokenToUserId(token);
         UserBasic userBasic = userBasicRepository.findById(userId);
         UserBasicPrincipal userBasicPrincipal = new UserBasicPrincipal(userBasic);
-        //유저 권한
-        System.out.println(userBasicPrincipal.getAuthorities().iterator().next().getAuthority());
-        //유저 네임
-        System.out.println(userBasicPrincipal.getUsername());
+//        //유저 권한
+//        System.out.println(userBasicPrincipal.getAuthorities().iterator().next().getAuthority());
+//        //유저 네임
+//        System.out.println(userBasicPrincipal.getUsername());
         return new UsernamePasswordAuthenticationToken(new UserAccount(userBasicPrincipal),token, userBasicPrincipal.getAuthorities());
     }
 

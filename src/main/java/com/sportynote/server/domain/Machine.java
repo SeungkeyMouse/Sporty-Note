@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -15,6 +17,8 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE machine SET deleted = true WHERE user_favorite_idx = ?")
+@Where(clause = "deleted=false")
 public class Machine extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

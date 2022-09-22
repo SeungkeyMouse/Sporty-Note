@@ -40,7 +40,7 @@ public class RecordController {
     private int status_code;
 
     /** 나의 기록 보기 날짜별로 */
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> calendar(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal) throws URISyntaxException {
         List<LocalDate> results = recordService.findByCalendar(userBasicPrincipal.getUserId());
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
@@ -56,8 +56,8 @@ public class RecordController {
 
     /** Read 해당 루틴 불러오기 */
     @GetMapping("/{routineName}")
-    public ResponseEntity<?> records(@PathVariable(value="routineName") String routineName) throws URISyntaxException {
-        List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(routineName);
+    public ResponseEntity<?> records(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @PathVariable(value="routineName") String routineName) throws URISyntaxException {
+        List<RoutineMachineDto> results = routineService.findByIdAndRoutineName(userBasicPrincipal.getUserId(), routineName);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
 

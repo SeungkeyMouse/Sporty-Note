@@ -9,6 +9,8 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -16,6 +18,8 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE node_location_set SET deleted = true WHERE user_favorite_idx = ?")
+@Where(clause = "deleted=false")
 public class NodeLocationSet extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

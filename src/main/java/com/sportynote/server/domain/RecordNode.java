@@ -7,6 +7,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
@@ -16,6 +18,8 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name ="record_node_table")
+@SQLDelete(sql = "UPDATE record_node_table SET deleted = true WHERE user_favorite_idx = ?")
+@Where(clause = "deleted=false")
 public class RecordNode extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

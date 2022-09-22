@@ -40,20 +40,20 @@ public class Initializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //하단 메소드 안의 내용들을 주석처리하면 실행시 데이터가 주입되지 않습니다.
         System.out.println("Initializer.java : CommandLineRunner 실행");
-//        gymService.save(new GymDto("바디스페이스", "37", "128", "서울시", "강남구", "선릉로"));
-//        gymService.save(new GymDto("정원헬스장", "36", "127", "서울시", "성북구", "안암로"));
-//        gymService.save(new GymDto("의정부헬스장", "37.5", "128", "의정부시", "무슨구", "땡땡동"));
-//        gymService.save(new GymDto("선릉헬스장", "37.5", "126", "서울시", "강남구", "선릉동"));
-//        userBasicSetup();
-//        machineSetup();
-//        machineLocationSetup();
-//        noteSetup();
-////        printUserFavorite();
+        gymService.save(new GymDto("바디스페이스", "37", "128", "서울시", "강남구", "선릉로"));
+        gymService.save(new GymDto("정원헬스장", "36", "127", "서울시", "성북구", "안암로"));
+        gymService.save(new GymDto("의정부헬스장", "37.5", "128", "의정부시", "무슨구", "땡땡동"));
+        gymService.save(new GymDto("선릉헬스장", "37.5", "126", "서울시", "강남구", "선릉동"));
+        userBasicSetup();
+        machineSetup();
+        machineLocationSetup();
+        noteSetup();
 //        printUserFavorite();
-//        routineSetup();
-//        recordSetup();
-//        System.out.println(jwtTokenProvider.createAccessToken("12312312"));
-//        nodeSetDto();
+        printUserFavorite();
+        routineSetup();
+        recordSetup();
+        System.out.println(jwtTokenProvider.createAccessToken("12312312"));
+        nodeSetDto();
 
         System.out.println("실행 완료되었습니다.");
     }
@@ -239,8 +239,8 @@ public class Initializer implements CommandLineRunner {
         for (long i = 1; i < 5; i++) {
             machines.add(i);
         }
-        RoutineDto routineDto = new RoutineDto("12312312", "lower", machines);
-        routineService.addRoutine(routineDto);
+        RoutineDto routineDto = new RoutineDto( "lower", machines);
+        routineService.addRoutine("12312312",routineDto);
     }
 
     void recordSetup() {

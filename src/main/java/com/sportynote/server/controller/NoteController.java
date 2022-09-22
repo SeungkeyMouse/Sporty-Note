@@ -31,7 +31,6 @@ public class NoteController {
     //1. 나의 <노트한 [기구]> 모두 불러오기(운동 종류 상관없이) ex) 내가 생성한 노트가 있는 기구(제목, id등)
     @GetMapping("/machines")
     public ResponseEntity<List<MachineDto>> getAllMyNotedMachines(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal){
-        System.out.println(userBasicPrincipal.getUserId());
         return ResponseEntity.ok(noteService.getAllMyNotedMachines(userBasicPrincipal.getUserId()));
     }
 
