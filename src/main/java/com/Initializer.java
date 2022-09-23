@@ -40,20 +40,20 @@ public class Initializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //하단 메소드 안의 내용들을 주석처리하면 실행시 데이터가 주입되지 않습니다.
         System.out.println("Initializer.java : CommandLineRunner 실행");
-        gymService.save(new GymDto("바디스페이스", "37", "128", "서울시", "강남구", "선릉로"));
-        gymService.save(new GymDto("정원헬스장", "36", "127", "서울시", "성북구", "안암로"));
-        gymService.save(new GymDto("의정부헬스장", "37.5", "128", "의정부시", "무슨구", "땡땡동"));
-        gymService.save(new GymDto("선릉헬스장", "37.5", "126", "서울시", "강남구", "선릉동"));
-        userBasicSetup();
-        machineSetup();
-        machineLocationSetup();
-        noteSetup();
+//        gymService.save(new GymDto("바디스페이스", "37", "128", "서울시", "강남구", "선릉로"));
+//        gymService.save(new GymDto("정원헬스장", "36", "127", "서울시", "성북구", "안암로"));
+//        gymService.save(new GymDto("의정부헬스장", "37.5", "128", "의정부시", "무슨구", "땡땡동"));
+//        gymService.save(new GymDto("선릉헬스장", "37.5", "126", "서울시", "강남구", "선릉동"));
+//        userBasicSetup();
+          machineSetup();
+//        machineLocationSetup();
+//        noteSetup();
+////        printUserFavorite();
 //        printUserFavorite();
-        printUserFavorite();
-        routineSetup();
-        recordSetup();
-        System.out.println(jwtTokenProvider.createAccessToken("12312312"));
-        nodeSetDto();
+//        routineSetup();
+//        recordSetup();
+//        System.out.println(jwtTokenProvider.createAccessToken("12312312"));
+//        nodeSetDto();
 
         System.out.println("실행 완료되었습니다.");
     }
@@ -205,20 +205,10 @@ public class Initializer implements CommandLineRunner {
         machineList.add(Machine.createMachine("원암 로우 머신(원판)" , "Lever One Arm Low Row (plate loaded)" , "등" , "42151101/42151101_medium1.png" , "42151101/42151101_medium2.png" , "42151201/42151201_video1.mp4"));
         machineList.add(Machine.createMachine("바벨 풀 오버" , "Barbell Pullover" , "등" , "43391101/43391101_medium1.png" , "43391101/43391101_medium2.png" , "43391201/43391201_video1.mp4"));
         machineList.add(Machine.createMachine("리버스 그립 하이로우 머신(원판)" , "Lever Reverse Grip High Row (plate loaded)" , "등" , "43781101/43781101_medium1.png" , "43781101/43781101_medium2.png" , "43781201/43781201_video1.mp4"));
-        machineList.add(Machine.createMachine("덤벨 풀오버" , "Dumbbell Pullover (VERSION 2)" , "등" , "53301101/53301101_medium1.png" , "53301101/53301101_medium2.png" , "53301201/53301201_video1.mp4"));
-        machineList.add(Machine.createMachine("케이블 와이드 풀 다운" , "Cable Neutral Grip Wide Pulldown (VERSION 2)" , "등" , "55801101/55801101_medium1.png" , "55801101/55801101_medium2.png" , "55801201/55801201_video1.mp4"));
-        machineList.add(Machine.createMachine("바벨 컬 프레스 익스텐션" , "Barbell Curl Press Extension " , "팔" , "58831101/58831101_medium1.png" , "58831101/58831101_medium2.png" , "58831201/58831201_video1.mp4"));
-        machineList.add(Machine.createMachine("케이블 스트레이트 암풀다운" , "Cable Straight Arm Pulldown (VERSION 2)" , "등" , "60361101/60361101_medium1.png" , "60361101/60361101_medium2.png" , "60361201/60361201_video1.mp4"));
-
         for (Machine machine : machineList) {
             machineRepository.save(machine);
         }
-        /***
-         * 즐겨찾기 추가
-         */
-        machineService.addFavorite("12312312", 1L);
-        machineService.addFavorite("12312312", 2L);
-        machineService.addFavorite("78978978", 3L);
+
 
 
     }

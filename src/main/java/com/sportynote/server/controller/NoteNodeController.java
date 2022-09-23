@@ -27,7 +27,7 @@ public class NoteNodeController {
 
     //2. 노드 수정
     @PutMapping
-    public ResponseEntity<Long> updateNoteNode(@RequestBody NodeUpdateDto nodeDto){
+    public ResponseEntity<Long> updateNoteNode(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @RequestBody NodeUpdateDto nodeDto){
         return ResponseEntity.ok(noteService.updateNoteNode(nodeDto));
     }
 
