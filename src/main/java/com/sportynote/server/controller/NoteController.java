@@ -36,7 +36,7 @@ public class NoteController {
 
 
     //2. 해당하는 운동의 나의 '노드' 모두 불러오기(MY탭) ex) 벤치프레스의 [MY] 노트
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<NoteDto> getMyNote(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,
                                                 @RequestParam("machineId") Long machineId){
         return ResponseEntity.ok(noteService.findMyNoteNodes(userBasicPrincipal.getUserId(), machineId));
