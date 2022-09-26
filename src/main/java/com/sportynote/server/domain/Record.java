@@ -5,6 +5,7 @@ import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -21,6 +22,7 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor
 @Table(name ="record_table")
 @SQLDelete(sql = "UPDATE record_table SET deleted = true WHERE record_idx = ?")
+@Where(clause = "deleted=false")
 public class Record extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,8 @@ package com.sportynote.server.domain;
 import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,6 +13,8 @@ import javax.persistence.*;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE Gym SET deleted = true WHERE user_favorite_idx = ?")
+@Where(clause = "deleted=false")
 public class Gym extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

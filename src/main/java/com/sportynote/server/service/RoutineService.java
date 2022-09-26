@@ -26,17 +26,18 @@ public class RoutineService {
     private final RoutineRepositoryImpl routineRepositoryImpl;
 
     /** 루틴 하나(여러 기구)첫 추가 CREATE */
-    public boolean addRoutine(RoutineDto routineDto) {
-            List<Long> machines = routineDto.getMachines();
-            List<Routine> routineList = new ArrayList<>();
-            UserBasic userBasicInfo = userBasicRepository.findById("12312312"); //예시 userid
-            for (Long machine : machines) {
-                Machine machineInfo = machineRepository.findById(machine);
-                Routine routine = Routine.createRoutine(routineDto.getRoutineName(),userBasicInfo ,machineInfo);
-                routineList.add(routine);
-            }
-            routineRepositoryImpl.saveAll(routineList);
-            return true;
+    public boolean addRoutine(String userId, RoutineDto routineDto) {
+
+        List<Long> machines = routineDto.getMachines();
+        List<Routine> routineList = new ArrayList<>();
+        UserBasic userBasicInfo = userBasicRepository.findById(userId);
+        for (Long machine : machines) {
+            Machine machineInfo = machineRepository.findById(machine);
+            Routine routine = Routine.createRoutine(routineDto.getRoutineName(),userBasicInfo ,machineInfo);
+            routineList.add(routine);
+        }
+        routineRepositoryImpl.saveAll(routineList);
+        return true;
     }
 
     /** 내 루틴 조회 Read */
@@ -50,9 +51,8 @@ public class RoutineService {
     }
 
     /** 내 루틴 내 기구 조회 */
-    public List<RoutineMachineDto> findByIdAndRoutineName(String RoutineName){
-        String userid="123123";
-        List<Routine> RoutineLists = routineRepository.findByIdAndRoutineName(userid, RoutineName);
+    public List<RoutineMachineDto> findByIdAndRoutineName(String userId, String RoutineName){
+        List<Routine> RoutineLists = routineRepository.findByIdAndRoutineName(userId, RoutineName);
         List<RoutineMachineDto> MachineLists = new ArrayList<>();
         for(Routine routine : RoutineLists){
             MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getKrMachineName(),
@@ -62,8 +62,8 @@ public class RoutineService {
     }
 
     /** 루틴 하나 수정 UPDATE */
-    public boolean modifyRoutine(RoutineDto routineDto){
-        List<Routine> routineExist = routineRepository.findByIdAndRoutineName(routineDto.getUserid(), routineDto.getRoutineName());
+    public boolean modifyRoutine(String userId, RoutineDto routineDto){
+        List<Routine> routineExist = routineRepository.findByIdAndRoutineName(userId, routineDto.getRoutineName());
         HashSet<Long> routineDtoSet = new HashSet<>(); /** 루틴 요청 저장할 기구 리스트*/
         HashSet<Long> routineExistSet = new HashSet<>(); /** 요청할 기구 리스트 */
         HashSet<Long> routineTempSet = new HashSet<>(); /** 차집합을 위한 임시 해시셋 */
@@ -78,7 +78,7 @@ public class RoutineService {
         routineExistSet.removeAll(routineDtoSet); // A-B, A, B 기존-요청, 기존복사, 요청
         routineDtoSet.removeAll(routineTempSet); //A-B,A ,B-A 기존-요청, 기존복사, 요청-기존복사
 
-        UserBasic userBasic = userBasicRepository.findById(routineDto.getUserid()); //예시 userid
+        UserBasic userBasic = userBasicRepository.findById(userId); //예시 userid
         /** UPDATE 중 SAVE */
         updateRoutineList(routineDto.getRoutineName(),userBasic,routineDtoSet);
 
@@ -110,8 +110,8 @@ public class RoutineService {
     }
 
     /** 루틴 하나 삭제 */
-    public boolean deleteRoutine(String routineName){
-        List<Routine> routineLists = routineRepository.findByIdAndRoutineName("123123",routineName);
+    public boolean deleteRoutine(String userId, String routineName){
+        List<Routine> routineLists = routineRepository.findByIdAndRoutineName(userId,routineName);
         for(Routine routine : routineLists) {
             routineRepository.deleteMachine(routine.getIdx());
         }

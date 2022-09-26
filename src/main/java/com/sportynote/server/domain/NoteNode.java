@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.w3c.dom.Node;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE note_node SET deleted = true WHERE note_node_idx = ?")
+@Where(clause = "deleted=false")
 public class NoteNode extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

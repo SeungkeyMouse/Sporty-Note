@@ -31,13 +31,12 @@ public class NoteController {
     //1. 나의 <노트한 [기구]> 모두 불러오기(운동 종류 상관없이) ex) 내가 생성한 노트가 있는 기구(제목, id등)
     @GetMapping("/machines")
     public ResponseEntity<List<MachineDto>> getAllMyNotedMachines(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal){
-        System.out.println(userBasicPrincipal.getUserId());
         return ResponseEntity.ok(noteService.getAllMyNotedMachines(userBasicPrincipal.getUserId()));
     }
 
 
     //2. 해당하는 운동의 나의 '노드' 모두 불러오기(MY탭) ex) 벤치프레스의 [MY] 노트
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<NoteDto> getMyNote(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,
                                                 @RequestParam("machineId") Long machineId){
         return ResponseEntity.ok(noteService.findMyNoteNodes(userBasicPrincipal.getUserId(), machineId));

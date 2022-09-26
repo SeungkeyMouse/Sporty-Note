@@ -4,6 +4,7 @@ import com.sportynote.server.domain.base.BaseEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name ="routine_table")
 @SQLDelete(sql = "UPDATE routine_table SET deleted = true WHERE routine_idx = ?")
+@Where(clause = "deleted=false")
 public class Routine extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

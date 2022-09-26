@@ -9,7 +9,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class RoutineDto {
-    private String userid;
     private String routineName;
     private List<Long> Machines;
+
+    public RoutineDto(){
+    }
+
 }
