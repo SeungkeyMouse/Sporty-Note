@@ -1,0 +1,1 @@
+web: java -Xms256m -jar server-0.0.1-SNAPSHOT.jar
