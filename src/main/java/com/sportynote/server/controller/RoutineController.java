@@ -35,8 +35,8 @@ public class RoutineController {
 
     /** 루틴 Create */
     @PostMapping("")
-
     public ResponseEntity<?> addRoutines(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,@RequestBody RoutineDto routineDto) throws URISyntaxException {
+        System.out.println(userBasicPrincipal.getUserId()+" "+routineDto.getRoutineName());
         return ResponseEntity.status(HttpStatus.valueOf(201)).body(routineService.addRoutine(userBasicPrincipal.getUserId(), routineDto));
     }
 

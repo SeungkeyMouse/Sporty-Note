@@ -5,14 +5,9 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 public class RoutineDto {
     private String routineName;
     private List<Long> Machines;
-
-    public RoutineDto(){
-    }
-
 }
