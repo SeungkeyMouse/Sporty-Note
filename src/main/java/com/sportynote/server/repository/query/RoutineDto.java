@@ -10,4 +10,9 @@ import java.util.List;
 public class RoutineDto {
     private String routineName;
     private List<Long> Machines;
+
+    public RoutineDto(){
+
+    }
+
 }
