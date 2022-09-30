@@ -1,7 +1,6 @@
 package com.sportynote.server.repository.query;
 
-import com.sportynote.server.Enum.NodeType;
-import com.sun.istack.NotNull;
+import com.sportynote.server.type.NodeType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

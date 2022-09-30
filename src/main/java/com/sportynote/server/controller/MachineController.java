@@ -1,12 +1,14 @@
 package com.sportynote.server.controller;
 
 import com.sportynote.server.repository.MachineRepository;
+import com.sportynote.server.repository.query.MachineDto;
 import com.sportynote.server.repository.query.NodeLocationDto;
 import com.sportynote.server.security.UserBasicPrincipal;
 import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.MachineService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/machines")
+@Slf4j
 public class MachineController {
 
     private final MachineRepository machineRepository;
@@ -36,7 +39,13 @@ public class MachineController {
     //운동기구 하나 클릭시 기구 정보 전송
     @GetMapping("/{machineId}")
     public ResponseEntity<?> getMachineById(@PathVariable Long machineId){
-        return ResponseEntity.ok(machineService.getMachineById(machineId));
+        log.info("getMachineById; machineId={}", machineId);
+        MachineDto machine = machineService.getMachineById(machineId);
+        if (machine == null)
+            machine = new MachineDto();//멘토님 log 설정 넣기-> WARN,ERROR 단계는 배포시, 테스트단계는 info
+
+        log.info("machine : "+ machine.toString());
+        return ResponseEntity.ok(machine);
     }
 
     //

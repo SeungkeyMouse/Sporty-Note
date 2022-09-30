@@ -1,11 +1,9 @@
-package com.sportynote.server.Enum;
+package com.sportynote.server.type;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
-import org.w3c.dom.Node;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @Getter

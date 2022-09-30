@@ -1,8 +1,7 @@
 package com.sportynote.server.domain;
 
-import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.type.NodeType;
 import com.sportynote.server.domain.base.BaseEntity;
-import com.sportynote.server.repository.query.NodeCreateDto;
 import com.sportynote.server.repository.query.NodeSetCreateDto;
 import com.sun.istack.NotNull;
 import lombok.Getter;

@@ -1,20 +1,17 @@
 package com.sportynote.server.service;
 
-import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.type.NodeType;
 import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.MachineRepository;
 import com.sportynote.server.repository.NodeLocationSetRepository;
 import com.sportynote.server.repository.UserBasicRepository;
 import com.sportynote.server.repository.UserFavoriteRepository;
-import com.sportynote.server.repository.query.GymDto;
 import com.sportynote.server.repository.query.MachineDto;
 import com.sportynote.server.repository.query.NodeLocationDto;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.crypto.Mac;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;

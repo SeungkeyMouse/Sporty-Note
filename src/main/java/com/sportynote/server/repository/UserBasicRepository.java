@@ -1,13 +1,8 @@
 package com.sportynote.server.repository;
 
-import com.sportynote.server.Enum.SocialType;
-import com.sportynote.server.domain.*;
-import com.sportynote.server.domain.Gym;
-import com.sportynote.server.domain.Machine;
+import com.sportynote.server.type.SocialType;
 import com.sportynote.server.domain.UserBasic;
-import com.sportynote.server.domain.UserFavorite;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.SQLDelete;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

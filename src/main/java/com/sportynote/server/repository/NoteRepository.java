@@ -1,10 +1,9 @@
 package com.sportynote.server.repository;
 
-import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.type.NodeType;
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.Note;
 import com.sportynote.server.domain.NoteNode;
-import com.sportynote.server.domain.NoteNodeSet;
 import com.sportynote.server.repository.query.MachineDto;
 import com.sportynote.server.repository.query.NodeDto;
 import com.sportynote.server.repository.query.NoteDto;
