@@ -1,14 +1,12 @@
 package com.sportynote.server.repository;
 
-import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.type.NodeType;
 import com.sportynote.server.domain.NodeLocationSet;
-import com.sportynote.server.domain.NoteNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import java.util.List;
 import java.util.Optional;
 
 @Repository

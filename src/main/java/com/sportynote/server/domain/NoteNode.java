@@ -1,17 +1,14 @@
 package com.sportynote.server.domain;
 
-import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.type.NodeType;
 import com.sportynote.server.domain.base.BaseEntity;
 import com.sportynote.server.repository.query.NodeCreateDto;
-import com.sportynote.server.repository.query.NodeDto;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.w3c.dom.Node;
 
 import javax.persistence.*;
 

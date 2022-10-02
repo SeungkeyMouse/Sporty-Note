@@ -39,12 +39,12 @@ public class NoteNodeController {
 
 
     /**
-     * NoteNodeSet
+     * NoteNodeSet [일반]탭에 들어가는 내용을 세팅하는 api
      */
     private String result;
     private int status_code;
     //POST
-    //1. 나의 <노트>에 '노드' 저장(하나씩 UPDATE)
+    //1. <노트>에 '노드' 저장(하나씩 UPDATE)
     @PostMapping("/set")
     public ResponseEntity<?> addNoteNodeSet(@RequestBody NodeSetCreateDto nodeCreateDto){
         result = (noteService.addNoteNodeSet(nodeCreateDto)) ? "success" : "failed";

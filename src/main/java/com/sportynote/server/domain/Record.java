@@ -52,6 +52,7 @@ public class Record extends BaseEntity {
 
     @CreatedDate
     @NotNull
+    @Deprecated//BaseEntity에 있는 내용
     private LocalDate createdDay;
 
     @Builder

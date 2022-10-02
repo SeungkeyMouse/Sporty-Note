@@ -1,4 +1,4 @@
-package com.sportynote.server.Enum;
+package com.sportynote.server.type;
 
 public enum SocialType {
     GOOGLE("google"), KAKAO("kakao");

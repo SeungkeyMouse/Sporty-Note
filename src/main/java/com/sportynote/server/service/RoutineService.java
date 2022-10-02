@@ -31,13 +31,18 @@ public class RoutineService {
         List<Long> machines = routineDto.getMachines();
         List<Routine> routineList = new ArrayList<>();
         UserBasic userBasicInfo = userBasicRepository.findById(userId);
-        for (Long machine : machines) {
-            Machine machineInfo = machineRepository.findById(machine);
-            Routine routine = Routine.createRoutine(routineDto.getRoutineName(),userBasicInfo ,machineInfo);
-            routineList.add(routine);
+        List<Routine> routineCheck = routineRepository.findByIdAndRoutineName(userId, routineDto.getRoutineName());
+        //사용자의 루틴이름이 없을경우
+        if (routineCheck.size()==0) {
+            for (Long machine : machines) {
+                Machine machineInfo = machineRepository.findById(machine);
+                Routine routine = Routine.createRoutine(routineDto.getRoutineName(), userBasicInfo, machineInfo);
+                routineList.add(routine);
+            }
+            routineRepositoryImpl.saveAll(routineList);
+            return true;
         }
-        routineRepositoryImpl.saveAll(routineList);
-        return true;
+        return false;
     }
 
     /** 내 루틴 조회 Read */
@@ -64,9 +69,13 @@ public class RoutineService {
     /** 루틴 하나 수정 UPDATE */
     public boolean modifyRoutine(String userId, RoutineDto routineDto){
         List<Routine> routineExist = routineRepository.findByIdAndRoutineName(userId, routineDto.getRoutineName());
+        //존재하지 않는 루틴일 경우 수정 불가능
+        if (routineExist.size()==0) { return false; }
+
         HashSet<Long> routineDtoSet = new HashSet<>(); /** 루틴 요청 저장할 기구 리스트*/
         HashSet<Long> routineExistSet = new HashSet<>(); /** 요청할 기구 리스트 */
         HashSet<Long> routineTempSet = new HashSet<>(); /** 차집합을 위한 임시 해시셋 */
+
         /** HashSet 설정 */
         for(int i=0;i<routineDto.getMachines().size();i++){
             routineDtoSet.add(routineDto.getMachines().get(i));

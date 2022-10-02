@@ -1,19 +1,15 @@
 package com;
 
-import com.sportynote.server.Enum.NodeType;
-import com.sportynote.server.Enum.SocialType;
+import com.sportynote.server.type.NodeType;
+import com.sportynote.server.type.SocialType;
 import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.*;
 import com.sportynote.server.repository.query.*;
 import com.sportynote.server.security.JwtTokenProvider;
 import com.sportynote.server.service.*;
-import io.jsonwebtoken.Jwt;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Node;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -45,7 +41,7 @@ public class Initializer implements CommandLineRunner {
 //        gymService.save(new GymDto("의정부헬스장", "37.5", "128", "의정부시", "무슨구", "땡땡동"));
 //        gymService.save(new GymDto("선릉헬스장", "37.5", "126", "서울시", "강남구", "선릉동"));
 //        userBasicSetup();
-//          machineSetup();
+          machineSetup();
 //        machineLocationSetup();
 //        noteSetup();
 ////        printUserFavorite();
@@ -59,10 +55,10 @@ public class Initializer implements CommandLineRunner {
     }
 
     private void nodeSetDto() {
-        noteService.addNoteNodeSet(new NodeSetCreateDto(1L, NodeType.CHEST, "Orange", "세팅된 머신1의 내용1입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
-        noteService.addNoteNodeSet(new NodeSetCreateDto(1L, NodeType.CHEST, "Orange", "세팅된 머신1의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
-        noteService.addNoteNodeSet(new NodeSetCreateDto(2L, NodeType.BACK, "Red", "세팅된 머신2의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
-        noteService.addNoteNodeSet(new NodeSetCreateDto(2L, NodeType.ELBOW, "Blue", "세팅된 머신2의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 벤치프레스", NodeType.CHEST, "Orange", "세팅된 머신1의 내용1입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 벤치프레스", NodeType.CHEST, "Orange", "세팅된 머신1의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 런지", NodeType.BACK, "Red", "세팅된 머신2의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 런지", NodeType.ELBOW, "Blue", "세팅된 머신2의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
 
     }
 
