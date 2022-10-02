@@ -1,6 +1,6 @@
 package com.sportynote.server.repository.repositoryImpl;
 
-import com.sportynote.server.Enum.SocialType;
+import com.sportynote.server.type.SocialType;
 import com.sportynote.server.domain.UserBasic;
 import org.springframework.data.jpa.repository.JpaRepository;
 

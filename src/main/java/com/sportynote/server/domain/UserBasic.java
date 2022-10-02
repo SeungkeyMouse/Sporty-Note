@@ -9,9 +9,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import com.sportynote.server.Enum.SocialType;
+import com.sportynote.server.type.SocialType;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 

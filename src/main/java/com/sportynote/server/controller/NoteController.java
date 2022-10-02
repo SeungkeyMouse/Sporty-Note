@@ -1,21 +1,15 @@
 package com.sportynote.server.controller;
 
-import com.sportynote.server.Enum.NodeType;
-import com.sportynote.server.domain.NoteNode;
-import com.sportynote.server.repository.NoteNodeRepository;
-import com.sportynote.server.repository.NoteRepository;
 import com.sportynote.server.repository.query.*;
 import com.sportynote.server.security.UserBasicPrincipal;
 import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.NoteService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor

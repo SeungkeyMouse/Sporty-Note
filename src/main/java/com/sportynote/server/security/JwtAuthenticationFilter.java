@@ -25,6 +25,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (jwtToken != null && jwtTokenProvider.validateToken(jwtToken)) {
             Authentication authentication = jwtTokenProvider.getAuthentication(jwtToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
+        } else if(("for test jwt").equals(jwtToken)){
+            //슈도코드-> dev일때랑 prod일때 확인해서 실행하는 메소드로 추출
         }
         filterChain.doFilter(request, response);
     }

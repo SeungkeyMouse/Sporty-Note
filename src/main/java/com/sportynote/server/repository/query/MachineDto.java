@@ -6,6 +6,7 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class MachineDto {
 
     //내 기구 정보

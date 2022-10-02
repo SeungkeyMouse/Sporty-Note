@@ -22,6 +22,7 @@ import java.util.*;
 
 @Configuration
 @EnableSwagger2
+//배포에서는 빼는 어노테이션 넣기
 public class SwaggerConfig {
 
     private ApiInfo apiInfo() {

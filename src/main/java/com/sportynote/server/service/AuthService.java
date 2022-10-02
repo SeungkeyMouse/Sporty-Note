@@ -1,7 +1,6 @@
 package com.sportynote.server.service;
 
-import com.sportynote.server.Enum.SocialType;
-import com.sportynote.server.config.RedisConfig;
+import com.sportynote.server.type.SocialType;
 import com.sportynote.server.domain.UserBasic;
 import com.sportynote.server.properties.RedisProperties;
 import com.sportynote.server.repository.UserBasicRepository;

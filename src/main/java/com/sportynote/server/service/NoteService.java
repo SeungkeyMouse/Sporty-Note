@@ -1,6 +1,6 @@
 package com.sportynote.server.service;
 
-import com.sportynote.server.Enum.NodeType;
+import com.sportynote.server.type.NodeType;
 import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.*;
 import com.sportynote.server.repository.query.*;
@@ -116,7 +116,7 @@ public class NoteService {
     }
 
     public boolean addNoteNodeSet(NodeSetCreateDto nodeSetCreateDto) {
-        Machine m = machineRepository.findById(nodeSetCreateDto.getMachineIdx());
+        Machine m = machineRepository.findByName(nodeSetCreateDto.getMachineName());
 
         NoteNodeSet noteNodeSet = NoteNodeSet.createNode(m, nodeSetCreateDto);
 
