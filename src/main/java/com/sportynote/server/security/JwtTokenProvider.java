@@ -80,6 +80,17 @@ public class JwtTokenProvider {
         return new UsernamePasswordAuthenticationToken(new UserAccount(userBasicPrincipal),token, userBasicPrincipal.getAuthorities());
     }
 
+    public UsernamePasswordAuthenticationToken getTestAuthentication() {
+        String userId = "be1023ce";//승기 인증코드
+        UserBasic userBasic = userBasicRepository.findById(userId);
+        UserBasicPrincipal userBasicPrincipal = new UserBasicPrincipal(userBasic);
+//        //유저 권한
+//        System.out.println(userBasicPrincipal.getAuthorities().iterator().next().getAuthority());
+//        //유저 네임
+//        System.out.println(userBasicPrincipal.getUsername());
+        return new UsernamePasswordAuthenticationToken(new UserAccount(userBasicPrincipal), "credentials", userBasicPrincipal.getAuthorities());
+    }
+
     /**
      * JwtToken에서 유저 ID를 가져오는 함수
      * @return String userId
