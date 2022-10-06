@@ -7,10 +7,9 @@
 <script type="text/javascript">
     AppleID.auth.init({
         clientId : 'com.sportynote.services',
-        scope : '[SCOPES]',
-        redirectURI : '[REDIRECT_URI]',
-        state : '[STATE]',
-        nonce : '[NONCE]',
+        scope : 'name email',
+        redirectURI : 'https://sportynote.com/auth/code',
+        state : 'test',
         usePopup : true
     });
 </script>

@@ -22,7 +22,7 @@ public class JwtTokenProvider {
     private final Key secretKey;
     private final UserBasicRepository userBasicRepository;
     private final RedisUtil redisUtil;
-    Long accessTokenValidTime = 36000L * 60 * 60 * 10; //1.5일 * 10
+    Long accessTokenValidTime = 36000L * 60 * 60 * 60; //1.5일 * 마지막 60
     public JwtTokenProvider(@Value("${jwtSecretKey}") String secretKey,UserBasicRepository userBasicRepository,RedisUtil redisUtil) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
@@ -84,10 +84,6 @@ public class JwtTokenProvider {
         String userId = "be1023ce";//승기 인증코드
         UserBasic userBasic = userBasicRepository.findById(userId);
         UserBasicPrincipal userBasicPrincipal = new UserBasicPrincipal(userBasic);
-//        //유저 권한
-//        System.out.println(userBasicPrincipal.getAuthorities().iterator().next().getAuthority());
-//        //유저 네임
-//        System.out.println(userBasicPrincipal.getUsername());
         return new UsernamePasswordAuthenticationToken(new UserAccount(userBasicPrincipal), "credentials", userBasicPrincipal.getAuthorities());
     }
 

@@ -1,0 +1,270 @@
+2022:10:06 20:04:46.457 INFO  --- [main] com.ServerApplication : Starting ServerApplication using Java 11.0.14.1 on hwang-yeonghaui-MacBookPro.local with PID 5413 (/Users/hwang-yeongha/Desktop/Sporty-note/out/production/classes started by hwang-yeongha in /Users/hwang-yeongha/Desktop/Sporty-note) 
+2022:10:06 20:04:46.461 INFO  --- [main] com.ServerApplication : The following 2 profiles are active: "dev", "oauth" 
+2022:10:06 20:04:47.166 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2022:10:06 20:04:47.166 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2022:10:06 20:04:47.448 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 278 ms. Found 2 JPA repository interfaces. 
+2022:10:06 20:04:47.454 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2022:10:06 20:04:47.455 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2022:10:06 20:04:47.535 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.sportynote.server.repository.repositoryImpl.RoutineRepositoryImpl; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2022:10:06 20:04:47.535 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.sportynote.server.repository.repositoryImpl.UserBasicRepositoryImpl; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2022:10:06 20:04:47.535 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 0 Redis repository interfaces. 
+2022:10:06 20:04:47.663 INFO  --- [main] c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor : Post-processing PropertySource instances 
+2022:10:06 20:04:47.664 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource 
+2022:10:06 20:04:47.664 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 20:04:47.664 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 20:04:47.665 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 20:04:47.665 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper 
+2022:10:06 20:04:47.665 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper 
+2022:10:06 20:04:47.665 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application-oauth.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 20:04:47.665 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application-dev.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 20:04:47.666 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 20:04:47.775 INFO  --- [main] c.u.j.f.DefaultLazyPropertyFilter : Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter 
+2022:10:06 20:04:47.779 INFO  --- [main] c.u.j.r.DefaultLazyPropertyResolver : Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver 
+2022:10:06 20:04:47.779 INFO  --- [main] c.u.j.d.DefaultLazyPropertyDetector : Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector 
+2022:10:06 20:04:47.850 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat initialized with port(s): 8080 (http) 
+2022:10:06 20:04:47.853 INFO  --- [main] o.a.catalina.core.StandardService : Starting service [Tomcat] 
+2022:10:06 20:04:47.854 INFO  --- [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.64] 
+2022:10:06 20:04:47.893 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext 
+2022:10:06 20:04:47.893 INFO  --- [main] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1414 ms 
+2022:10:06 20:04:47.938 INFO  --- [main] c.u.j.e.DefaultLazyEncryptor : Found Custom Encryptor Bean org.jasypt.encryption.pbe.PooledPBEStringEncryptor@a809a62 with name: jasyptStringEncryptor 
+2022:10:06 20:04:48.040 INFO  --- [main] o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default] 
+2022:10:06 20:04:48.054 INFO  --- [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 5.6.9.Final 
+2022:10:06 20:04:48.113 INFO  --- [main] o.h.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+2022:10:06 20:04:48.149 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting... 
+2022:10:06 20:04:48.235 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed. 
+2022:10:06 20:04:48.240 INFO  --- [main] org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect 
+2022:10:06 20:04:48.840 INFO  --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2022:10:06 20:04:48.843 INFO  --- [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2022:10:06 20:04:49.327 WARN  --- [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2022:10:06 20:04:49.437 WARN  --- [main] o.s.b.a.s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b5aa33ff-1104-4f51-8394-7109e679287f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+ 
+2022:10:06 20:04:49.501 INFO  --- [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)] 
+2022:10:06 20:04:49.513 INFO  --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping : Adding welcome page: class path resource [static/index.html] 
+2022:10:06 20:04:49.629 INFO  --- [main] o.s.s.w.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@691cc52c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@48873409, org.springframework.security.web.context.SecurityContextPersistenceFilter@4fb8d97a, org.springframework.security.web.header.HeaderWriterFilter@286dba42, org.springframework.web.filter.CorsFilter@4bf5b473, org.springframework.security.web.authentication.logout.LogoutFilter@3cdfbf7a, com.sportynote.server.security.JwtAuthenticationFilter@4d46444b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@318d0545, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1bb425e4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@42fccd6a, org.springframework.security.web.session.SessionManagementFilter@5bb34437, org.springframework.security.web.access.ExceptionTranslationFilter@4919cfcf, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@f6f5188] 
+2022:10:06 20:04:49.834 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path '' 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.c.RefreshScopeRefreshedEventListener : Refreshing cached encryptable property sources on ServletWebServerInitializedEvent 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source systemProperties refreshed 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source systemEnvironment refreshed 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source random refreshed 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application-oauth.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application-dev.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 20:04:49.835 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper 
+2022:10:06 20:04:49.836 INFO  --- [main] s.d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed 
+2022:10:06 20:04:49.841 INFO  --- [main] s.d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s) 
+2022:10:06 20:04:49.857 INFO  --- [main] s.d.s.w.s.ApiListingReferenceScanner : Scanning for api listing references 
+2022:10:06 20:04:49.947 INFO  --- [main] com.ServerApplication : Started ServerApplication in 3.731 seconds (JVM running for 4.013) 
+2022:10:06 20:43:08.056 INFO  --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2022:10:06 20:43:08.057 INFO  --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet' 
+2022:10:06 20:43:08.060 INFO  --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 3 ms 
+2022:10:06 21:03:29.533 INFO  --- [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' 
+2022:10:06 21:03:29.536 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated... 
+2022:10:06 21:03:29.540 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed. 
+2022:10:06 21:21:33.448 INFO  --- [main] com.ServerApplication : Starting ServerApplication using Java 11.0.14.1 on hwang-yeonghaui-MacBookPro.local with PID 6217 (/Users/hwang-yeongha/Desktop/Sporty-note/out/production/classes started by hwang-yeongha in /Users/hwang-yeongha/Desktop/Sporty-note) 
+2022:10:06 21:21:33.450 INFO  --- [main] com.ServerApplication : The following 2 profiles are active: "dev", "oauth" 
+2022:10:06 21:21:34.200 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2022:10:06 21:21:34.200 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2022:10:06 21:21:34.479 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 275 ms. Found 2 JPA repository interfaces. 
+2022:10:06 21:21:34.485 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2022:10:06 21:21:34.486 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2022:10:06 21:21:34.573 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.sportynote.server.repository.repositoryImpl.RoutineRepositoryImpl; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2022:10:06 21:21:34.573 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.sportynote.server.repository.repositoryImpl.UserBasicRepositoryImpl; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2022:10:06 21:21:34.573 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 84 ms. Found 0 Redis repository interfaces. 
+2022:10:06 21:21:34.698 INFO  --- [main] c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor : Post-processing PropertySource instances 
+2022:10:06 21:21:34.698 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource 
+2022:10:06 21:21:34.704 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 21:21:34.704 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 21:21:34.705 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:21:34.705 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper 
+2022:10:06 21:21:34.705 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper 
+2022:10:06 21:21:34.706 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application-oauth.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:21:34.706 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application-dev.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:21:34.706 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:21:34.815 INFO  --- [main] c.u.j.f.DefaultLazyPropertyFilter : Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter 
+2022:10:06 21:21:34.819 INFO  --- [main] c.u.j.r.DefaultLazyPropertyResolver : Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver 
+2022:10:06 21:21:34.820 INFO  --- [main] c.u.j.d.DefaultLazyPropertyDetector : Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector 
+2022:10:06 21:21:34.890 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat initialized with port(s): 8080 (http) 
+2022:10:06 21:21:34.894 INFO  --- [main] o.a.catalina.core.StandardService : Starting service [Tomcat] 
+2022:10:06 21:21:34.894 INFO  --- [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.64] 
+2022:10:06 21:21:34.933 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext 
+2022:10:06 21:21:34.934 INFO  --- [main] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1464 ms 
+2022:10:06 21:21:34.978 INFO  --- [main] c.u.j.e.DefaultLazyEncryptor : Found Custom Encryptor Bean org.jasypt.encryption.pbe.PooledPBEStringEncryptor@2c17ebb7 with name: jasyptStringEncryptor 
+2022:10:06 21:21:35.073 INFO  --- [main] o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default] 
+2022:10:06 21:21:35.091 INFO  --- [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 5.6.9.Final 
+2022:10:06 21:21:35.145 INFO  --- [main] o.h.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+2022:10:06 21:21:35.180 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting... 
+2022:10:06 21:21:35.234 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed. 
+2022:10:06 21:21:35.241 INFO  --- [main] org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect 
+2022:10:06 21:21:35.794 INFO  --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2022:10:06 21:21:35.797 INFO  --- [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2022:10:06 21:21:36.295 WARN  --- [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2022:10:06 21:21:36.396 WARN  --- [main] o.s.b.a.s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: fd28a14d-b82b-4a95-81de-8afb6cf82aa9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+ 
+2022:10:06 21:21:36.463 INFO  --- [main] o.s.s.w.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5344604d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1d3433c7, org.springframework.security.web.context.SecurityContextPersistenceFilter@7a2fd9de, org.springframework.security.web.header.HeaderWriterFilter@488702c7, org.springframework.web.filter.CorsFilter@16bc9213, org.springframework.security.web.authentication.logout.LogoutFilter@5ca01434, com.sportynote.server.security.JwtAuthenticationFilter@2413efce, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@753e5e51, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@68deb8e1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@54a5b509, org.springframework.security.web.session.SessionManagementFilter@2cdbe28, org.springframework.security.web.access.ExceptionTranslationFilter@288f3ac6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1306e335] 
+2022:10:06 21:21:36.480 INFO  --- [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)] 
+2022:10:06 21:21:36.637 INFO  --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping : Adding welcome page: class path resource [static/index.html] 
+2022:10:06 21:21:36.802 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path '' 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.c.RefreshScopeRefreshedEventListener : Refreshing cached encryptable property sources on ServletWebServerInitializedEvent 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source systemProperties refreshed 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source systemEnvironment refreshed 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source random refreshed 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application-oauth.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application-dev.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 21:21:36.803 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper 
+2022:10:06 21:21:36.804 INFO  --- [main] s.d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed 
+2022:10:06 21:21:36.809 INFO  --- [main] s.d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s) 
+2022:10:06 21:21:36.825 INFO  --- [main] s.d.s.w.s.ApiListingReferenceScanner : Scanning for api listing references 
+2022:10:06 21:21:36.914 INFO  --- [main] com.ServerApplication : Started ServerApplication in 3.681 seconds (JVM running for 3.984) 
+2022:10:06 21:48:31.537 INFO  --- [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' 
+2022:10:06 21:48:31.542 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated... 
+2022:10:06 21:48:31.550 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed. 
+2022:10:06 21:48:46.809 INFO  --- [main] com.ServerApplication : Starting ServerApplication using Java 11.0.14.1 on hwang-yeonghaui-MacBookPro.local with PID 6614 (/Users/hwang-yeongha/Desktop/Sporty-note/out/production/classes started by hwang-yeongha in /Users/hwang-yeongha/Desktop/Sporty-note) 
+2022:10:06 21:48:46.811 INFO  --- [main] com.ServerApplication : The following 2 profiles are active: "dev", "oauth" 
+2022:10:06 21:48:47.545 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2022:10:06 21:48:47.546 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2022:10:06 21:48:47.820 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 271 ms. Found 2 JPA repository interfaces. 
+2022:10:06 21:48:47.826 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2022:10:06 21:48:47.826 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2022:10:06 21:48:47.908 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.sportynote.server.repository.repositoryImpl.RoutineRepositoryImpl; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2022:10:06 21:48:47.909 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.sportynote.server.repository.repositoryImpl.UserBasicRepositoryImpl; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2022:10:06 21:48:47.909 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 78 ms. Found 0 Redis repository interfaces. 
+2022:10:06 21:48:48.044 INFO  --- [main] c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor : Post-processing PropertySource instances 
+2022:10:06 21:48:48.045 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource 
+2022:10:06 21:48:48.045 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 21:48:48.045 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 21:48:48.046 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:48:48.047 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper 
+2022:10:06 21:48:48.047 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper 
+2022:10:06 21:48:48.047 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application-oauth.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:48:48.047 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application-dev.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:48:48.047 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:48:48.162 INFO  --- [main] c.u.j.f.DefaultLazyPropertyFilter : Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter 
+2022:10:06 21:48:48.167 INFO  --- [main] c.u.j.r.DefaultLazyPropertyResolver : Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver 
+2022:10:06 21:48:48.167 INFO  --- [main] c.u.j.d.DefaultLazyPropertyDetector : Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector 
+2022:10:06 21:48:48.259 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat initialized with port(s): 8080 (http) 
+2022:10:06 21:48:48.264 INFO  --- [main] o.a.catalina.core.StandardService : Starting service [Tomcat] 
+2022:10:06 21:48:48.264 INFO  --- [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.64] 
+2022:10:06 21:48:48.312 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext 
+2022:10:06 21:48:48.312 INFO  --- [main] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1481 ms 
+2022:10:06 21:48:48.359 INFO  --- [main] c.u.j.e.DefaultLazyEncryptor : Found Custom Encryptor Bean org.jasypt.encryption.pbe.PooledPBEStringEncryptor@51049621 with name: jasyptStringEncryptor 
+2022:10:06 21:48:48.462 INFO  --- [main] o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default] 
+2022:10:06 21:48:48.482 INFO  --- [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 5.6.9.Final 
+2022:10:06 21:48:48.545 INFO  --- [main] o.h.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+2022:10:06 21:48:48.582 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting... 
+2022:10:06 21:48:48.642 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed. 
+2022:10:06 21:48:48.648 INFO  --- [main] org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect 
+2022:10:06 21:48:49.236 INFO  --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2022:10:06 21:48:49.240 INFO  --- [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2022:10:06 21:48:49.739 WARN  --- [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2022:10:06 21:48:49.854 WARN  --- [main] o.s.b.a.s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 48a2b2e1-88dc-4cf4-b515-0244fc15dd6c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+ 
+2022:10:06 21:48:49.916 INFO  --- [main] o.s.s.w.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@58cf2091, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@28feec4f, org.springframework.security.web.context.SecurityContextPersistenceFilter@34bba7f7, org.springframework.security.web.header.HeaderWriterFilter@68deb8e1, org.springframework.web.filter.CorsFilter@5bcaebdb, org.springframework.security.web.authentication.logout.LogoutFilter@1f041bad, com.sportynote.server.security.JwtAuthenticationFilter@242c2da4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b620300, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13c90cb9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5464a18, org.springframework.security.web.session.SessionManagementFilter@1990d2bb, org.springframework.security.web.access.ExceptionTranslationFilter@11518582, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1d3433c7] 
+2022:10:06 21:48:49.933 INFO  --- [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)] 
+2022:10:06 21:48:50.093 INFO  --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping : Adding welcome page: class path resource [static/index.html] 
+2022:10:06 21:48:50.246 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path '' 
+2022:10:06 21:48:50.246 INFO  --- [main] c.u.j.c.RefreshScopeRefreshedEventListener : Refreshing cached encryptable property sources on ServletWebServerInitializedEvent 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source systemProperties refreshed 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source systemEnvironment refreshed 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source random refreshed 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application-oauth.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application-dev.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 21:48:50.247 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper 
+2022:10:06 21:48:50.247 INFO  --- [main] s.d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed 
+2022:10:06 21:48:50.252 INFO  --- [main] s.d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s) 
+2022:10:06 21:48:50.269 INFO  --- [main] s.d.s.w.s.ApiListingReferenceScanner : Scanning for api listing references 
+2022:10:06 21:48:50.373 INFO  --- [main] com.ServerApplication : Started ServerApplication in 3.786 seconds (JVM running for 4.064) 
+2022:10:06 21:48:56.344 INFO  --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2022:10:06 21:48:56.345 INFO  --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet' 
+2022:10:06 21:48:56.346 INFO  --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 1 ms 
+2022:10:06 21:50:22.525 INFO  --- [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' 
+2022:10:06 21:50:22.528 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated... 
+2022:10:06 21:50:22.536 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed. 
+2022:10:06 22:08:10.682 INFO  --- [main] com.ServerApplication : Starting ServerApplication using Java 11.0.14.1 on hwang-yeonghaui-MacBookPro.local with PID 6848 (/Users/hwang-yeongha/Desktop/Sporty-note/out/production/classes started by hwang-yeongha in /Users/hwang-yeongha/Desktop/Sporty-note) 
+2022:10:06 22:08:10.684 INFO  --- [main] com.ServerApplication : The following 2 profiles are active: "dev", "oauth" 
+2022:10:06 22:08:11.433 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2022:10:06 22:08:11.433 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2022:10:06 22:08:11.709 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 272 ms. Found 2 JPA repository interfaces. 
+2022:10:06 22:08:11.715 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode 
+2022:10:06 22:08:11.715 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2022:10:06 22:08:11.796 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.sportynote.server.repository.repositoryImpl.RoutineRepositoryImpl; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2022:10:06 22:08:11.797 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.sportynote.server.repository.repositoryImpl.UserBasicRepositoryImpl; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository 
+2022:10:06 22:08:11.797 INFO  --- [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 78 ms. Found 0 Redis repository interfaces. 
+2022:10:06 22:08:11.923 INFO  --- [main] c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor : Post-processing PropertySource instances 
+2022:10:06 22:08:11.924 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource 
+2022:10:06 22:08:11.935 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 22:08:11.935 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 22:08:11.936 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 22:08:11.936 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper 
+2022:10:06 22:08:11.936 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper 
+2022:10:06 22:08:11.936 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application-oauth.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 22:08:11.936 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application-dev.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 22:08:11.936 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 22:08:12.048 INFO  --- [main] c.u.j.f.DefaultLazyPropertyFilter : Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter 
+2022:10:06 22:08:12.052 INFO  --- [main] c.u.j.r.DefaultLazyPropertyResolver : Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver 
+2022:10:06 22:08:12.053 INFO  --- [main] c.u.j.d.DefaultLazyPropertyDetector : Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector 
+2022:10:06 22:08:12.126 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat initialized with port(s): 8080 (http) 
+2022:10:06 22:08:12.131 INFO  --- [main] o.a.catalina.core.StandardService : Starting service [Tomcat] 
+2022:10:06 22:08:12.132 INFO  --- [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.64] 
+2022:10:06 22:08:12.175 INFO  --- [main] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext 
+2022:10:06 22:08:12.175 INFO  --- [main] o.s.b.w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1469 ms 
+2022:10:06 22:08:12.222 INFO  --- [main] c.u.j.e.DefaultLazyEncryptor : Found Custom Encryptor Bean org.jasypt.encryption.pbe.PooledPBEStringEncryptor@51049621 with name: jasyptStringEncryptor 
+2022:10:06 22:08:12.324 INFO  --- [main] o.h.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default] 
+2022:10:06 22:08:12.363 INFO  --- [main] org.hibernate.Version : HHH000412: Hibernate ORM core version 5.6.9.Final 
+2022:10:06 22:08:12.439 INFO  --- [main] o.h.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final} 
+2022:10:06 22:08:12.477 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting... 
+2022:10:06 22:08:12.543 INFO  --- [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed. 
+2022:10:06 22:08:12.550 INFO  --- [main] org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect 
+2022:10:06 22:08:13.174 INFO  --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2022:10:06 22:08:13.178 INFO  --- [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2022:10:06 22:08:13.679 WARN  --- [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2022:10:06 22:08:13.781 WARN  --- [main] o.s.b.a.s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c0aa609f-e140-4e79-9963-854b352cc217
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+ 
+2022:10:06 22:08:13.850 INFO  --- [main] o.s.s.w.DefaultSecurityFilterChain : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7ba5e21c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2e3622a6, org.springframework.security.web.context.SecurityContextPersistenceFilter@53416190, org.springframework.security.web.header.HeaderWriterFilter@7553d28b, org.springframework.web.filter.CorsFilter@53923ca0, org.springframework.security.web.authentication.logout.LogoutFilter@6b620300, com.sportynote.server.security.JwtAuthenticationFilter@43addda0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5d8d7b25, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@420da96b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@17cc72cb, org.springframework.security.web.session.SessionManagementFilter@675fe8de, org.springframework.security.web.access.ExceptionTranslationFilter@3e010e07, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5bc26351] 
+2022:10:06 22:08:13.870 INFO  --- [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)] 
+2022:10:06 22:08:14.027 INFO  --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping : Adding welcome page: class path resource [static/index.html] 
+2022:10:06 22:08:14.179 INFO  --- [main] o.s.b.w.e.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path '' 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.c.RefreshScopeRefreshedEventListener : Refreshing cached encryptable property sources on ServletWebServerInitializedEvent 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source systemProperties refreshed 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source systemEnvironment refreshed 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source random refreshed 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application-oauth.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application-dev.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.c.CachingDelegateEncryptablePropertySource : Property Source Config resource 'class path resource [application.properties]' via location 'optional:classpath:/' refreshed 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource server.ports [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource 
+2022:10:06 22:08:14.180 INFO  --- [main] c.u.j.EncryptablePropertySourceConverter : Converting PropertySource servletContextInitParams [org.springframework.web.context.support.ServletContextPropertySource] to EncryptableEnumerablePropertySourceWrapper 
+2022:10:06 22:08:14.180 INFO  --- [main] s.d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed 
+2022:10:06 22:08:14.186 INFO  --- [main] s.d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s) 
+2022:10:06 22:08:14.211 INFO  --- [main] s.d.s.w.s.ApiListingReferenceScanner : Scanning for api listing references 
+2022:10:06 22:08:14.306 INFO  --- [main] com.ServerApplication : Started ServerApplication in 3.873 seconds (JVM running for 4.158) 
+2022:10:06 22:08:21.955 INFO  --- [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' 
+2022:10:06 22:08:21.959 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated... 
+2022:10:06 22:08:21.966 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed. 
