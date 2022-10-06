@@ -4,6 +4,7 @@ import com.sportynote.server.domain.Routine;
 import com.sportynote.server.domain.UserBasic;
 import com.sportynote.server.repository.UserBasicRepository;
 import com.sportynote.server.security.JwtTokenProvider;
+import com.sportynote.server.util.RedisUtil;
 import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,19 +16,20 @@ import java.util.List;
 public class UserService {
     UserBasicRepository userBasicRepository;
     JwtTokenProvider jwtTokenProvider;
-
+    RedisUtil redisUtil;
     public UserService(UserBasicRepository userBasicRepository, JwtTokenProvider jwtTokenProvider) {
         this.userBasicRepository = userBasicRepository;
         this.jwtTokenProvider=jwtTokenProvider;
     }
 
-    /** 루틴 하나 삭제 */
-    public boolean deleteUsers(String jwtToken) {
-        if (jwtTokenProvider.validateToken(jwtToken)) {
-            UserBasic userBasic = userBasicRepository.findById(jwtTokenProvider.getTokenToUserId(jwtToken));
-            userBasicRepository.delete(userBasic.getIdx());
-            return true;
-        }
-        return false;
+    /**
+     * 한 회원이 회원탈퇴를 누르게 될 경우 해당 유저를 삭제하는 함수 redis 로그아웃 포함
+     * @param userId,jwtToken
+     * @return
+     */
+    public boolean deleteUser(String userId,String jwtToken) {
+        UserBasic userBasic = userBasicRepository.findById(userId);
+        userBasicRepository.delete(userBasic.getIdx());
+        return redisUtil.delete(jwtToken);
     }
 }

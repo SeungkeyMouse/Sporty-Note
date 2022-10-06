@@ -2,6 +2,8 @@ package com.sportynote.server.controller;
 
 import com.sportynote.server.repository.UserBasicRepository;
 import com.sportynote.server.security.JwtTokenProvider;
+import com.sportynote.server.security.UserBasicPrincipal;
+import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.net.URISyntaxException;
 
 @RestController
@@ -32,9 +36,8 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteUsers(HttpServletRequest request) throws URISyntaxException {
+    public ResponseEntity<?> deleteUsers(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,HttpServletRequest request) throws URISyntaxException {
         String jwtToken = jwtTokenProvider.getTokenFromHeader(request);
-        return ResponseEntity.ok(userService.deleteUsers(jwtToken));
+        return ResponseEntity.ok(userService.deleteUser(userBasicPrincipal.getUserId(),jwtToken));
     }
-
 }

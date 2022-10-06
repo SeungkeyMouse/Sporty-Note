@@ -1,20 +1,25 @@
 package com.sportynote.server.controller;
 import com.sportynote.server.repository.query.auth.GoogleOauthDto.*;
 import com.sportynote.server.repository.query.auth.KakaoOauthDto.*;
+import com.sportynote.server.security.JwtTokenProvider;
+import com.sportynote.server.security.UserBasicPrincipal;
+import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.AuthService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/auth")
 public class LoginController {
     private final AuthService authService;
-
-    public LoginController(AuthService authService){
+    private final JwtTokenProvider jwtTokenProvider;
+    public LoginController(AuthService authService, JwtTokenProvider jwtTokenProvider){
         this.authService = authService;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     /**
@@ -42,9 +47,9 @@ public class LoginController {
      * 사용자로부터 access token을 받아 이를 만료시키는 코드
      */
     @GetMapping("/logout")
-    public ResponseEntity<?> jwtLogout(@RequestParam("access_token") String Token) {
-        authService.oauthLogout(Token);
-        return ResponseEntity.ok(200);
+    public ResponseEntity<?> jwtLogout(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,HttpServletRequest request) {
+        String jwtToken = jwtTokenProvider.getTokenFromHeader(request);
+        return ResponseEntity.status(200).body(authService.oauthLogout(userBasicPrincipal.getUserId(),jwtToken));
     }
 
     /**

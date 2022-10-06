@@ -29,14 +29,14 @@ public class AuthService {
     private final RestTemplate restTemplate;
     private final UserBasicRepository userBasicRepository;
     private final UserBasicRepositoryImpl userBasicRepositoryImpl;
-    private final JwtTokenProvider jwtAuthProvider;
+    private final JwtTokenProvider jwtTokenProvider;
     private final RedisUtil redisUtil;
     private final RedisProperties redisProperties;
 
-    public AuthService(RestTemplate restTemplate, UserBasicRepository userBasicRepository, JwtTokenProvider jwtAuthProvider, UserBasicRepositoryImpl userBasicRepositoryImpl, RedisUtil redisUtil, RedisProperties redisProperties) {
+    public AuthService(RestTemplate restTemplate, UserBasicRepository userBasicRepository, JwtTokenProvider jwtTokenProvider, UserBasicRepositoryImpl userBasicRepositoryImpl, RedisUtil redisUtil, RedisProperties redisProperties) {
         this.restTemplate = restTemplate;
         this.userBasicRepository=userBasicRepository;
-        this.jwtAuthProvider=jwtAuthProvider;
+        this.jwtTokenProvider=jwtTokenProvider;
         this.userBasicRepositoryImpl=userBasicRepositoryImpl;
         this.redisUtil=redisUtil;
         this.redisProperties=redisProperties;
@@ -119,13 +119,13 @@ public class AuthService {
         String kakaoUserId = Long.toString(kakaoUserInformation.getId());
         if (isAlreadyUser(kakaoUserId,SocialType.KAKAO)) { // 이미 DB에 저장되어있는 카카오 유저라면
             UserBasic userBasic = userBasicRepository.findByOauthId(kakaoUserId);
-            return jwtAuthProvider.createUserToken(userBasic.getUserId());
+            return jwtTokenProvider.createUserToken(userBasic.getUserId());
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8);
             UserBasic userBasic = UserBasic.createdUserBasic(kakaoUserInformation.getKakao_account().getEmail(),kakaoUserId,
                     kakaoUserInformation.getKakao_account().getProfile().getNickname(),userId,SocialType.KAKAO);
             userBasicRepository.save(userBasic);
-            return jwtAuthProvider.createUserToken(userBasic.getUserId());
+            return jwtTokenProvider.createUserToken(userBasic.getUserId());
         }
     }
 
@@ -202,17 +202,26 @@ public class AuthService {
         String GoogleUserId = GoogleUserInformation.getId();
         if (isAlreadyUser(GoogleUserId,SocialType.GOOGLE)) { // 이미 DB에 저장되어있는 구글 유저라면
             UserBasic userBasic = userBasicRepository.findByOauthId(GoogleUserId);
-            return jwtAuthProvider.createAccessToken(userBasic.getUserId());
+            return jwtTokenProvider.createAccessToken(userBasic.getUserId());
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8);
             UserBasic userBasic = UserBasic.createdUserBasic(GoogleUserInformation.getEmail(),GoogleUserInformation.getId(),GoogleUserInformation.getName(),userId,SocialType.GOOGLE);
             userBasicRepository.save(userBasic);
-            return jwtAuthProvider.createAccessToken(userBasic.getUserId());
+            return jwtTokenProvider.createAccessToken(userBasic.getUserId());
         }
     }
 
-    public Boolean oauthLogout(String Token){
-        return redisUtil.delete(Token);
+    /**
+     *
+     * @param userId
+     * @param Token
+     * @return
+     */
+    public Boolean oauthLogout(String userId,String Token){
+        if (userId == jwtTokenProvider.getTokenToUserId(Token)){
+            return redisUtil.delete(Token);
+        }
+        return false;
     }
 
     @Value("${KAKAO_OAUTH_API_KEY}")
