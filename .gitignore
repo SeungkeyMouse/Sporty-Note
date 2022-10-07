@@ -7,6 +7,8 @@ build/
 =======
 .ssh
 application-dev.properties
+log*
+
 
 ### STS ###
 .apt_generated
