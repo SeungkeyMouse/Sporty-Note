@@ -42,7 +42,7 @@ public class MachineController {
         log.info("getMachineById; machineId={}", machineId);
         MachineDto machine = machineService.getMachineById(machineId);
         if (machine == null)
-            machine = new MachineDto();//멘토님 log 설정 넣기-> WARN,ERROR 단계는 배포시, 테스트단계는 info
+            machine = new MachineDto();
 
         log.info("machine : "+ machine.toString());
         return ResponseEntity.ok(machine);

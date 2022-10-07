@@ -7,6 +7,8 @@ build/
 =======
 .ssh
 application-dev.properties
+log*
+
 
 ### STS ###
 .apt_generated
@@ -41,3 +43,7 @@ https://git.swmgit.org/swm-13-main/13_swm14/sporty-note.git
 
 ### VS Code ###
 .vscode/
+
+### LOG FILE ###
+tmp/
+logs/

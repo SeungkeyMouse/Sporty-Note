@@ -5,6 +5,7 @@ import com.sportynote.server.domain.*;
 import com.sportynote.server.repository.*;
 import com.sportynote.server.repository.query.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class NoteService {
     private final NoteNodeRepository nodeRepository;
     private final NoteRepository noteRepository;
@@ -116,9 +118,12 @@ public class NoteService {
     }
 
     public boolean addNoteNodeSet(NodeSetCreateDto nodeSetCreateDto) {
-        Machine m = machineRepository.findByName(nodeSetCreateDto.getMachineName());
+        List<Machine> m = machineRepository.findByName(nodeSetCreateDto.getMachineName());
+        if(m.size() != 1){
+            return false;
+        }
 
-        NoteNodeSet noteNodeSet = NoteNodeSet.createNode(m, nodeSetCreateDto);
+        NoteNodeSet noteNodeSet = NoteNodeSet.createNode(m.get(0), nodeSetCreateDto);
 
         nodeSetRepository.save(noteNodeSet);
 

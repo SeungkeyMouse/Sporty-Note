@@ -17,7 +17,7 @@ public enum NodeType {
 //    ABDOMINAL("복부"),
     GAZE("Gaze", "시선"),
     HIP("Hip", "힙"),
-    Etc("Etc", "기타");
+    ETC("Etc", "기타");
 
 
     private final String engName;
@@ -32,7 +32,7 @@ public enum NodeType {
             if(type.krName.equals(s) || type.engName.equals(s)) return type;
         }
 
-        return NodeType.Etc;
+        return NodeType.ETC;
     }
 
     @JsonCreator

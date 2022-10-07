@@ -27,9 +27,9 @@ public class MachineRepository{
         return em.find(Machine.class, machineId);
     }
 
-    public Machine findByName(String machineName) {
+    public List<Machine> findByName(String machineName) {
         return em.createQuery("select m from Machine m where m.krMachineName =: machineName", Machine.class)
                 .setParameter("machineName", machineName)
-                .getSingleResult();
+                .getResultList();
     }
 }
