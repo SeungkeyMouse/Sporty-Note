@@ -3,10 +3,12 @@ package com.sportynote.server.controller;
 import com.sportynote.server.repository.query.NodeCreateDto;
 import com.sportynote.server.repository.query.NodeSetCreateDto;
 import com.sportynote.server.repository.query.NodeUpdateDto;
+import com.sportynote.server.repository.query.NoteDto;
 import com.sportynote.server.security.UserBasicPrincipal;
 import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.NoteService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/nodes")
+@Slf4j
 public class NoteNodeController {
     private final NoteService noteService;
 
@@ -22,19 +25,31 @@ public class NoteNodeController {
     //1. 나의 <노트>에 '노드' 저장(하나씩 UPDATE)
     @PostMapping
     public ResponseEntity<Long> addNoteNode(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @RequestBody NodeCreateDto nodeCreateDto){
-        return ResponseEntity.ok(noteService.addNoteNode(userBasicPrincipal.getUserId(),nodeCreateDto));
+        log.info("addNoteNode; nodeCreateDto={}", nodeCreateDto.toString());
+        Long response = noteService.addNoteNode(userBasicPrincipal.getUserId(), nodeCreateDto);
+        log.info("response : "+ response.toString());
+
+        return ResponseEntity.ok(response);
     }
 
     //2. 노드 수정
     @PutMapping
     public ResponseEntity<Long> updateNoteNode(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @RequestBody NodeUpdateDto nodeDto){
-        return ResponseEntity.ok(noteService.updateNoteNode(nodeDto));
+        log.info("updateNoteNode; nodeDto={}", nodeDto.toString());
+        Long response = noteService.updateNoteNode(nodeDto);
+        log.info("response : "+ response.toString());
+
+        return ResponseEntity.ok(response);
     }
 
     //3. 노드 삭제
     @DeleteMapping
     public ResponseEntity<Long> deleteNoteNode(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,@RequestParam("note_node_idx") Long noteNodeIdx){
-        return ResponseEntity.ok(noteService.deleteNoteNode(noteNodeIdx));
+        log.info("deleteNoteNode; nodeDto={}", noteNodeIdx.toString());
+        Long response = noteService.deleteNoteNode(noteNodeIdx);
+        log.info("response : "+ response.toString());
+
+        return ResponseEntity.ok(response);
     }
 
 

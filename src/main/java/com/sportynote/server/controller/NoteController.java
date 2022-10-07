@@ -5,6 +5,7 @@ import com.sportynote.server.security.UserBasicPrincipal;
 import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.NoteService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/notes")
+@Slf4j
 public class NoteController {
     private final NoteService noteService;
 
@@ -33,12 +35,19 @@ public class NoteController {
     @GetMapping()
     public ResponseEntity<NoteDto> getMyNote(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,
                                                 @RequestParam("machineId") Long machineId){
-        return ResponseEntity.ok(noteService.findMyNoteNodes(userBasicPrincipal.getUserId(), machineId));
+        log.info("getMyNote; machineId={}", machineId);
+        NoteDto myNoteNodes = noteService.findMyNoteNodes(userBasicPrincipal.getUserId(), machineId);
+        log.info("myNotes : "+ myNoteNodes.toString());
+        return ResponseEntity.ok(myNoteNodes);
     }
 
     //3. [일반] 탭 노트 내용 불러오기
     @GetMapping("/general")
     public ResponseEntity<NoteDto> getNormalNote(@RequestParam("machineId") Long machineId){
-        return ResponseEntity.ok(noteService.findGeneralNoteNodes(machineId));
+        log.info("getNormalNote; machineId={}", machineId);
+        NoteDto generalNoteNodes = noteService.findGeneralNoteNodes(machineId);
+        log.info("generalNote : "+ generalNoteNodes.toString());
+
+        return ResponseEntity.ok(generalNoteNodes);
     }
 }

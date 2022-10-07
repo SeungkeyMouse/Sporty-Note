@@ -41,7 +41,7 @@ public class Initializer implements CommandLineRunner {
 //        gymService.save(new GymDto("의정부헬스장", "37.5", "128", "의정부시", "무슨구", "땡땡동"));
 //        gymService.save(new GymDto("선릉헬스장", "37.5", "126", "서울시", "강남구", "선릉동"));
 //        userBasicSetup();
-//          machineSetup();
+//          machineSetup();//<-----------서버 시작시 실행
 //        machineLocationSetup();
 //        noteSetup();
 ////        printUserFavorite();
@@ -49,16 +49,77 @@ public class Initializer implements CommandLineRunner {
 //        routineSetup();
 //        recordSetup();
 //        System.out.println(jwtTokenProvider.createAccessToken("12312312"));
-//        nodeSetDto();
+//        nodeSetDto();//<-----------서버 시작시 실행
 
         System.out.println("실행 완료되었습니다.");
     }
 
     private void nodeSetDto() {
-        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 벤치프레스", NodeType.CHEST, "Orange", "세팅된 머신1의 내용1입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
-        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 벤치프레스", NodeType.CHEST, "Orange", "세팅된 머신1의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
-        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 런지", NodeType.BACK, "Red", "세팅된 머신2의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
-        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 런지", NodeType.ELBOW, "Blue", "세팅된 머신2의 내용2입니다.", 0F, 0F, LocalDateTime.now(), "www.naver.com"));
+        //작업장1
+        noteService.addNoteNodeSet(new NodeSetCreateDto("어시스트 풀업",NodeType.SHOULDER,"#99FF99","올라갈때 어깨가 웅크리지 않도록 한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 벤치프레스",NodeType.GRIP,"#0000FF","어깨너비의 1.5배로 잡는다. 인체 구조상 그립 너비가 넓어야 가슴 근육을 사용하게 된다. 좁으면 손목,팔꿈치에 무리가 간다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 데드리프트",NodeType.GAZE,"#9933FF","준비자세는 45도 아래쪽을 바라본다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 풀 스쿼트",NodeType.LEG,"#FFFF66","발을 적당히 넓게 벌려주고, 발끝도 약간 바깥으로 벌려준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 인클라인 벤치프레스",NodeType.BACK,"#FF9999","날개뼈를 뒤로 접고 가슴을 내밀어줌(견갑 후인하강)", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 라잉 트라이셉스 익스텐션",NodeType.GRIP,"#0000FF","바벨을 척골 위에 얹어두는 느낌으로 잡는다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("암 풀 다운",NodeType.SHOULDER,"#99FF99","어깨가 절대 올라가면 안된다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 해머 컬",NodeType.ELBOW,"#CCFFFF","옆구리에 팔꿈치를 붙여준 상태로 앞뒤,옆으로 빠지지 않게 당겨준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 플라이",NodeType.CHEST,"#FFCC66","가슴을 펴고 날개뼈를 내린다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 프론트 레이즈",NodeType.SHOULDER,"#99FF99","어깨를 들쑥날쑥하지 않은 상태로 눌러준 상태로 운동한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 인클라인 벤치프레스",NodeType.HIP,"#FF6699","엉덩이를 등받이쪽으로 밀어 넣어준 상태로 진행한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 래터럴 레이즈",NodeType.GRIP,"#0000FF","주전자 따르듯이 하지않고(내회전 금지), 외회전을 유지한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 런지",NodeType.LEG,"#FFFF66","무릎은 발가락 방향으로 앞으로 포물선으로 편하게 내려간다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("레그 익스텐션",NodeType.BACK,"#FF9999","상체는 고정해준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("리버스 펙덱 플라이",NodeType.ETC,"#CCCCCC","밀어줄때, 180도 넘지 않게 주의한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 시티드 로우",NodeType.BACK,"#FF9999","허리를 중립을 유지시켜준 상태에서 조금 눕는다는 느낌으로 당겨준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 컬",NodeType.LEG,"#FFFF66","다리너비는 어깨너비정도 벌려준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 밀리터리 프레스",NodeType.GRIP,"#0000FF","손 너비를 넓게 잡아야 삼두가 아니라 전면 삼각근에 집중할 수 있다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("숄더프레스 머신",NodeType.ELBOW,"#CCFFFF","올릴때는 팔꿈치를 끝까지 피지 말고 진행하여 어깨가 들리지 않게한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("레그프레스 머신(경사)",NodeType.LEG,"#FFFF66","발은 골반넓이만큼 벌려준다.", 0F, 0F, LocalDateTime.now(), ""));
+
+        //작업장2
+        noteService.addNoteNodeSet(new NodeSetCreateDto("어시스트 풀업",NodeType.BACK,"#FF9999","허리가 꺾이지 않게 주의하며, 보조할 경우에는 허리가 아니라 등근육을 잡아줘야 한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 벤치프레스",NodeType.LEG,"#FFFF66","발은 바닥에서 떼지 말고 살작 넓게 벌려서 땅에 고정한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 데드리프트",NodeType.ELBOW,"#CCFFFF","준비자세는 팔을 최대한 핀 상태로 키커진다 생각하면서 상체를 최대한 세워준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 풀 스쿼트",NodeType.SHOULDER,"#99FF99","바벨이 어깨의 두툼한 부분에 걸치게 한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 인클라인 벤치프레스",NodeType.ELBOW,"#CCFFFF","호를 그리며 천천히 내려오며 팔꿈치가 지면과 수직으로 밀 것", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 라잉 트라이셉스 익스텐션",NodeType.BACK,"#FF9999","견갑을 거상하여 고정해야 팔이 완전히 접힌다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("암 풀 다운",NodeType.ELBOW,"#CCFFFF","팔꿈치를 살짝 바깥으로 돌려준 상태로 골반쪽으로 당겨준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 해머 컬",NodeType.GRIP,"#0000FF","엄지가 하늘을 향하는 느낌으로 당겨준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 플라이",NodeType.ELBOW,"#CCFFFF","팔꿈치를 조금 굽히고 땅을 보도록 천천히 내린다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 프론트 레이즈",NodeType.GRIP,"#0000FF","손의 각도는 전면 삼각근의 자극이 잘 오는 각도로 자유롭게 진행한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 인클라인 벤치프레스",NodeType.BACK,"#FF9999","견갑골은 너무 강하게 후인하강하는 것이 아니라 가슴이 열릴정도만 해주면 된다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 래터럴 레이즈",NodeType.BACK,"#FF9999","상체를 숙인 상태에서 덤벨을 들어올려 측면삼각근이 중력의 영향을 100% 받을 수 있게 한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 런지",NodeType.BACK,"#FF9999","앞으로 무릎을 내밀때 상체를 세운다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("레그 익스텐션",NodeType.LEG,"#FFFF66","발끝은 몸쪽으로, 허벅지는 누른 상태로 끝까지 밀어준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("리버스 펙덱 플라이",NodeType.ELBOW,"#CCFFFF","팔꿈치는 약간 굽힌 채로 밀어준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 시티드 로우",NodeType.GRIP,"#0000FF","스트레이트 바로는 언더그립으로 잡아준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 컬",NodeType.CHEST,"#FFCC66","가슴은 활짝 열어준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 밀리터리 프레스",NodeType.ELBOW,"#CCFFFF","바벨을 부러뜨린다는 느낌으로 팔꿈치의 방향이 옆이 아닌 앞을 향하도록 당겨준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("숄더프레스 머신",NodeType.ELBOW,"#CCFFFF","내릴때는 팔꿈치를 90도까지만 내려온다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("레그프레스 머신(경사)",NodeType.BACK,"#FF9999","허리 말리지않게 등받이 붙이고,허리를 펴준다.", 0F, 0F, LocalDateTime.now(), ""));
+
+        //작업장3
+        noteService.addNoteNodeSet(new NodeSetCreateDto("어시스트 풀업",NodeType.ELBOW,"#CCFFFF","팔을 완전히 핀 상태에서 바를 바깥쪽으로 구부려준다고 생각하고, 아래로쪽으로 내려주면서 겨드랑이쪽에 붙여준다는 느낌으로 당긴다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 벤치프레스",NodeType.BACK,"#FF9999","허리는 바닥에서 살짝 띄워서 아치모양을 만들어준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 데드리프트",NodeType.LEG,"#FFFF66","바닥이 벽이라고 생각하고 못을 뽑는 다는 느낌으로 벽을 밀면서 일어난다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 풀 스쿼트",NodeType.BACK,"#FF9999","무게중심은 중앙보다 살짝 앞쪽으로 가야 허리를 숙이지 않을 수 있다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 인클라인 벤치프레스",NodeType.ELBOW,"#CCFFFF","팔꿈치 각도는 45~90도 사이", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 라잉 트라이셉스 익스텐션",NodeType.ELBOW,"#CCFFFF","완전히 접고 펴주며 수직이동하며, 아프면 견갑 하강이 되어있기 때문이다.", 0F, 0F, LocalDateTime.now(), ""));
+        //6
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 해머 컬",NodeType.SHOULDER,"#99FF99","어깨가 올라가지 않게 주의한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 플라이",NodeType.ELBOW,"#CCFFFF","이두근이 가슴에 밀착하도록 끝까지 수축해준다.", 0F, 0F, LocalDateTime.now(), ""));
+        //9
+        noteService.addNoteNodeSet(new NodeSetCreateDto("덤벨 인클라인 벤치프레스",NodeType.ELBOW,"#CCFFFF","올라갈때는 덤벨을 모아준다는 느낌으로 덤벨부터 밀면서 올라간다.", 0F, 0F, LocalDateTime.now(), ""));
+        //11
+        //12
+        noteService.addNoteNodeSet(new NodeSetCreateDto("레그 익스텐션",NodeType.ETC,"#CCCCCC","다리와 의자 사이 공간이 없을정도로 등받이를 조절한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("리버스 펙덱 플라이",NodeType.CHEST,"#FFCC66","가슴은 앞으로 둥글게 말고 진행한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 시티드 로우",NodeType.HIP,"#FF6699","누울 때 엉덩이는 따라가면 안되고 고정해준다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("케이블 컬",NodeType.ELBOW,"#CCFFFF","겨드랑이쪽에 붙여서 고정해준 상태로 진행한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("바벨 밀리터리 프레스",NodeType.BACK,"#FF9999","허리가 과하게 꺾이지 않기 위해 중립 상태로 유지한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("숄더프레스 머신",NodeType.GRIP,"#0000FF","손목 꺾이지 않고 일자로, 손바닥에 무게를 두고 진행한다.", 0F, 0F, LocalDateTime.now(), ""));
+        noteService.addNoteNodeSet(new NodeSetCreateDto("레그프레스 머신(경사)",NodeType.HIP,"#FF6699","고관절 접히면서 엉덩이 늘어나는 느낌으로 당긴다.", 0F, 0F, LocalDateTime.now(), ""));
 
     }
 
@@ -169,7 +230,7 @@ public class Initializer implements CommandLineRunner {
         machineList.add(Machine.createMachine("트라이셉스 익스텐션 머신" , "Lever Triceps Extension" , "팔" , "06071101/06071101_medium1.png" , "06071101/06071101_medium2.png" , "video/06071201_video1.mp4"));
         machineList.add(Machine.createMachine("풀업" , "Pull-up" , "등" , "06521101/06521101_medium1.png" , "06521101/06521101_medium2.png" , "video/06521201_video1.mp4"));
         machineList.add(Machine.createMachine("푸시업" , "Push-up" , "가슴" , "06621101/06621101_medium1.png" , "06621101/06621101_medium2.png" , "video/06621201_video1.mp4"));
-        machineList.add(Machine.createMachine("레그프레스 머신(경사)" , "Sled 45 Leg Press" , "하체" , "07391101/07391101_medium1.png" , "07391101/07391101_medium2.png" , "video/07391201_video1.mp4"));
+        machineList.add(Machine.createMachine("레그프레스 머신(경사45)" , "Sled 45 Leg Press" , "하체" , "07391101/07391101_medium1.png" , "07391101/07391101_medium2.png" , "video/07391201_video1.mp4"));
         machineList.add(Machine.createMachine("핵 스쿼트 머신" , "Sled Hack Squat" , "하체" , "07431101/07431101_medium1.png" , "07431101/07431101_medium2.png" , "video/07431201_video1.mp4"));
         machineList.add(Machine.createMachine("벤치프레스(스미스 머신)" , "Smith Bench Press" , "가슴" , "07481101/07481101_medium1.png" , "07481101/07481101_medium2.png" , "video/07481201_video1.mp4"));
         machineList.add(Machine.createMachine("인클라인 벤치프레스(스미스 머신)" , "Smith Incline Bench Press" , "가슴" , "07571101/07571101_medium1.png" , "07571101/07571101_medium2.png" , "video/07571201_video1.mp4"));
