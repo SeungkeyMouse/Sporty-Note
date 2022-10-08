@@ -46,7 +46,7 @@ public class AuthService {
     /**
      * 사용자로부터 인가 CODE를 받아서 TOKEN을 요청하는 함수
      */
-    public String getKakaoOauthToken(String code) throws JSONException {
+    public String getKakaoOauthToken(String code)  {
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
 
         data.add("grant_type", "authorization_code");
@@ -73,7 +73,7 @@ public class AuthService {
     /**
      * 사용자로부터 인가 CODE를 받아서 TOKEN을 요청하는 함수
      */
-    public String getGoogleOauthToken(String code) throws JSONException {
+    public String getGoogleOauthToken(String code)  {
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("grant_type", "authorization_code");
         data.add("client_id", GOOGLE_OAUTH_CLIENT_ID);
@@ -103,7 +103,7 @@ public class AuthService {
      * @param token
      * @return AccessToken
      */
-    public String kakaoLogin(String token) throws JSONException {
+    public String kakaoLogin(String token)  {
         GetKakaoUserInformationResponseDto kakaoUserInformation = getKakaoUserInformation(token);
         String kakaoUserId = Long.toString(kakaoUserInformation.getId());
         UserBasic userBasic;
@@ -187,7 +187,7 @@ public class AuthService {
      * @param token
      * @return AccessToken
      */
-    public String googleLogin(String token) throws JSONException  {
+    public String googleLogin(String token)   {
         GetGoogleUserInformationResponseDto GoogleUserInformation = getGoogleUserInformation(token);
         String GoogleUserId = GoogleUserInformation.getId();
         UserBasic userBasic;
