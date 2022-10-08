@@ -5,6 +5,7 @@ import com.sportynote.server.security.JwtTokenProvider;
 import com.sportynote.server.security.UserBasicPrincipal;
 import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.AuthService;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class LoginController {
      * @return 로그인 성공 유무 및 accessToken(JWT)
      */
     @GetMapping("/kakao/callback")
-    public KakaoLoginResponse kakaoOauth(@RequestParam("code") String code) {
+    public KakaoLoginResponse kakaoOauth(@RequestParam("code") String code) throws JSONException {
         String accessToken = authService.getKakaoOauthToken(code);
         return new KakaoLoginResponse(true, accessToken);
     }
@@ -38,7 +39,7 @@ public class LoginController {
      * @return 로그인 성공 유무 및 accessToken(JWT)
      */
     @GetMapping("/google/callback")
-    public GoogleLoginResponse googleOauth(@RequestParam("code") String code) {
+    public GoogleLoginResponse googleOauth(@RequestParam("code") String code) throws JSONException {
         String accessToken = authService.getGoogleOauthToken(code);
         return new GoogleLoginResponse(true, accessToken);
     }

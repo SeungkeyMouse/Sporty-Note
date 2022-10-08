@@ -11,6 +11,7 @@ import com.sportynote.server.security.JwtTokenProvider;
 import com.sportynote.server.util.RedisUtil;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class AuthService {
     /**
      * 사용자로부터 인가 CODE를 받아서 TOKEN을 요청하는 함수
      */
-    public String getKakaoOauthToken(String code) {
+    public String getKakaoOauthToken(String code) throws JSONException {
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
 
         data.add("grant_type", "authorization_code");
@@ -60,17 +61,11 @@ public class AuthService {
                 .toUri();
         ResponseEntity<GetKakaoOauthTokenResponseDto> result = restTemplate.postForEntity(uri, data,
                 GetKakaoOauthTokenResponseDto.class);
-        if (result.getStatusCode() == HttpStatus.OK) {
-            String token = result.getBody().getAccess_token();
-            if (token == null) {
-                return null;
-            } else {
-                return kakaoLogin(token);
-            }
-        }
-        else {
+        if (result.getStatusCode() != HttpStatus.OK) {
             return null;
         }
+        String token = result.getBody().getAccess_token();
+        return kakaoLogin(token);
     }
 
 
@@ -78,7 +73,7 @@ public class AuthService {
     /**
      * 사용자로부터 인가 CODE를 받아서 TOKEN을 요청하는 함수
      */
-    public String getGoogleOauthToken(String code) {
+    public String getGoogleOauthToken(String code) throws JSONException {
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("grant_type", "authorization_code");
         data.add("client_id", GOOGLE_OAUTH_CLIENT_ID);
@@ -95,38 +90,32 @@ public class AuthService {
         ResponseEntity<GetGoogleOauthTokenResponseDto> result = restTemplate.postForEntity(uri, data,
                 GetGoogleOauthTokenResponseDto.class);
 
-        if (result.getStatusCode() == HttpStatus.OK) {
-            String token = result.getBody().getAccess_token();
-            if (token == null) {
-                return null;
-            } else {
-                return googleLogin(token);
-            }
-        }
-        else {
+        if (result.getStatusCode() != HttpStatus.OK) {
             return null;
         }
+        String token = result.getBody().getAccess_token();
+        return googleLogin(token);
     }
-
-
 
 
     /**
      * Kakao 로그인 처리 후 accessToken 발행하는 함수
+     * @param token
+     * @return AccessToken
      */
-    public String kakaoLogin(String token) {
+    public String kakaoLogin(String token) throws JSONException {
         GetKakaoUserInformationResponseDto kakaoUserInformation = getKakaoUserInformation(token);
         String kakaoUserId = Long.toString(kakaoUserInformation.getId());
+        UserBasic userBasic;
         if (isAlreadyUser(kakaoUserId,SocialType.KAKAO)) { // 이미 DB에 저장되어있는 카카오 유저라면
-            UserBasic userBasic = userBasicRepository.findByOauthId(kakaoUserId);
-            return jwtTokenProvider.createUserToken(userBasic.getUserId());
+            userBasic = userBasicRepository.findByOauthId(kakaoUserId);
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8);
-            UserBasic userBasic = UserBasic.createdUserBasic(kakaoUserInformation.getKakao_account().getEmail(),kakaoUserId,
+            userBasic = UserBasic.createdUserBasic(kakaoUserInformation.getKakao_account().getEmail(),kakaoUserId,
                     kakaoUserInformation.getKakao_account().getProfile().getNickname(),userId,SocialType.KAKAO);
             userBasicRepository.save(userBasic);
-            return jwtTokenProvider.createUserToken(userBasic.getUserId());
         }
+        return jwtTokenProvider.createUserToken(userBasic.getUserId());
     }
 
     /**
@@ -195,31 +184,32 @@ public class AuthService {
 
     /**
      * Google 로그인 처리 후 넘겨받은 accessToken으로 JWT accessToken 발행하는 함수
-     * //https://www.googleapis.com/drive/v2/files?
+     * @param token
+     * @return AccessToken
      */
-    public String googleLogin(String token) {
+    public String googleLogin(String token) throws JSONException  {
         GetGoogleUserInformationResponseDto GoogleUserInformation = getGoogleUserInformation(token);
         String GoogleUserId = GoogleUserInformation.getId();
+        UserBasic userBasic;
         if (isAlreadyUser(GoogleUserId,SocialType.GOOGLE)) { // 이미 DB에 저장되어있는 구글 유저라면
-            UserBasic userBasic = userBasicRepository.findByOauthId(GoogleUserId);
-            return jwtTokenProvider.createAccessToken(userBasic.getUserId());
+            userBasic = userBasicRepository.findByOauthId(GoogleUserId);
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8);
-            UserBasic userBasic = UserBasic.createdUserBasic(GoogleUserInformation.getEmail(),GoogleUserInformation.getId(),GoogleUserInformation.getName(),userId,SocialType.GOOGLE);
+            userBasic = UserBasic.createdUserBasic(GoogleUserInformation.getEmail(),GoogleUserInformation.getId(),GoogleUserInformation.getName(),userId,SocialType.GOOGLE);
             userBasicRepository.save(userBasic);
-            return jwtTokenProvider.createAccessToken(userBasic.getUserId());
         }
+        return jwtTokenProvider.createUserToken(userBasic.getUserId());
     }
 
     /**
-     *
+     * 유저의 id를 받아 유저의 jwt를 레디스에서 제거하는 함수
      * @param userId
-     * @param Token
+     * @param jwtToken
      * @return
      */
-    public Boolean oauthLogout(String userId,String Token){
-        if (userId == jwtTokenProvider.getTokenToUserId(Token)){
-            return redisUtil.delete(Token);
+    public Boolean oauthLogout(String userId,String jwtToken){
+        if (userId.equals(jwtTokenProvider.getTokenToUserId(jwtToken))){
+            return redisUtil.delete(jwtToken);
         }
         return false;
     }
