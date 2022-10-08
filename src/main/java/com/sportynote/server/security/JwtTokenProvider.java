@@ -13,8 +13,9 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class JwtTokenProvider {
      * @return
      */
 
-    public String createUserToken(String uuid) throws JSONException{
+    public String createUserToken(String uuid) {
         String token = createAccessToken(uuid);
         createRedisToken(uuid,token);
         return token;
@@ -66,11 +67,11 @@ public class JwtTokenProvider {
      * @param accessToken
      * @return
      */
-    public void createRedisToken(String uuid, String accessToken) throws JSONException {
+    public void createRedisToken(String uuid, String accessToken) {
         redisUtil.set(accessToken, getLoginInfo(uuid), accessTokenValidTime/60); //minutes
     }
 
-    public String getLoginInfo(String uuid) throws JSONException{
+    public String getLoginInfo(String uuid) {
         Date currentTime = new Date();
         SimpleDateFormat date = new SimpleDateFormat("yyyy MM dd HH:mm");
         JSONObject jsonObject = new JSONObject();

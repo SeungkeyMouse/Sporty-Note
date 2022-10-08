@@ -28,7 +28,7 @@ public class LoginController {
      * @return 로그인 성공 유무 및 accessToken(JWT)
      */
     @GetMapping("/kakao/callback")
-    public KakaoLoginResponse kakaoOauth(@RequestParam("code") String code) throws JSONException {
+    public KakaoLoginResponse kakaoOauth(@RequestParam("code") String code)  {
         String accessToken = authService.getKakaoOauthToken(code);
         return new KakaoLoginResponse(true, accessToken);
     }
@@ -39,7 +39,7 @@ public class LoginController {
      * @return 로그인 성공 유무 및 accessToken(JWT)
      */
     @GetMapping("/google/callback")
-    public GoogleLoginResponse googleOauth(@RequestParam("code") String code) throws JSONException {
+    public GoogleLoginResponse googleOauth(@RequestParam("code") String code)  {
         String accessToken = authService.getGoogleOauthToken(code);
         return new GoogleLoginResponse(true, accessToken);
     }
