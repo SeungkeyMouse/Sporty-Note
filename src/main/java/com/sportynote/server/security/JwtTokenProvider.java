@@ -1,6 +1,7 @@
 package com.sportynote.server.security;
 
 import java.security.Key;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.sportynote.server.domain.UserBasic;
@@ -12,6 +13,8 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -31,12 +34,15 @@ public class JwtTokenProvider {
     }
 
     /**
-     * AccessToken Redis에 저장 후 AccessToken을 리턴
+     * 유저의 고유번호를 받아 accesstoken을 만들고
+     * @param uuid
+     * @return
      */
-    public String createUserToken(String uuid){
-        String accessToken = createAccessToken(uuid);
-        redisUtil.set(accessToken, "accessToken", accessTokenValidTime/60); //minutes
-        return accessToken;
+
+    public String createUserToken(String uuid) throws JSONException{
+        String token = createAccessToken(uuid);
+        createRedisToken(uuid,token);
+        return token;
     }
 
     /**
@@ -53,6 +59,25 @@ public class JwtTokenProvider {
                 .setExpiration(new Date(currentTime.getTime() + accessTokenValidTime))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    /**
+     * 유저 고유id와 accessToken을 받아 유저정보를 Redis에 저장하는 함수.
+     * @param accessToken
+     * @return
+     */
+    public void createRedisToken(String uuid, String accessToken) throws JSONException {
+        redisUtil.set(accessToken, getLoginInfo(uuid), accessTokenValidTime/60); //minutes
+    }
+
+    public String getLoginInfo(String uuid) throws JSONException{
+        Date currentTime = new Date();
+        SimpleDateFormat date = new SimpleDateFormat("yyyy MM dd HH:mm");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("userId",uuid);
+        jsonObject.put("IAT",date.format(currentTime));
+        jsonObject.put("EXP",date.format(currentTime.getTime()+accessTokenValidTime));
+        return String.valueOf(jsonObject);
     }
 
 

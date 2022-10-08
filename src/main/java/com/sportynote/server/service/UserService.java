@@ -17,9 +17,10 @@ public class UserService {
     UserBasicRepository userBasicRepository;
     JwtTokenProvider jwtTokenProvider;
     RedisUtil redisUtil;
-    public UserService(UserBasicRepository userBasicRepository, JwtTokenProvider jwtTokenProvider) {
+    public UserService(UserBasicRepository userBasicRepository, JwtTokenProvider jwtTokenProvider,RedisUtil redisUtil) {
         this.userBasicRepository = userBasicRepository;
         this.jwtTokenProvider=jwtTokenProvider;
+        this.redisUtil=redisUtil;
     }
 
     /**
@@ -30,6 +31,8 @@ public class UserService {
     public boolean deleteUser(String userId,String jwtToken) {
         UserBasic userBasic = userBasicRepository.findById(userId);
         userBasicRepository.delete(userBasic.getIdx());
+        System.out.println(jwtToken);
         return redisUtil.delete(jwtToken);
     }
+
 }
