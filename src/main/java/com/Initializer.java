@@ -41,7 +41,7 @@ public class Initializer implements CommandLineRunner {
 //        gymService.save(new GymDto("의정부헬스장", "37.5", "128", "의정부시", "무슨구", "땡땡동"));
 //        gymService.save(new GymDto("선릉헬스장", "37.5", "126", "서울시", "강남구", "선릉동"));
 //        userBasicSetup();
-//          machineSetup();//<-----------서버 시작시 실행
+          machineSetup();//<-----------서버 시작시 실행
 //        machineLocationSetup();
 //        noteSetup();
 ////        printUserFavorite();
@@ -49,7 +49,7 @@ public class Initializer implements CommandLineRunner {
 //        routineSetup();
 //        recordSetup();
 //        System.out.println(jwtTokenProvider.createAccessToken("12312312"));
-//        nodeSetDto();//<-----------서버 시작시 실행
+        nodeSetDto();//<-----------서버 시작시 실행
         System.out.println("실행 완료되었습니다.");
     }
 
