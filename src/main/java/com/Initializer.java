@@ -51,6 +51,7 @@ public class Initializer implements CommandLineRunner {
 //        System.out.println(jwtTokenProvider.createAccessToken("12312312"));
         nodeSetDto();//<-----------서버 시작시 실행
         System.out.println("실행 완료되었습니다.");
+        System.out.println(new Date());
     }
 
     private void nodeSetDto() {
