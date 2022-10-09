@@ -121,6 +121,7 @@ public class Initializer implements CommandLineRunner {
         noteService.addNoteNodeSet(new NodeSetCreateDto("숄더프레스 머신",NodeType.GRIP,"#0000FF","손목 꺾이지 않고 일자로, 손바닥에 무게를 두고 진행한다.", 0F, 0F, LocalDateTime.now(), ""));
         noteService.addNoteNodeSet(new NodeSetCreateDto("레그프레스 머신(경사)",NodeType.HIP,"#FF6699","고관절 접히면서 엉덩이 늘어나는 느낌으로 당긴다.", 0F, 0F, LocalDateTime.now(), ""));
 
+        //노드 추가로 db에 들어가는지 확인 필요
     }
 
     private void noteSetup() {
