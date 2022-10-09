@@ -92,6 +92,10 @@ public class NoteRepository {
         NoteDto noteDto = new NoteDto();
 
         //1. 머신에 대한 기본 정보
+        if(resultList.size()==0) {//해당하는 노트가 없는경우(미생성)
+            noteDto.setNodeDtos(new HashMap<>());
+            return noteDto;
+        }
         Machine machine = resultList.get(0).getNote().getMachine();
         MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getKrMachineName(),machine.getEngMachineName(),
                 machine.getTargetArea(), machine.getImageUrl1(), machine.getImageUrl2(), machine.getVideoUrl1());
