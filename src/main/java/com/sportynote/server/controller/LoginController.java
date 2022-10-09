@@ -5,7 +5,6 @@ import com.sportynote.server.security.JwtTokenProvider;
 import com.sportynote.server.security.UserBasicPrincipal;
 import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.AuthService;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
