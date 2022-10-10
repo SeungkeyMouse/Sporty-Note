@@ -31,7 +31,7 @@ public class MachineController {
      * @throws URISyntaxException
      */
     //모든 기구리스트 리턴!
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> getMachines() throws URISyntaxException {
         return ResponseEntity.ok(machineService.getMachines());
     }
