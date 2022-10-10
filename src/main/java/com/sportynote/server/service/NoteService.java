@@ -68,7 +68,16 @@ public class NoteService {
     }
 
     public NoteDto findMyNoteNodes(String userId, Long machineId) {
-        return noteRepository.findMyNoteNodes(userId, machineId);
+        NoteDto myNoteNodes = noteRepository.findMyNoteNodes(userId, machineId);
+        if(myNoteNodes.getNodeDtos().size()==0){//0인경우 머신 정보만 넘겨주고 나머지 map은 비어있음.
+            myNoteNodes.setNoteIdx(-1L);
+            Machine machine = machineRepository.findById(machineId);
+            MachineDto machineDto = new MachineDto(machine.getIdx(), machine.getKrMachineName(),machine.getEngMachineName(),
+                    machine.getTargetArea(), machine.getImageUrl1(), machine.getImageUrl2(), machine.getVideoUrl1());
+            myNoteNodes.setMachineDto(machineDto);
+        }
+
+        return myNoteNodes;
     }
 
     public Long updateNoteNode(NodeUpdateDto nodeDto) {

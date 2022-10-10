@@ -121,6 +121,7 @@ public class Initializer implements CommandLineRunner {
         noteService.addNoteNodeSet(new NodeSetCreateDto("숄더프레스 머신",NodeType.GRIP,"#0000FF","손목 꺾이지 않고 일자로, 손바닥에 무게를 두고 진행한다.", 0F, 0F, LocalDateTime.now(), ""));
         noteService.addNoteNodeSet(new NodeSetCreateDto("레그프레스 머신(경사)",NodeType.HIP,"#FF6699","고관절 접히면서 엉덩이 늘어나는 느낌으로 당긴다.", 0F, 0F, LocalDateTime.now(), ""));
 
+        //노드 추가로 db에 들어가는지 확인 필요
     }
 
     private void noteSetup() {
@@ -267,7 +268,8 @@ public class Initializer implements CommandLineRunner {
         machineList.add(Machine.createMachine("리버스 그립 하이로우 머신(원판)" , "Lever Reverse Grip High Row (plate loaded)" , "등" , "43781101/43781101_medium1.png" , "43781101/43781101_medium2.png" , "video/43781201_video1.mp4"));
 
         for (Machine machine : machineList) {
-            machineRepository.save(machine);
+            List<Machine> byName = machineRepository.findByName(machine.getKrMachineName());
+            if(byName.size()==0) machineRepository.save(machine);
         }
 
 
