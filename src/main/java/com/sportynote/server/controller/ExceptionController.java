@@ -44,6 +44,9 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(errorCode);
     }
 
+
+
+
     private ResponseEntity<Object> handleExceptionInternal(ErrorCode errorCode) {
         return ResponseEntity.status(errorCode.getHttpStatus())
                 .body(makeErrorResponse(errorCode));
@@ -52,6 +55,12 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     private ErrorResponse makeErrorResponse(ErrorCode errorCode) {
         return ErrorResponse.toErrorResponse(errorCode);
     }
+
+
+
+
+
+
 
     private ResponseEntity<Object> handleExceptionInternal(ErrorCode errorCode, String message) {
         return ResponseEntity.status(errorCode.getHttpStatus())
