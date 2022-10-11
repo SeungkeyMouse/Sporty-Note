@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 public class RedisUtil {
     private RedisTemplate<String, Object> redisTemplate;
     private RedisTemplate<String, Object> redisBlackListTemplate;
-
     RedisUtil(RedisTemplate<String, Object> redisTemplate, RedisTemplate<String, Object> redisBlackListTemplate) {
         this.redisTemplate = redisTemplate;
         this.redisBlackListTemplate = redisBlackListTemplate;
