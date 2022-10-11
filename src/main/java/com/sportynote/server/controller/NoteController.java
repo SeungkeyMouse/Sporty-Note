@@ -6,10 +6,13 @@ import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpCookie;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,5 +52,23 @@ public class NoteController {
         log.info("generalNote : "+ generalNoteNodes.toString());
 
         return ResponseEntity.ok(generalNoteNodes);
+    }
+
+    /*@PostMapping("/general/list")
+    public ResponseEntity<List<NoteDto>> getGeneralNotes(@RequestBody GeneralNotesDto generalNotesDto){
+        log.info("getGeneralNotes; generalNoteDto.getMachineIds={}", generalNotesDto.getMachineIdxs().toArray());
+        List<NoteDto> generalNotes = noteService.findGeneralNotes(generalNotesDto.getMachineIdxs());
+        log.info("generalNotes : " + generalNotes.toString());
+
+        return  ResponseEntity.ok(generalNotes);
+    }*/
+
+    @GetMapping("/general/list")
+    public ResponseEntity<List<NoteDto>> getGeneralNotes(@RequestParam List<String> list){
+        log.info("getGeneralNotes; generalNoteDto.getMachineIds={}", list.toArray());
+        List<NoteDto> generalNotes = noteService.findGeneralNotes(list);
+        log.info("generalNotes : " + generalNotes.toString());
+
+        return  ResponseEntity.ok(generalNotes);
     }
 }

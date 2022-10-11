@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -124,6 +125,17 @@ public class NoteService {
 
         generalNote.setNoteIdx(0L);
         return generalNote;
+    }
+    public List<NoteDto> findGeneralNotes(List<String> machineIds){
+        List<NoteDto> generalNoteList = new ArrayList<>();
+        for (String machineIdx : machineIds) {
+            Long machineId = Long.valueOf(machineIdx);
+
+            NoteDto generalNoteNodes = findGeneralNoteNodes(machineId);
+            if(generalNoteNodes.getNodeDtos().size()!=0)
+                generalNoteList.add(generalNoteNodes);
+        }
+        return generalNoteList;
     }
 
     public boolean addNoteNodeSet(NodeSetCreateDto nodeSetCreateDto) {
