@@ -19,7 +19,6 @@ import java.util.List;
 public class RecordRepository {
     private final EntityManager em;
     private final JPAQueryFactory jpaQueryFactory;
-
     QRecord m = new QRecord("m");
 
     public void save(Record record) {

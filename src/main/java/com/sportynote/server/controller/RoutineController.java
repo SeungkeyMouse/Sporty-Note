@@ -7,6 +7,7 @@ import com.sportynote.server.repository.query.RoutineMachineDto;
 import com.sportynote.server.repository.query.MachineDto;
 import com.sportynote.server.repository.query.RoutineDto;
 
+import com.sportynote.server.repository.query.RoutineModifyDto;
 import com.sportynote.server.security.UserBasicPrincipal;
 import com.sportynote.server.security.user.CurrentUser;
 import com.sportynote.server.service.RoutineService;
@@ -36,8 +37,7 @@ public class RoutineController {
     /** 루틴 Create */
     @PostMapping("")
     public ResponseEntity<?> addRoutines(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,@RequestBody RoutineDto routineDto) throws URISyntaxException {
-        System.out.println(userBasicPrincipal.getUserId()+" "+routineDto.getRoutineName());
-        return ResponseEntity.status(HttpStatus.valueOf(201)).body(routineService.addRoutine(userBasicPrincipal.getUserId(), routineDto));
+            return ResponseEntity.status(HttpStatus.valueOf(201)).body(routineService.addRoutine(userBasicPrincipal.getUserId(), routineDto));
     }
 
     /** 모든 루틴 Read */
@@ -55,8 +55,8 @@ public class RoutineController {
 
     /** 루틴 수정 Update */
     @PutMapping("/modify-routines")
-    public ResponseEntity<?> modifyRoutines(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @RequestBody RoutineDto routineDto) throws URISyntaxException {
-        return ResponseEntity.status(HttpStatus.valueOf(201)).body(routineService.modifyRoutine(userBasicPrincipal.getUserId(),routineDto));
+    public ResponseEntity<?> modifyRoutines(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @RequestBody RoutineModifyDto routineModifyDto) throws URISyntaxException {
+        return ResponseEntity.status(HttpStatus.valueOf(201)).body(routineService.modifyRoutine(userBasicPrincipal.getUserId(),routineModifyDto));
     }
 
     @DeleteMapping("/{routineName}")

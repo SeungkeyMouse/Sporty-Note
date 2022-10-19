@@ -48,9 +48,8 @@ public class RecordController {
 
     //기록 하나 보기
     @GetMapping("/day/{recordDay}")
-    public ResponseEntity<?> recordDay(@PathVariable String recordDay) {
-        String userid="123123";
-        List<RecordDto> results= recordService.findByRecordDay(recordDay,userid);
+    public ResponseEntity<?> recordDay(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @PathVariable String recordDay) {
+        List<RecordDto> results= recordService.findByRecordDay(userBasicPrincipal.getUserId(),recordDay);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
 
@@ -76,7 +75,7 @@ public class RecordController {
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
     }
 
-    /** Create 기록 (그래프) 완료체크시 */
+    /** Delete 기록 (그래프) 완료체크시 */
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRecords(@RequestBody RecordDto recordDto) throws URISyntaxException {
         result = (recordService.deleteRecord(recordDto)) ? "success" : "failed";
