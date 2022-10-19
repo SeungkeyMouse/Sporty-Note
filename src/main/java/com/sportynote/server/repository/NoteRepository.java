@@ -1,11 +1,8 @@
 package com.sportynote.server.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.sportynote.server.domain.QRecord;
+import com.sportynote.server.domain.*;
 import com.sportynote.server.type.NodeType;
-import com.sportynote.server.domain.Machine;
-import com.sportynote.server.domain.Note;
-import com.sportynote.server.domain.NoteNode;
 import com.sportynote.server.repository.query.MachineDto;
 import com.sportynote.server.repository.query.NodeDto;
 import com.sportynote.server.repository.query.NoteDto;
@@ -20,11 +17,13 @@ import java.util.*;
 @RequiredArgsConstructor
 public class NoteRepository {
     private final EntityManager em;
-    private final JPAQueryFactory jpaQueryFactory;
-    QRecord s = new QRecord("s");
+
     public void save(Note note) {
         em.persist(note);
     }
+    private final JPAQueryFactory jpaQueryFactory;
+    QNote qNote = new QNote("m");
+
     public Optional<Note> findById(Long noteIdx){
         return Optional.ofNullable(em.find(Note.class, noteIdx));
     }
@@ -132,5 +131,20 @@ public class NoteRepository {
         noteDto.setNodeDtos(nodeMap);
 
         return noteDto;
+    }
+
+    public Long delete(Note note) {
+        em.remove(note);
+        return note.getIdx();
+    }
+
+    public List<Note> findByMachineId(Long machineIdx) {
+        return em.createQuery("select n from Note n"
+                                + " join fetch n.machine"
+                                + " where n.machine.idx=: machineIdx" +
+                                " and n.deleted=false "
+                        , Note.class)
+                .setParameter("machineIdx", machineIdx)
+                .getResultList();
     }
 }
