@@ -24,25 +24,28 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ExceptionController extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(RestApiException.class)
+    @ExceptionHandler({RestApiException.class,IllegalArgumentException.class})
     public ResponseEntity<?> handleCustomException(RestApiException e) {
         ErrorCode errorCode = e.getErrorCode();
+        System.out.println("1111");
         return handleExceptionInternal(errorCode);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException e) {
-        log.warn("handleIllegalArgument", e);
-        ErrorCode errorCode = ExceptionCode.INVALID_PARAMETER;
-        return handleExceptionInternal(errorCode, e.getMessage());
-    }
+//    @ExceptionHandler(IllegalArgumentException.class)
+//    public ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException e) {
+//        log.warn("handleIllegalArgument", e);
+//        System.out.println("2222");
+//        ErrorCode errorCode = ExceptionCode.INVALID_PARAMETER;
+//        return handleExceptionInternal(errorCode);
+//    }
 
-    @ExceptionHandler({RuntimeException.class})
-    public ResponseEntity<Object> handleAllException(Exception ex) {
-        log.warn("handleAllException", ex);
-        ErrorCode errorCode = ExceptionCode.INTERNAL_SERVER_ERROR;
-        return handleExceptionInternal(errorCode);
-    }
+//    @ExceptionHandler({RuntimeException.class})
+//    public ResponseEntity<Object> handleAllException(Exception ex) {
+//        log.warn("handleAllException", ex);
+//        System.out.println("ex,"+ex);
+//        ErrorCode errorCode = ExceptionCode.INTERNAL_SERVER_ERROR;
+//        return handleExceptionInternal(errorCode);
+//    }
 
 
 

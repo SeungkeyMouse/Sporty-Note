@@ -31,7 +31,6 @@ public class UserService {
     public boolean deleteUser(String userId,String jwtToken) {
         UserBasic userBasic = userBasicRepository.findById(userId);
         userBasicRepository.delete(userBasic.getIdx());
-        System.out.println(jwtToken);
         return redisUtil.delete(jwtToken);
     }
 

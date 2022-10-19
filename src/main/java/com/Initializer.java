@@ -292,8 +292,8 @@ public class Initializer implements CommandLineRunner {
         for (long i = 1L; i < 5L; i++) {
             machines.add(i);
         }
-        RoutineDto routineDto = new RoutineDto( "lower", machines);
-        routineService.addRoutine("12312312",routineDto);
+        //RoutineDto routineDto = new RoutineDto( "lower", machines);
+        //routineService.addRoutine("12312312",routineDto);
     }
 
     void recordSetup() {
