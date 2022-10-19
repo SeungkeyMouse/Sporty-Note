@@ -60,7 +60,7 @@ public class RecordService {
     }
 
     /** 내 운동기록 불러오기 (날짜하나에 저장한 기록) */
-    public List<RecordDto> findByRecordDay(String recordDay, String userId){
+    public List<RecordDto> findByRecordDay(String userId,String recordDay){
         LocalDate localDate = stringToLocalDate(recordDay);
         List<Record> recordList = recordRepository.findByRecordDay(localDate,userId);
         List<RecordDto> RecordLists = new ArrayList<>();

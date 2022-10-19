@@ -38,7 +38,6 @@ public class UserController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUsers(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,HttpServletRequest request) throws URISyntaxException {
         String jwtToken = jwtTokenProvider.getTokenFromHeader(request);
-        System.out.println(jwtToken);
         return ResponseEntity.ok(userService.deleteUser(userBasicPrincipal.getUserId(),jwtToken));
     }
 }
