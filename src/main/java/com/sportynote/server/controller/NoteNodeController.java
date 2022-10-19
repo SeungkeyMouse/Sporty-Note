@@ -44,10 +44,11 @@ public class NoteNodeController {
 
     //3. 노드 삭제
     @DeleteMapping
-    public ResponseEntity<Long> deleteNoteNode(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,@RequestParam("note_node_idx") Long noteNodeIdx){
+    public ResponseEntity<Boolean> deleteNoteNode(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal,@RequestParam("note_node_idx") Long noteNodeIdx){
         log.info("deleteNoteNode; nodeDto={}", noteNodeIdx.toString());
-        Long response = noteService.deleteNoteNode(noteNodeIdx);
-        log.info("response : "+ response.toString());
+        Long deleteNoteIdx = noteService.deleteNoteNode(noteNodeIdx);
+        boolean response = noteService.deleteNoteIfNodeZero(deleteNoteIdx);
+        log.info("response : "+ response);
 
         return ResponseEntity.ok(response);
     }

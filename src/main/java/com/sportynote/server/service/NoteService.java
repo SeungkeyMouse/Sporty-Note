@@ -30,17 +30,17 @@ public class NoteService {
 
     public Long addNoteNode(String userId, NodeCreateDto nodeCreateDto) {
 
-        Optional<Note> optNote = noteRepository.findById(nodeCreateDto.getNoteIdx());
+        List<Note> noteList = noteRepository.findByMachineId(nodeCreateDto.getMachineIdx());
         Note note;
         //해당 기구에 대한 노트가 생성되지 않은 경우 -> 노트 먼저 생성
-        if (!optNote.isPresent()) {
+        if (noteList.size()==0) {
             note = Note.createNote(
                     userBasicRepository.findById(userId),
                     machineRepository.findById(nodeCreateDto.getMachineIdx())
             );
             noteRepository.save(note);
         } else {//해당 기구에 대한 노트가 이미 있는 경우 가져옴.
-            note = optNote.get();
+            note = noteList.get(0);
         }
         //이후 노드 생성
         NoteNode node;
@@ -105,14 +105,30 @@ public class NoteService {
         return notedMachines;
     }
 
+    /**
+     * 노드를 삭제하되, 만약 그것이 노트의 마지막 노드일 경우, "노트"도 삭제.
+     * @param nodeIdx
+     * @return 지워진 노드 idx
+     */
     public Long deleteNoteNode(Long nodeIdx) {
         NoteNode node = nodeRepository.findById(nodeIdx);
-        return nodeRepository.delete(node);
+        Long deletedNoteIdx = nodeRepository.delete(node);
+
+        return deletedNoteIdx;
+    }
+    public boolean deleteNoteIfNodeZero(Long deletedNoteIdx){
+        List<NoteNode> existsNote = nodeRepository.findByNoteId(deletedNoteIdx);
+        System.out.println(existsNote.toString());
+        if(existsNote.size()==0) {
+            Optional<Note> optNote = noteRepository.findById(deletedNoteIdx);
+            optNote.ifPresent(noteRepository::delete);
+            return true;
+        }
+        return false;
     }
 
     /**
      * 세팅용 노드 CRUD
-     *
      * @param machineId 노트 생성 안하고 nodeLocation처럼 바로 Machine에 꽂힌 노드
      * @return
      */
