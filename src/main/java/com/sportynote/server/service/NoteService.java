@@ -30,7 +30,7 @@ public class NoteService {
 
     public Long addNoteNode(String userId, NodeCreateDto nodeCreateDto) {
 
-        List<Note> noteList = noteRepository.findByMachineId(nodeCreateDto.getMachineIdx());
+        List<Note> noteList = noteRepository.findByMachineIdAndUserId(userId,nodeCreateDto.getMachineIdx());
         Note note;
         //해당 기구에 대한 노트가 생성되지 않은 경우 -> 노트 먼저 생성
         if (noteList.size()==0) {

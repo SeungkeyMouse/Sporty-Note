@@ -138,13 +138,15 @@ public class NoteRepository {
         return note.getIdx();
     }
 
-    public List<Note> findByMachineId(Long machineIdx) {
+    public List<Note> findByMachineIdAndUserId(String userId, Long machineIdx) {
         return em.createQuery("select n from Note n"
                                 + " join fetch n.machine"
                                 + " where n.machine.idx=: machineIdx" +
+                                " and n.userBasic.userId =: userId" +
                                 " and n.deleted=false "
                         , Note.class)
                 .setParameter("machineIdx", machineIdx)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 }
