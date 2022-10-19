@@ -1,5 +1,7 @@
 package com.sportynote.server.repository;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.sportynote.server.domain.QRecord;
 import com.sportynote.server.type.NodeType;
 import com.sportynote.server.domain.Machine;
 import com.sportynote.server.domain.Note;
@@ -18,7 +20,8 @@ import java.util.*;
 @RequiredArgsConstructor
 public class NoteRepository {
     private final EntityManager em;
-
+    private final JPAQueryFactory jpaQueryFactory;
+    QRecord s = new QRecord("s");
     public void save(Note note) {
         em.persist(note);
     }
