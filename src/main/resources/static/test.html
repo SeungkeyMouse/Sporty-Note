@@ -1,0 +1,43 @@
+<html>
+
+<head>
+  <title>Home</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<ul>
+  <li onclick="appleLogin(); return true;">
+    <a href="javascript:void(0)">
+      <span>Login with Apple</span>
+    </a>
+  </li>
+</ul>
+
+<script>
+  function appleLogin() {
+    $.ajax({
+      url: '/login/getAppleAuthUrl',
+      type: 'get',
+      async: false,
+      dataType: 'text',
+      success: function (res) {
+        location.href = res;
+      }
+    });
+  };
+
+  // $(document).ready(function() {
+  //   var appleInfo = '${appleInfo}';
+  //   if(appleInfo != ""){
+  //     var data = JSON.parse(appleInfo);
+  //     if(data['sub'] != null) {
+  //       alert("애플로그인 성공 \n accessToken : " + data['sub']);
+  //       alert(
+  //               "email : "
+  //               + data['email']);
+  //     }
+  //   });
+</script>
+</body>
+</html>

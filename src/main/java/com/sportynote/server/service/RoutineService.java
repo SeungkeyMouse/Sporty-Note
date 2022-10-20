@@ -35,7 +35,7 @@ public class RoutineService {
         if (routineCheck.size()==0) {
             for (Long machine : machines) {
                 Machine machineInfo = machineRepository.findById(machine);
-                Routine routine = Routine.createRoutine(routineDto.getRoutineName(), userBasicInfo, machineInfo);
+                Routine routine = Routine.createRoutine(routineDto.getRoutineName(), userBasicInfo);
                 routineList.add(routine);
             }
             routineRepositoryImpl.saveAll(routineList);
@@ -59,10 +59,10 @@ public class RoutineService {
     public List<RoutineMachineDto> findByIdAndRoutineName(String userId, String RoutineName){
         List<Routine> RoutineLists = routineRepository.findByIdAndRoutineName(userId, RoutineName);
         List<RoutineMachineDto> MachineLists = new ArrayList<>();
-        for(Routine routine : RoutineLists){
-            MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getKrMachineName(),
-                    routine.getMachine().getTargetArea(),routine.getMachine().getImageUrl1()));
-        }
+//        for(Routine routine : RoutineLists){
+//            MachineLists.add(new RoutineMachineDto(routine.getIdx(),routine.getMachine().getIdx(),routine.getMachine().getKrMachineName(),
+//                    routine.getMachine().getTargetArea(),routine.getMachine().getImageUrl1()));
+//        }
         return MachineLists;
     }
 
@@ -80,9 +80,9 @@ public class RoutineService {
         for(int i=0;i<routineModifyDto.getMachines().size();i++){
             routineDtoSet.add(routineModifyDto.getMachines().get(i));
         }
-        for(int i=0;i<routineExist.size();i++){
-            routineExistSet.add(routineExist.get(i).getMachine().getIdx());
-        }
+//        for(int i=0;i<routineExist.size();i++){
+//            routineExistSet.add(routineExist.get(i).getMachine().getIdx());
+//        }
         routineTempSet.addAll(routineExistSet); // A, A, B   기존, 기존복사, 요청
         routineExistSet.removeAll(routineDtoSet); // A-B, A, B 기존-요청, 기존복사, 요청
         routineDtoSet.removeAll(routineTempSet); //A-B,A ,B-A 기존-요청, 기존복사, 요청-기존복사
@@ -113,7 +113,7 @@ public class RoutineService {
         List<Routine> routineList = new ArrayList<>();
         for (Long machine : routineDtoSet) {
             Machine machineInfo = machineRepository.findById(machine);
-            Routine routine = Routine.createRoutine(newRoutineName,userBasic ,machineInfo);
+            Routine routine = Routine.createRoutine(newRoutineName,userBasic);
             routineList.add(routine);
         }
 

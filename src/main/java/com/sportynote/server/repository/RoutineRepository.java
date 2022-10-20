@@ -26,7 +26,7 @@ public class RoutineRepository {
                 .getResultList();
     }
     public void routineNameUpdate(String routineName,String newRoutineName,String userId){
-        em.createQuery("update Routine m set m.routineName =:newRoutineName where m.userBasic.userId=:userId and m.routineName=:routineName")
+        em.createQuery("update Routine m set m.routineName =:newRoutineName where m.userBasic.userId=:userId and m.routineName=:routineName and m.deleted = false")
                 .setParameter("routineName",routineName).setParameter("newRoutineName",newRoutineName)
                 .setParameter("userId",userId).executeUpdate();
     }

@@ -34,7 +34,6 @@ public class NoteNodeSet extends BaseEntity {
 
     private String color;
 
-
     private String text;
 
     private Float x_location;

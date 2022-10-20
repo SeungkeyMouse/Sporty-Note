@@ -60,6 +60,14 @@ dependencies {
 
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+	//apple
+	implementation group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '3.10'
+	// https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk16
+	implementation group: 'org.bouncycastle', name: 'bcprov-jdk16', version: '1.46'
+	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
 }
 
 
