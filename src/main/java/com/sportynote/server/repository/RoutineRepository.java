@@ -1,13 +1,15 @@
 package com.sportynote.server.repository;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sportynote.server.domain.*;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,7 +19,10 @@ public class RoutineRepository {
         em.persist(routine);
     }
 
-    public void deleteMachine(Long idx){
+    public void deleteRoutineList(Long idx){
+        em.remove(em.find(RoutineList.class, idx));
+    }
+    public void deleteRoutine(Long idx){
         em.remove(em.find(Routine.class, idx));
     }
 
@@ -36,20 +41,37 @@ public class RoutineRepository {
                 .setParameter("userId",userId).getResultList();
     }
 
-
-
-
-    public List<Routine> findByIdAndRoutineName(String userid, String RoutineName){
-        return em.createQuery("select m from Routine m"
-                        + " join fetch m.machine"
-                        + " join fetch m.userBasic where m.userBasic.userId=:userid and m.routineName=:RoutineName",Routine.class)
-                .setParameter("userid",userid).setParameter("RoutineName",RoutineName).getResultList();
+    public List<RoutineList> findByRoutineListById(Long routineIdx){
+        return em.createQuery("select m from RoutineList m where m.routine.idx=:routineIdx",RoutineList.class)
+                .setParameter("routineIdx",routineIdx).getResultList();
     }
 
-    public Routine findByUserIdAndMachineIdAndRoutineName(String userId, Long machineId, String routineName) {
-            return em.createQuery("select m from Routine m where m.userBasic.userId=:userid and m.machine.idx=:machineId and m.routineName=:routineName", Routine.class)
-                    .setParameter("userid", userId).setParameter("machineId",machineId).setParameter("routineName", routineName).getSingleResult();
+    public List<RoutineList> findByIdAndRoutineList(Long routineIdx){
+        return em.createQuery("select m from RoutineList m"
+                        + " join fetch m.machine" + " join fetch m.routine"
+                        + " where m.routine.idx=:routineIdx",RoutineList.class)
+                .setParameter("routineIdx",routineIdx).getResultList();
     }
+
+    public Optional<Routine> findByIdAndRoutineName(String userid, String routineName) {
+        try {
+            return Optional.ofNullable(em.createQuery("select m from Routine m"
+                            + " join fetch m.userBasic where m.userBasic.userId=:userid and m.routineName=:routineName", Routine.class)
+                    .setParameter("userid", userid).setParameter("routineName", routineName).getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    public RoutineList findByMachineIdAndRoutineId(Long machineId, Long routineId) {
+            return em.createQuery("select m from RoutineList m"+
+                            " where m.machine.idx=:machineId and m.routine.idx=:routineId", RoutineList.class)
+                    .setParameter("machineId",machineId)
+                    .setParameter("routineId", routineId)
+                    .getSingleResult();
+    }
+
+
 //    public List<Routine> addRoutine(String userId, Routine routine){
 //    }
 

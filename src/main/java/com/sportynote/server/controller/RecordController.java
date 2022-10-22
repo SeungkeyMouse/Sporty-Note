@@ -35,7 +35,7 @@ public class RecordController {
     }
 
     /**
-     * 결과 상태 코드 리턴 변수*/
+     * 결과 상태 코드 리턴 변수 */
     private String result;
     private int status_code;
 

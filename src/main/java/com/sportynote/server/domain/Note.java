@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE note SET deleted = true WHERE user_favorite_idx = ?")
+@SQLDelete(sql = "UPDATE note SET deleted = true WHERE note_idx = ?")
 @Where(clause = "deleted=false")
 public class Note extends BaseEntity {
     @Id

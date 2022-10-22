@@ -30,8 +30,9 @@ public class Routine extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private UserBasic userBasic;
 
-//    @OneToMany(mappedBy = "RoutineList", cascade= CascadeType.ALL)
-//    private List<RoutineList> routineList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "routine", cascade= CascadeType.ALL)
+    private List<RoutineList> routineLists = new ArrayList<>();
 
     public Routine(String routineName, UserBasic userBasic){
         this.routineName=routineName;
@@ -39,7 +40,7 @@ public class Routine extends BaseEntity {
     }
 
     @Builder //수정 빌더
-    public Routine(Long idx, String routineName, UserBasic userBasic, Machine machine){
+    public Routine(Long idx, String routineName, UserBasic userBasic){
         this.idx=idx;
         this.routineName=routineName;
         this.userBasic=userBasic;

@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE machine SET deleted = true WHERE user_favorite_idx = ?")
+@SQLDelete(sql = "UPDATE machine SET deleted = true WHERE machine_idx = ?")
 @Where(clause = "deleted=false")
 public class Machine extends BaseEntity {
     @Id
@@ -54,7 +54,7 @@ public class Machine extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
-    private List<Routine> routines = new ArrayList<>();
+    private List<RoutineList> routineLists = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
