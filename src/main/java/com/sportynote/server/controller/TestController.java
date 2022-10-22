@@ -45,7 +45,7 @@ import java.security.*;
 public class TestController {
 
     public static final String TEAM_ID = "9NS2G9S8SM";
-    public static final String REDIRECT_URL = "https://api.sportynote.com/auth/code";
+    public static final String REDIRECT_URL = "https://api.sportynote.com/gym/login/oauth_apple";
     public static final String CLIENT_ID = "com.sportynote.services";
     public static final String KEY_ID = "2RJ9H5FGB8";
     public static final String AUTH_URL = "https://appleid.apple.com";
