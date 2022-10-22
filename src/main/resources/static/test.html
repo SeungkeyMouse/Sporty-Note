@@ -17,7 +17,8 @@
 <script>
   function appleLogin() {
     $.ajax({
-      url: '/login/getAppleAuthUrl',
+      // url: '/login/getAppleAuthUrl',
+      url: '/gym/login/oauth_apple',
       type: 'get',
       async: false,
       dataType: 'text',
