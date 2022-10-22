@@ -3,26 +3,39 @@ package com.sportynote.server.controller;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemReader;
+import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.interfaces.ECPrivateKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.Date;
+import java.util.*;
+
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.ECDSASigner;
 import java.security.*;
@@ -38,11 +51,6 @@ public class TestController {
     public static final String AUTH_URL = "https://appleid.apple.com";
     public static final String KEY_PATH = "static/apple/AuthKey_QS9UWDPNF3.p8";
 
-    @GetMapping("/test")
-    public Integer Test() throws IOException {
-        System.out.println(readPrivateKey("static/apple/AuthKey_QS9UWDPNF3.p8"));
-        return 1;
-    }
     @RequestMapping(value = "/login/getAppleAuthUrl")
     public @ResponseBody String getAppleAuthUrl(HttpServletRequest request) throws Exception {
         String reqUrl =
@@ -54,48 +62,12 @@ public class TestController {
                         + "&response_type=code id_token&scope=name email&response_mode=form_post";
         return reqUrl;
     }
-//    @RequestMapping(value = "/login/oauth_apple")
-//    public String oauth_apple(HttpServletRequest request, @RequestParam(value = "code", required= false) String code
-//            , HttpServletResponse response
-//            , Model model) throws Exception {
-//
-//        // 애플로그인 취소시 로그인페이지로 이동
-//        if(code == null) {
-//            return "/test/test";
-//        }
-//
-//        String client_id = CLIENT_ID;
-//        String client_secret = createClientSecret(TEAM_ID, CLIENT_ID, KEY_ID, KEY_PATH, AUTH_URL);
-//
-//        // 토큰 검증 및 발급
-//        String reqUrl = AUTH_URL + "/auth/token";
-//        Map<String, String> tokenRequest = new HashMap<>();
-//        tokenRequest.put("client_id", client_id);
-//        tokenRequest.put("client_secret", client_secret);
-//        tokenRequest.put("code", code);
-//        tokenRequest.put("grant_type", "authorization_code");
-//        String apiResponse = doPost(reqUrl, tokenRequest);
-//
-//        JSONObject tokenResponse = new JSONObject(apiResponse);
-//        JSONObject appleInfo = decodeFromIdToken(tokenResponse.getString("id_token"));
-//
-//        /**
-//
-//         TO DO : 리턴받은 appleInfo로
-//         , 회원가입처리
-//         , 로그인처리
-//         , 처리 후 원하는 위치 이동
-//         */
-//
-//
-//        // 추후 아래는 삭제
-//        model.addAttribute("appleInfo", appleInfo);
-//        return "/test/test";
-//    }
+   
     public String createClientSecret(String teamId, String clientId, String keyId, String keyPath, String authUrl) throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
         JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.ES256).keyID(keyId).build();
         JWTClaimsSet claimsSet = new JWTClaimsSet();
         Date currentTime = new Date();
+
         claimsSet.setIssuer(teamId);
         claimsSet.setIssueTime(currentTime);
         claimsSet.setExpirationTime(new Date(currentTime.getTime() + 3600000));
@@ -106,10 +78,13 @@ public class TestController {
 
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(readPrivateKey(keyPath));
         KeyFactory kf = KeyFactory.getInstance("EC");
+
         try {
             ECPrivateKey ecPrivateKey = (ECPrivateKey) kf.generatePrivate(spec);
             JWSSigner jwsSigner = new ECDSASigner(ecPrivateKey.getS());
+
             jwt.sign(jwsSigner);
+
         } catch (JOSEException e) {
             e.printStackTrace();
         }
@@ -131,5 +106,68 @@ public class TestController {
             e.printStackTrace();
         }
         return content;
+    }
+
+    public String doPost(String url, Map<String, String> param) {
+        String result = null;
+        CloseableHttpClient httpclient = null;
+        CloseableHttpResponse response = null;
+        Integer statusCode = null;
+        String reasonPhrase = null;
+        try {
+            httpclient = HttpClients.createDefault();
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
+            List<NameValuePair> nvps = new ArrayList<>();
+            Set<Map.Entry<String, String>> entrySet = param.entrySet();
+            for (Map.Entry<String, String> entry : entrySet) {
+                String fieldName = entry.getKey();
+                String fieldValue = entry.getValue();
+                nvps.add(new BasicNameValuePair(fieldName, fieldValue));
+            }
+            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(nvps);
+            httpPost.setEntity(formEntity);
+            response = httpclient.execute(httpPost);
+            statusCode = response.getStatusLine().getStatusCode();
+            HttpEntity entity = response.getEntity();
+            result = EntityUtils.toString(entity, "UTF-8");
+
+            if (statusCode != 200) {
+                System.out.println("애러");
+            }
+            EntityUtils.consume(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (response != null) {
+                    response.close();
+                }
+                if (httpclient != null) {
+                    httpclient.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public JSONObject decodeFromIdToken(String id_token) {
+
+        try {
+            SignedJWT signedJWT = SignedJWT.parse(id_token);
+            ReadOnlyJWTClaimsSet getPayload = signedJWT.getJWTClaimsSet();
+            String appleInfo = getPayload.toJSONObject().toJSONString();
+            JSONObject payload = new JSONObject(appleInfo);
+
+            if (payload != null) {
+                return payload;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
