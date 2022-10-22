@@ -17,7 +17,6 @@ import java.util.*;
 @RequiredArgsConstructor
 public class NoteRepository {
     private final EntityManager em;
-
     public void save(Note note) {
         em.persist(note);
     }

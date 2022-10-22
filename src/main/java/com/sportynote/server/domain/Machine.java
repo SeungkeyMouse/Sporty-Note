@@ -54,7 +54,7 @@ public class Machine extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)
-    private List<Routine> routines = new ArrayList<>();
+    private List<RoutineList> routineLists = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "machine", cascade= CascadeType.ALL)

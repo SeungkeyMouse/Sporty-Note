@@ -33,7 +33,6 @@ public class NoteNode extends BaseEntity {
 
     private String color;
 
-
     private String text;
     private Float x_location;
     private Float y_location;

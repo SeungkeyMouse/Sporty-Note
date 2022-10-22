@@ -30,31 +30,27 @@ public class Routine extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private UserBasic userBasic;
 
-    @NotNull
-    @JoinColumn(name="machine_idx")
-    @ManyToOne
-    private Machine machine;
 
-    public Routine(String routineName, UserBasic userBasic, Machine machine){
+    @OneToMany(mappedBy = "routine", cascade= CascadeType.ALL)
+    private List<RoutineList> routineLists = new ArrayList<>();
+
+    public Routine(String routineName, UserBasic userBasic){
         this.routineName=routineName;
         this.userBasic=userBasic;
-        this.machine=machine;
     }
 
     @Builder //수정 빌더
-    public Routine(Long idx, String routineName, UserBasic userBasic, Machine machine){
+    public Routine(Long idx, String routineName, UserBasic userBasic){
         this.idx=idx;
         this.routineName=routineName;
         this.userBasic=userBasic;
-        this.machine=machine;
     }
 
     //==Routine 생성 메서드==//
-    public static Routine createRoutine(String routineName, UserBasic userBasic, Machine machine) {
+    public static Routine createRoutine(String routineName, UserBasic userBasic) {
         return Routine.builder()
                 .routineName(routineName)
                 .userBasic(userBasic)
-                .machine(machine)
                 .build();
     }
 

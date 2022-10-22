@@ -110,7 +110,7 @@ public class AuthService {
         if (isAlreadyUser(kakaoUserId,SocialType.KAKAO)) { // 이미 DB에 저장되어있는 카카오 유저라면
             userBasic = userBasicRepository.findByOauthId(kakaoUserId);
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
-            String userId = UUID.randomUUID().toString().substring(0,8);
+            String userId = UUID.randomUUID().toString().substring(0,8).toUpperCase();
             userBasic = UserBasic.createdUserBasic(kakaoUserInformation.getKakao_account().getEmail(),kakaoUserId,
                     kakaoUserInformation.getKakao_account().getProfile().getNickname(),userId,SocialType.KAKAO);
             userBasicRepository.save(userBasic);
@@ -194,7 +194,7 @@ public class AuthService {
         if (isAlreadyUser(GoogleUserId,SocialType.GOOGLE)) { // 이미 DB에 저장되어있는 구글 유저라면
             userBasic = userBasicRepository.findByOauthId(GoogleUserId);
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
-            String userId = UUID.randomUUID().toString().substring(0,8);
+            String userId = UUID.randomUUID().toString().substring(0,8).toUpperCase();
             userBasic = UserBasic.createdUserBasic(GoogleUserInformation.getEmail(),GoogleUserInformation.getId(),GoogleUserInformation.getName(),userId,SocialType.GOOGLE);
             userBasicRepository.save(userBasic);
         }
