@@ -13,11 +13,10 @@
     </a>
   </li>
 </ul>
-
+<!--      // url: '/login/getAppleAuthUrl',-->
 <script>
   function appleLogin() {
     $.ajax({
-      // url: '/login/getAppleAuthUrl',
       url: '/gym/login/oauth_apple',
       type: 'get',
       async: false,
