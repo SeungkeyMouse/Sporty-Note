@@ -29,7 +29,11 @@ import static com.sportynote.server.controller.TestController.*;
 @RequiredArgsConstructor
 @RequestMapping("/gym")
 public class GymController {
-
+    public static final String TEAM_ID = "9NS2G9S8SM";
+    public static final String CLIENT_ID = "com.sportynote.services";
+    public static final String KEY_ID = "2RJ9H5FGB8";
+    public static final String AUTH_URL = "https://appleid.apple.com";
+    public static final String KEY_PATH = "static/apple/AuthKey_QS9UWDPNF3.p8";
     TestController testController;
     @RequestMapping(value = "/login/oauth_apple")
     public ResponseEntity<?> oauth_apple(HttpServletRequest request, @RequestParam(value = "code", required= false) String code
