@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE user_Basic SET deleted = true WHERE user_basic_idx = ?")
+@SQLDelete(sql = "UPDATE user_basic SET deleted = true WHERE user_basic_idx = ?")
 @Where(clause = "deleted=false")
 public class UserBasic extends BaseEntity implements Serializable {
     @Id
