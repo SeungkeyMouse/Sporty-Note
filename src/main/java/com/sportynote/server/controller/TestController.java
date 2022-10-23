@@ -5,6 +5,7 @@ import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -22,15 +23,14 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.security.interfaces.ECPrivateKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -42,6 +42,7 @@ import java.security.*;
 
 
 @Controller
+@Slf4j
 public class TestController {
 
     public static final String TEAM_ID = "9NS2G9S8SM";
@@ -51,7 +52,7 @@ public class TestController {
     public static final String AUTH_URL = "https://appleid.apple.com";
     public static final String KEY_PATH = "static/apple/AuthKey_QS9UWDPNF3.p8";
 
-    @RequestMapping(value = "/login/getAppleAuthUrl")
+    @GetMapping(value = "/login/getAppleAuthUrl")
     public @ResponseBody String getAppleAuthUrl(HttpServletRequest request) throws Exception {
         String reqUrl =
                 AUTH_URL
@@ -62,7 +63,10 @@ public class TestController {
                         + "&response_type=code id_token&scope=name email&response_mode=form_post";
         return reqUrl;
     }
-   
+    @PostMapping(value = "/login/getAppleAuthUrl")
+    public String getApplePLZ(){
+        return "HI";
+    }
     public String createClientSecret(String teamId, String clientId, String keyId, String keyPath, String authUrl) throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
         JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.ES256).keyID(keyId).build();
         JWTClaimsSet claimsSet = new JWTClaimsSet();
@@ -75,6 +79,7 @@ public class TestController {
         claimsSet.setSubject(clientId);
 
         SignedJWT jwt = new SignedJWT(header, claimsSet);
+        log.info("createClientSecret; jwt={}", jwt);
 
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(readPrivateKey(keyPath));
         KeyFactory kf = KeyFactory.getInstance("EC");
@@ -91,7 +96,7 @@ public class TestController {
 
         return jwt.serialize();
 }
-    private byte[] readPrivateKey(String keyPath) throws IOException {
+    /*private byte[] readPrivateKey(String keyPath) throws IOException {
         Resource resource = new ClassPathResource(keyPath);
         byte[] content = null;
 
@@ -105,6 +110,26 @@ public class TestController {
         {
             e.printStackTrace();
         }
+        log.info("readPrivateKey; content={}", content);
+
+        return content;
+    }*/
+
+    private byte[] readPrivateKey(String keyPath) {
+
+        ClassPathResource resource = new ClassPathResource(keyPath);
+        byte[] content = null;
+
+        try (Reader keyReader = new InputStreamReader(resource.getInputStream());
+             PemReader pemReader = new PemReader(keyReader)) {
+            {
+                PemObject pemObject = pemReader.readPemObject();
+                content = pemObject.getContent();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return content;
     }
 
