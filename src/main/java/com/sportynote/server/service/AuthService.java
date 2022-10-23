@@ -214,6 +214,17 @@ public class AuthService {
         return false;
     }
 
+    /**
+     * Redis에 저장되어 있는 jwt 여부에 따라 로그인 여부를 파악하는 함수
+     * @param jwtToken
+     * @return
+     */
+    public Boolean isLogin(String jwtToken) {
+        if (jwtToken == null) {
+            return false;
+        }
+        return redisUtil.hasKey(jwtToken);
+    }
     @Value("${KAKAO_OAUTH_API_KEY}")
     private String KAKAO_OAUTH_API_KEY;
 

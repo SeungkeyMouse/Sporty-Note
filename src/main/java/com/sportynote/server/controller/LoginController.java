@@ -59,4 +59,15 @@ public class LoginController {
     public void StringCode (@RequestParam("code") String code) {
     }
 
+    /**
+     * 로그인 여부를 확인하는 함수
+     * @param request
+     * @return
+     */
+    @GetMapping("/isLogin")
+    public ResponseEntity<?> isLogin(HttpServletRequest request) {
+        String jwtToken = jwtTokenProvider.getTokenFromHeader(request);
+        return ResponseEntity.status(200).body(authService.isLogin(jwtToken));
+    }
+
 }
