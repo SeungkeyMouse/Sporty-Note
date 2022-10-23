@@ -29,8 +29,8 @@ public class WebAppConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry
-                .addMapping("/**")
-                .allowedOriginPatterns("*");
+                .addMapping("/**");
+//                .allowedOriginPatterns("*");
 
         // .allowedOrigins("//dapi.kakao.com");
     }
