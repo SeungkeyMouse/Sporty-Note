@@ -9,6 +9,9 @@ build/
 application-dev.properties
 log*
 
+=======
+resources/static
+SwaggerConfig
 
 ### STS ###
 .apt_generated
