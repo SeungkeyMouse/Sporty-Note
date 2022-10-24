@@ -22,15 +22,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String jwtToken = jwtTokenProvider.getTokenFromHeader(request);
-
         //테스트용
-        if(("test").equals(jwtToken)){
-            //슈도코드-> dev일때랑 prod일때 확인해서 실행하는 메소드로 추출
-            //"be1023ce"
-            Authentication authentication = jwtTokenProvider.getTestAuthentication();
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-        else if (jwtToken != null && jwtTokenProvider.validateToken(jwtToken)) {
+//       if(("test").equals(jwtToken)){
+//            //슈도코드-> dev일때랑 prod일때 확인해서 실행하는 메소드로 추출
+//            //"be1023ce"
+//            Authentication authentication = jwtTokenProvider.getTestAuthentication();
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+//       }
+        if (jwtToken != null && jwtTokenProvider.validateToken(jwtToken)) {
             Authentication authentication = jwtTokenProvider.getAuthentication(jwtToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
