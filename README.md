@@ -7,6 +7,7 @@
 <p align="center">
   <br>
   <img width="400" alt="image" src="https://user-images.githubusercontent.com/57786933/196044691-93ad7348-2029-4258-b10a-adb7efca5838.jpg">
+
   <br>
   <img width="400" alt="image" src="https://user-images.githubusercontent.com/57786933/196044702-7b0689b1-8dc0-4570-b94e-66cdde73aca0.jpg">
   <img width="400" alt="image" src="https://user-images.githubusercontent.com/57786933/196044698-0e1168ba-3e29-4648-86e0-e752d8628f77.jpg">
@@ -15,10 +16,14 @@
 </p>
 
 
-## 프로젝트 소개
+## ✅  프로젝트 소개
+
+### 프로젝트 구조
+
+<img width="820" alt="image" src="https://user-images.githubusercontent.com/47708717/197838310-f97f804a-4546-4725-9b35-4b3e0acbe7a7.png">
 
 <p align="justify">
-프로젝트 개요/동기
+### 프로젝트 개요/동기
 </p>
 1) 헬스장에서 기구 사용 방법에 대한 접근이 어려움. <br>
 - 간편하게 확인할 수 있는 기구 사용법에 대한 직관적인 시각 자료 제공. <br><br>
@@ -29,7 +34,7 @@
 
 <br>
 
-## 기술 스택
+## ✅  기술 스택
 
 | Java | SpringBoot |  JPA   |  JPQL   |  QueryDSL   |   MySQL   |   Redis  |  AWS S3/EC2/CDN/CodePipeline   |
 | :--------: | :--------: | :------: | :-----: |:------: |:------:  |:------: |:------: |
@@ -55,7 +60,7 @@
 - Redis를 사용하여 토큰을 관리함
 <br>
 
-## 배운 점 & 아쉬운 점
+## ✅  배운 점 & 아쉬운 점
 - 도메인을 결정하고, 프로젝트 아키텍처 및 DB 설계의 과정을 통해 많은 고민과 숙련된 경험을 얻을 수 있었습니다.
 - `Jira`를 사용하여 스토리 포인트와 스프린트 방식을 진행해보았으나, 프로젝트 진행 인원이 3명인 것을 감안하여 효율성을 감안하여 `Notion`으로 회의 및 멘토링 내용들을 정리하며 좀 더 원활하게 프로젝트를 수행 할 수 있었습니다.
 - Spring Data JPA에서 페이징(Paging)을 사용해보지 못한 것이 아쉽습니다. 추후 Machine의 조회 과정에서 사진을 다수 불러오기 때문에 이에 대하여 Paging을 도입할 계획이 있습니다.
