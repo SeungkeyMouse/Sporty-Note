@@ -28,7 +28,6 @@ public class RoutineService {
     /** 루틴 하나(여러 기구)첫 추가 CREATE */
     @Transactional
     public boolean addRoutine(String userId, RoutineDto routineDto) {
-        System.out.println(userId+" "+routineDto.getRoutineName());
         UserBasic userBasicInfo = userBasicRepository.findById(userId);
         Optional<Routine> routineCheck = routineRepository.findByIdAndRoutineName(userId, routineDto.getRoutineName());
         // 사용자의 루틴이름이 있을경우 false 리턴
@@ -120,14 +119,6 @@ public class RoutineService {
         routineTempSet.addAll(routineExistSet); // A, A, B   기존, 기존복사, 요청
         routineExistSet.removeAll(routineDtoSet); // A-B, A, B 기존-요청, 기존복사, 요청
         routineDtoSet.removeAll(routineTempSet); //A-B,A ,B-A 기존-요청, 기존복사, 요청-기존복사
-
-        System.out.println(routineTempSet.size());
-        System.out.println(routineExistSet.size());
-        System.out.println(routineDtoSet.size());
-
-        for (Long machine : routineDtoSet) {
-            System.out.println(machine);
-        }
 
         UserBasic userBasic = userBasicRepository.findById(userId); //예시 userid
 

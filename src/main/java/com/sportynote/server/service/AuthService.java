@@ -73,29 +73,29 @@ public class AuthService {
     /**
      * 사용자로부터 인가 CODE를 받아서 TOKEN을 요청하는 함수
      */
-    public String getGoogleOauthToken(String code)  {
-        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-        data.add("grant_type", "authorization_code");
-        data.add("client_id", GOOGLE_OAUTH_CLIENT_ID);
-        data.add("client_secret", GOOGLE_OAUTH_CLIENT_SECRET);
-        data.add("redirect_uri", GOOGLE_OAUTH_REDIRECT_URI);
-        data.add("code", code);
-
-        URI uri = UriComponentsBuilder
-                .fromUriString(GOOGLE_OAUTH_TOKEN_API_URI)
-                .encode()
-                .build()
-                .toUri();
-
-        ResponseEntity<GetGoogleOauthTokenResponseDto> result = restTemplate.postForEntity(uri, data,
-                GetGoogleOauthTokenResponseDto.class);
-
-        if (result.getStatusCode() != HttpStatus.OK) {
-            return null;
-        }
-        String token = result.getBody().getAccess_token();
-        return googleLogin(token);
-    }
+//    public String getGoogleOauthToken(String code)  {
+//        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+//        data.add("grant_type", "authorization_code");
+//        data.add("client_id", GOOGLE_OAUTH_CLIENT_ID);
+//        data.add("client_secret", GOOGLE_OAUTH_CLIENT_SECRET);
+//        data.add("redirect_uri", GOOGLE_OAUTH_REDIRECT_URI);
+//        data.add("code", code);
+//
+//        URI uri = UriComponentsBuilder
+//                .fromUriString(GOOGLE_OAUTH_TOKEN_API_URI)
+//                .encode()
+//                .build()
+//                .toUri();
+//
+//        ResponseEntity<GetGoogleOauthTokenResponseDto> result = restTemplate.postForEntity(uri, data,
+//                GetGoogleOauthTokenResponseDto.class);
+//
+//        if (result.getStatusCode() != HttpStatus.OK) {
+//            return null;
+//        }
+//        String token = result.getBody().getAccess_token();
+//        return googleLogin(token);
+//    }
 
 
     /**
@@ -184,18 +184,17 @@ public class AuthService {
 
     /**
      * Google 로그인 처리 후 넘겨받은 accessToken으로 JWT accessToken 발행하는 함수
-     * @param token
+     * @param googleRequestOauthDto
      * @return AccessToken
      */
-    public String googleLogin(String token)   {
-        GetGoogleUserInformationResponseDto GoogleUserInformation = getGoogleUserInformation(token);
-        String GoogleUserId = GoogleUserInformation.getId();
+    public String googleLogin(GoogleRequestOauthDto googleRequestOauthDto) {
+        String GoogleUserId = googleRequestOauthDto.getUid();
         UserBasic userBasic;
         if (isAlreadyUser(GoogleUserId,SocialType.GOOGLE)) { // 이미 DB에 저장되어있는 구글 유저라면
             userBasic = userBasicRepository.findByOauthId(GoogleUserId);
         } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
             String userId = UUID.randomUUID().toString().substring(0,8).toUpperCase();
-            userBasic = UserBasic.createdUserBasic(GoogleUserInformation.getEmail(),GoogleUserInformation.getId(),GoogleUserInformation.getName(),userId,SocialType.GOOGLE);
+            userBasic = UserBasic.createdUserBasic(googleRequestOauthDto.getEmail(),GoogleUserId,googleRequestOauthDto.getName(),userId,SocialType.GOOGLE);
             userBasicRepository.save(userBasic);
         }
         return jwtTokenProvider.createUserToken(userBasic.getUserId());
