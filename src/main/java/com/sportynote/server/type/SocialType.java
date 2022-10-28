@@ -1,7 +1,7 @@
 package com.sportynote.server.type;
 
 public enum SocialType {
-    GOOGLE("google"), KAKAO("kakao");
+    GOOGLE("google"), KAKAO("kakao"), APPLE("apple");
 
 
     private final String ROLE_PREFIX = "ROLE_";

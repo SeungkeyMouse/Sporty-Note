@@ -55,7 +55,16 @@ public class LoginController {
         String accessToken = authService.googleLogin(googleRequestOauthDto);
         return new GoogleLoginResponse(true, accessToken);
     }
-
+    /**
+     * 애플 서버로부터 인증(firebase 기반)된 사용자 정보를 받아 유저 정보에 대한 AccessToken 발행
+     * @param googleRequestOauthDto
+     * @return 로그인 성공 유무 및 accessToken(JWT)
+     */
+    @PostMapping("/apple/callback")
+    public GoogleLoginResponse appleOauth(@RequestBody GoogleRequestOauthDto googleRequestOauthDto)  {
+        String accessToken = authService.appleLogin(googleRequestOauthDto);
+        return new GoogleLoginResponse(true, accessToken);
+    }
 
     /**
      * 사용자로부터 access token을 받아 이를 만료시키는 코드
