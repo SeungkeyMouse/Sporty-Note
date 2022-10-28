@@ -1,4 +1,5 @@
 package com.sportynote.server.controller;
+import com.sportynote.server.repository.query.auth.GoogleOauthDto;
 import com.sportynote.server.repository.query.auth.GoogleOauthDto.*;
 import com.sportynote.server.repository.query.auth.KakaoOauthDto.*;
 import com.sportynote.server.security.JwtTokenProvider;
@@ -34,14 +35,27 @@ public class LoginController {
 
 
     /**
-     * 사용자로부터 인가코드를 받아 구글 서버로부터 유저 정보를 받고 AccessToken 발행
+     * 사용자로부터 인가코드를 받아 구글 서버로부터 유저 정보를 받고 AccessToken 발행(
      * @return 로그인 성공 유무 및 accessToken(JWT)
      */
-    @GetMapping("/google/callback")
-    public GoogleLoginResponse googleOauth(@RequestParam("code") String code)  {
-        String accessToken = authService.getGoogleOauthToken(code);
+//    @Deprecated
+//    @GetMapping("/google/callback")
+//    public GoogleLoginResponse googleOauth(@RequestParam("code") String code)  {
+//        String accessToken = authService.getGoogleOauthToken(code);
+//        return new GoogleLoginResponse(true, accessToken);
+//    }
+
+    /**
+     * 구글 서버로부터 인증(firebase 기반)된 사용자 정보를 받아 유저 정보에 대한 AccessToken 발행
+     * @param googleRequestOauthDto
+     * @return 로그인 성공 유무 및 accessToken(JWT)
+     */
+    @PostMapping("/google/callback")
+    public GoogleLoginResponse googleOauth(@RequestBody GoogleRequestOauthDto googleRequestOauthDto)  {
+        String accessToken = authService.googleLogin(googleRequestOauthDto);
         return new GoogleLoginResponse(true, accessToken);
     }
+
 
     /**
      * 사용자로부터 access token을 받아 이를 만료시키는 코드

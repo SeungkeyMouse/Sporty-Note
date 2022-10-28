@@ -27,7 +27,6 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     @ExceptionHandler({RestApiException.class,IllegalArgumentException.class})
     public ResponseEntity<?> handleCustomException(RestApiException e) {
         ErrorCode errorCode = e.getErrorCode();
-        System.out.println("1111");
         return handleExceptionInternal(errorCode);
     }
 
