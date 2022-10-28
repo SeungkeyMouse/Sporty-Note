@@ -10,7 +10,7 @@ application-dev.properties
 log*
 
 =======
-resources/static
+resources/static/
 SwaggerConfig
 
 ### STS ###
