@@ -1,5 +1,6 @@
 HELP.md
 .gradle
+.gitignore
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
@@ -10,7 +11,7 @@ application-dev.properties
 log*
 
 =======
-resources/static
+src/main/resources/static/
 SwaggerConfig
 
 ### STS ###

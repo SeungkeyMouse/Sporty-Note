@@ -199,7 +199,23 @@ public class AuthService {
         }
         return jwtTokenProvider.createUserToken(userBasic.getUserId());
     }
-
+    /**
+     * Google 로그인 처리 후 넘겨받은 accessToken으로 JWT accessToken 발행하는 함수
+     * @param googleRequestOauthDto
+     * @return AccessToken
+     */
+    public String appleLogin(GoogleRequestOauthDto googleRequestOauthDto) {
+        String GoogleUserId = googleRequestOauthDto.getUid();
+        UserBasic userBasic;
+        if (isAlreadyUser(GoogleUserId,SocialType.APPLE)) { // 이미 DB에 저장되어있는 구글 유저라면
+            userBasic = userBasicRepository.findByOauthId(GoogleUserId);
+        } else { // DB에 저장되어 있지 않은 유저라면 신규 생성 후 토큰 발급
+            String userId = UUID.randomUUID().toString().substring(0,8).toUpperCase();
+            userBasic = UserBasic.createdUserBasic(googleRequestOauthDto.getEmail(),GoogleUserId,googleRequestOauthDto.getName(),userId,SocialType.APPLE);
+            userBasicRepository.save(userBasic);
+        }
+        return jwtTokenProvider.createUserToken(userBasic.getUserId());
+    }
     /**
      * 유저의 id를 받아 유저의 jwt를 레디스에서 제거하는 함수
      * @param userId
