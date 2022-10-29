@@ -171,14 +171,11 @@ public class RoutineService {
         Optional<Routine> routine = routineRepository.findByIdAndRoutineName(userId,routineName);
 
         List<RoutineList> routineLists = routineRepository.findByIdAndRoutineList(routine.get().getIdx());
-        System.out.println(routineLists.size());
         for(RoutineList routineList : routineLists) {
-            System.out.println(routineList.getIdx());
             Long idx = routineList.getIdx();
             routineRepository.deleteRoutineList(idx);
         }
         routineRepository.deleteRoutine(routine.get().getIdx());
-        System.out.println("getidx "+routine.get().getIdx());
         return true;
     }
 

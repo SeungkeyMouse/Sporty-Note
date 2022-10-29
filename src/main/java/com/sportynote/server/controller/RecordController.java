@@ -69,24 +69,24 @@ public class RecordController {
 
     /** Create 기록 (그래프) 완료체크시 */
     @PostMapping("/complete")
-    public ResponseEntity<?> addRecords(@RequestBody RecordDto recordDto) throws URISyntaxException {
-        result = (recordService.addRecord(recordDto)) ? "success" : "failed";
+    public ResponseEntity<?> addRecords(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @RequestBody RecordDto recordDto) throws URISyntaxException {
+        result = (recordService.addRecord(userBasicPrincipal.getUserId(),recordDto)) ? "success" : "failed";
         status_code = result == "success" ? 201 : 200;
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
     }
 
     /** Delete 기록 (그래프) 완료체크시 */
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteRecords(@RequestBody RecordDto recordDto) throws URISyntaxException {
-        result = (recordService.deleteRecord(recordDto)) ? "success" : "failed";
+    public ResponseEntity<?> deleteRecords(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @RequestBody RecordDto recordDto) throws URISyntaxException {
+        result = (recordService.deleteRecord(userBasicPrincipal.getUserId(), recordDto)) ? "success" : "failed";
         status_code = result == "success" ? 201 : 200;
         return ResponseEntity.status(HttpStatus.valueOf(status_code)).body(result);
     }
 
     /** Read 이전 기록, 차트로 보기 */
     @GetMapping("/previous/{machineIdx}")
-    public ResponseEntity<?> previousRecord(@PathVariable Long machineIdx) throws URISyntaxException {
-        List<List<RecordDto>> results = recordService.previousRecord(machineIdx);
+    public ResponseEntity<?> previousRecord(@ApiIgnore @CurrentUser UserBasicPrincipal userBasicPrincipal, @PathVariable Long machineIdx) throws URISyntaxException {
+        List<List<RecordDto>> results = recordService.previousRecord(userBasicPrincipal.getUserId(), machineIdx);
         return ResponseEntity.status(HttpStatus.valueOf(200)).body(results);
     }
 

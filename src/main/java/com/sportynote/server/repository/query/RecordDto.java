@@ -13,8 +13,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class RecordDto {
 
-    private String userId;
-
     private Long machineIdx;
 
     private Integer sett;
@@ -24,5 +22,8 @@ public class RecordDto {
     private Integer count;
 
     private boolean complete;
+    public RecordDto(){
+
+    }
 
 }

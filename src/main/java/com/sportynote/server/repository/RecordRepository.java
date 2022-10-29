@@ -27,9 +27,9 @@ public class RecordRepository {
     public void deleteRecord(Long idx){
         em.remove(em.find(Record.class, idx));
     }
-    public Record findByIdentityId(RecordDto recordDto){
+    public Record findByIdentityId(String userId, RecordDto recordDto){
         return em.createQuery("select m from Record m where m.userBasic.userId=:userId and m.machine.idx=:idx and m.sett=:sett",Record.class)
-                .setParameter("userId",recordDto.getUserId())
+                .setParameter("userId",userId)
                 .setParameter("idx",recordDto.getMachineIdx())
                 .setParameter("sett",recordDto.getSett()).getSingleResult();
     }
@@ -51,8 +51,7 @@ public class RecordRepository {
     //        SELECT user_id,record_idx,sett,kg,count,complete from record_table
     //        where kg = (SELECT max(kg) from record_table where user_id="123123");
     public List<RecordDto> findByPreviousRecordCNT(String userid,Long machineIdx){
-
-        return em.createQuery("select new com.sportynote.server.repository.query.RecordDto(m.userBasic.userId,m.machine.idx,m.sett,m.kg,m.count,m.complete) " +
+        return em.createQuery("select new com.sportynote.server.repository.query.RecordDto(m.machine.idx,m.sett,m.kg,m.count,m.complete) " +
                         "from Record m where m.kg=any(select max(a.kg) from Record a group by a.userBasic.userId) " +
                         "and m.userBasic.userId=:userId " +
                         "and m.machine.idx=:machineIdx",RecordDto.class)
@@ -60,10 +59,9 @@ public class RecordRepository {
     }
 
     public List<RecordDto> findByPreviousRecordMAX(String userid,Long machineIdx){
-        return em.createQuery("select new com.sportynote.server.repository.query.RecordDto(m.userBasic.userId,m.machine.idx,m.sett,m.kg,m.count,m.complete) " +
+        return em.createQuery("select new com.sportynote.server.repository.query.RecordDto(m.machine.idx,m.sett,m.kg,m.count,m.complete) " +
                 "from Record m where m.kg =(select max(a.kg) from Record a where a.userBasic.userId=:userId and a.machine.idx=:machineIdx)",RecordDto.class)
                 .setParameter("userId",userid).setParameter("machineIdx",machineIdx).getResultList();
-
     }
 }
 

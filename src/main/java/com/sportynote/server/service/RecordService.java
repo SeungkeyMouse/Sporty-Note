@@ -30,13 +30,10 @@ public class RecordService {
     private final MachineRepository machineRepository;
     private final UserBasicRepository userBasicRepository;
 
-
-    private UserBasic userBasic;
-    private Machine machine;
     /** 기록시 머신 하나의 한 세트 체크 CREATE */
-    public boolean addRecord(RecordDto recordDto) {
-        userBasic = userBasicRepository.findById(recordDto.getUserId());
-        machine = machineRepository.findById(recordDto.getMachineIdx());
+    public boolean addRecord(String userId, RecordDto recordDto) {
+        UserBasic userBasic = userBasicRepository.findById(userId);
+        Machine machine = machineRepository.findById(recordDto.getMachineIdx());
 
         Record record = Record.createRecord(userBasic,machine,recordDto.getSett(),recordDto.getKg(),
                 recordDto.getCount(),recordDto.isComplete());
@@ -46,10 +43,10 @@ public class RecordService {
     }
 
     /** 기록시 머신 하나의 한 세트 체크 DELETE */
-    public boolean deleteRecord(RecordDto recordDto) {
-        userBasic = userBasicRepository.findById(recordDto.getUserId());
-        machine = machineRepository.findById(recordDto.getMachineIdx());
-        Record record = recordRepository.findByIdentityId(recordDto);
+    public boolean deleteRecord(String userId, RecordDto recordDto) {
+        // UserBasic userBasic = userBasicRepository.findById(userId);
+        // Machine machine = machineRepository.findById(recordDto.getMachineIdx());
+        Record record = recordRepository.findByIdentityId(userId, recordDto);
         recordRepository.deleteRecord(record.getIdx());
         return true;
     }
@@ -65,18 +62,17 @@ public class RecordService {
         List<Record> recordList = recordRepository.findByRecordDay(localDate,userId);
         List<RecordDto> RecordLists = new ArrayList<>();
         for(Record record : recordList) {
-            RecordLists.add(new RecordDto(record.getUserBasic().getUserId(),record.getMachine().getIdx(),record.getSett(),
+            RecordLists.add(new RecordDto(record.getMachine().getIdx(),record.getSett(),
                     record.getKg(),record.getCount(),record.isComplete()));
         }
         return RecordLists;
     }
 
 
-    public List<List<RecordDto>> previousRecord(Long machineIdx){
-        String userid="123123";
+    public List<List<RecordDto>> previousRecord(String userId, Long machineIdx){
         List<List<RecordDto>> recordDtoLists = new ArrayList<>();
-        recordDtoLists.add(recordRepository.findByPreviousRecordMAX(userid, machineIdx));
-        recordDtoLists.add(recordRepository.findByPreviousRecordCNT(userid, machineIdx));
+        recordDtoLists.add(recordRepository.findByPreviousRecordMAX(userId, machineIdx));
+        recordDtoLists.add(recordRepository.findByPreviousRecordCNT(userId, machineIdx));
         return recordDtoLists;
     }
 

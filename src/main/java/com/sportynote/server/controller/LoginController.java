@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
@@ -31,6 +32,12 @@ public class LoginController {
     public KakaoLoginResponse kakaoOauth(@RequestParam("code") String code)  {
         String accessToken = authService.getKakaoOauthToken(code);
         return new KakaoLoginResponse(true, accessToken);
+    }
+
+    @GetMapping("/test")
+    public Boolean Test(HttpServletRequest request){
+        String jwtToken = jwtTokenProvider.getTokenFromHeader(request);
+        return jwtTokenProvider.validateToken(jwtToken);
     }
 
 
